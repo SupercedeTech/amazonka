@@ -184,7 +184,7 @@ s3vhost rq = case _requestPath rq of
         rewritePossible
           | '.' `B8.elem` bucketName = False
           | bucketNameLen < 3 || bucketNameLen > 63 = False
-          | not $ bucketName =~ ("^[a-z0-9][a-z0-9\\-]*[a-z0-9]$" :: ByteString) = False
+          -- \| not $ bucketName =~ ("^[a-z0-9][a-z0-9\\-]*[a-z0-9]$" :: ByteString) = False
           | otherwise = True
      in if rewritePossible
           then
