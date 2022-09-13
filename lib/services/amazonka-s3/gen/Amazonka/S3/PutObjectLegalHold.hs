@@ -1,13 +1,14 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE TypeFamilies          #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds   #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- Derived from AWS service descriptions, licensed under Apache 2.0.
@@ -23,43 +24,42 @@
 -- Applies a legal hold configuration to the specified object. For more
 -- information, see
 -- <https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html Locking Objects>.
---
+-- 
 -- This action is not supported by Amazon S3 on Outposts.
 module Amazonka.S3.PutObjectLegalHold
-  ( -- * Creating a Request
-    PutObjectLegalHold (..),
-    newPutObjectLegalHold,
-
+    (
+    -- * Creating a Request
+      PutObjectLegalHold (..)
+    , newPutObjectLegalHold 
     -- * Request Lenses
-    putObjectLegalHold_checksumAlgorithm,
-    putObjectLegalHold_contentMD5,
-    putObjectLegalHold_expectedBucketOwner,
-    putObjectLegalHold_requestPayer,
-    putObjectLegalHold_legalHold,
-    putObjectLegalHold_versionId,
-    putObjectLegalHold_bucket,
-    putObjectLegalHold_key,
+    , putObjectLegalHold_checksumAlgorithm
+    , putObjectLegalHold_contentMD5
+    , putObjectLegalHold_expectedBucketOwner
+    , putObjectLegalHold_requestPayer
+    , putObjectLegalHold_legalHold
+    , putObjectLegalHold_versionId
+    , putObjectLegalHold_bucket
+    , putObjectLegalHold_key
 
     -- * Destructuring the Response
-    PutObjectLegalHoldResponse (..),
-    newPutObjectLegalHoldResponse,
-
+    , PutObjectLegalHoldResponse (..)
+    , newPutObjectLegalHoldResponse 
     -- * Response Lenses
-    putObjectLegalHoldResponse_requestCharged,
-    putObjectLegalHoldResponse_httpStatus,
-  )
-where
+    , putObjectLegalHoldResponse_requestCharged
+    , putObjectLegalHoldResponse_httpStatus
+    ) where
 
+import Amazonka.S3.Types
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
 import qualified Amazonka.Request as Request
 import qualified Amazonka.Response as Response
-import Amazonka.S3.Types
 
 -- | /See:/ 'newPutObjectLegalHold' smart constructor.
 data PutObjectLegalHold = PutObjectLegalHold'
-  { -- | Indicates the algorithm used to create the checksum for the object when
+    {
+    -- | Indicates the algorithm used to create the checksum for the object when
     -- using the SDK. This header will not provide any additional functionality
     -- if not using the SDK. When sending this header, there must be a
     -- corresponding @x-amz-checksum@ or @x-amz-trailer@ header sent.
@@ -67,29 +67,29 @@ data PutObjectLegalHold = PutObjectLegalHold'
     -- @400 Bad Request@. For more information, see
     -- <https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html Checking object integrity>
     -- in the /Amazon S3 User Guide/.
-    --
+    -- 
     -- If you provide an individual checksum, Amazon S3 ignores any provided
     -- @ChecksumAlgorithm@ parameter.
-    checksumAlgorithm :: Prelude.Maybe ChecksumAlgorithm,
+    checksumAlgorithm :: Prelude.Maybe ChecksumAlgorithm
     -- | The MD5 hash for the request body.
-    --
+    -- 
     -- For requests made using the Amazon Web Services Command Line Interface
     -- (CLI) or Amazon Web Services SDKs, this field is calculated
     -- automatically.
-    contentMD5 :: Prelude.Maybe Prelude.Text,
+    , contentMD5 :: Prelude.Maybe Prelude.Text
     -- | The account ID of the expected bucket owner. If the bucket is owned by a
     -- different account, the request fails with the HTTP status code
     -- @403 Forbidden@ (access denied).
-    expectedBucketOwner :: Prelude.Maybe Prelude.Text,
-    requestPayer :: Prelude.Maybe RequestPayer,
+    , expectedBucketOwner :: Prelude.Maybe Prelude.Text
+    , requestPayer :: Prelude.Maybe RequestPayer
     -- | Container element for the legal hold configuration you want to apply to
     -- the specified object.
-    legalHold :: Prelude.Maybe ObjectLockLegalHold,
+    , legalHold :: Prelude.Maybe ObjectLockLegalHold
     -- | The version ID of the object that you want to place a legal hold on.
-    versionId :: Prelude.Maybe ObjectVersionId,
+    , versionId :: Prelude.Maybe ObjectVersionId
     -- | The bucket name containing the object that you want to place a legal
     -- hold on.
-    --
+    -- 
     -- When using this action with an access point, you must direct requests to
     -- the access point hostname. The access point hostname takes the form
     -- /AccessPointName/-/AccountId/.s3-accesspoint./Region/.amazonaws.com.
@@ -98,11 +98,10 @@ data PutObjectLegalHold = PutObjectLegalHold'
     -- name. For more information about access point ARNs, see
     -- <https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html Using access points>
     -- in the /Amazon S3 User Guide/.
-    bucket :: BucketName,
+    , bucket :: BucketName
     -- | The key name for the object that you want to place a legal hold on.
-    key :: ObjectKey
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , key :: ObjectKey
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'PutObjectLegalHold' with all optional fields omitted.
@@ -120,12 +119,12 @@ data PutObjectLegalHold = PutObjectLegalHold'
 -- @400 Bad Request@. For more information, see
 -- <https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html Checking object integrity>
 -- in the /Amazon S3 User Guide/.
---
+-- 
 -- If you provide an individual checksum, Amazon S3 ignores any provided
 -- @ChecksumAlgorithm@ parameter.
 --
 -- 'contentMD5', 'putObjectLegalHold_contentMD5' - The MD5 hash for the request body.
---
+-- 
 -- For requests made using the Amazon Web Services Command Line Interface
 -- (CLI) or Amazon Web Services SDKs, this field is calculated
 -- automatically.
@@ -143,7 +142,7 @@ data PutObjectLegalHold = PutObjectLegalHold'
 --
 -- 'bucket', 'putObjectLegalHold_bucket' - The bucket name containing the object that you want to place a legal
 -- hold on.
---
+-- 
 -- When using this action with an access point, you must direct requests to
 -- the access point hostname. The access point hostname takes the form
 -- /AccessPointName/-/AccountId/.s3-accesspoint./Region/.amazonaws.com.
@@ -154,24 +153,19 @@ data PutObjectLegalHold = PutObjectLegalHold'
 -- in the /Amazon S3 User Guide/.
 --
 -- 'key', 'putObjectLegalHold_key' - The key name for the object that you want to place a legal hold on.
-newPutObjectLegalHold ::
-  -- | 'bucket'
-  BucketName ->
-  -- | 'key'
-  ObjectKey ->
-  PutObjectLegalHold
-newPutObjectLegalHold pBucket_ pKey_ =
-  PutObjectLegalHold'
-    { checksumAlgorithm =
-        Prelude.Nothing,
-      contentMD5 = Prelude.Nothing,
-      expectedBucketOwner = Prelude.Nothing,
-      requestPayer = Prelude.Nothing,
-      legalHold = Prelude.Nothing,
-      versionId = Prelude.Nothing,
-      bucket = pBucket_,
-      key = pKey_
-    }
+newPutObjectLegalHold
+    :: BucketName -- ^ 'bucket'
+    -> ObjectKey -- ^ 'key'
+    -> PutObjectLegalHold
+newPutObjectLegalHold pBucket_ pKey_
+  = PutObjectLegalHold'{checksumAlgorithm =
+                          Prelude.Nothing,
+                        contentMD5 = Prelude.Nothing,
+                        expectedBucketOwner = Prelude.Nothing,
+                        requestPayer = Prelude.Nothing,
+                        legalHold = Prelude.Nothing,
+                        versionId = Prelude.Nothing, bucket = pBucket_,
+                        key = pKey_}
 
 -- | Indicates the algorithm used to create the checksum for the object when
 -- using the SDK. This header will not provide any additional functionality
@@ -181,42 +175,42 @@ newPutObjectLegalHold pBucket_ pKey_ =
 -- @400 Bad Request@. For more information, see
 -- <https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html Checking object integrity>
 -- in the /Amazon S3 User Guide/.
---
+-- 
 -- If you provide an individual checksum, Amazon S3 ignores any provided
 -- @ChecksumAlgorithm@ parameter.
 putObjectLegalHold_checksumAlgorithm :: Lens.Lens' PutObjectLegalHold (Prelude.Maybe ChecksumAlgorithm)
-putObjectLegalHold_checksumAlgorithm = Lens.lens (\PutObjectLegalHold' {checksumAlgorithm} -> checksumAlgorithm) (\s@PutObjectLegalHold' {} a -> s {checksumAlgorithm = a} :: PutObjectLegalHold)
+putObjectLegalHold_checksumAlgorithm = Lens.lens (\ PutObjectLegalHold'{checksumAlgorithm} -> checksumAlgorithm) (\ s@PutObjectLegalHold'{} a -> s{checksumAlgorithm = a} :: PutObjectLegalHold)
 
 -- | The MD5 hash for the request body.
---
+-- 
 -- For requests made using the Amazon Web Services Command Line Interface
 -- (CLI) or Amazon Web Services SDKs, this field is calculated
 -- automatically.
 putObjectLegalHold_contentMD5 :: Lens.Lens' PutObjectLegalHold (Prelude.Maybe Prelude.Text)
-putObjectLegalHold_contentMD5 = Lens.lens (\PutObjectLegalHold' {contentMD5} -> contentMD5) (\s@PutObjectLegalHold' {} a -> s {contentMD5 = a} :: PutObjectLegalHold)
+putObjectLegalHold_contentMD5 = Lens.lens (\ PutObjectLegalHold'{contentMD5} -> contentMD5) (\ s@PutObjectLegalHold'{} a -> s{contentMD5 = a} :: PutObjectLegalHold)
 
 -- | The account ID of the expected bucket owner. If the bucket is owned by a
 -- different account, the request fails with the HTTP status code
 -- @403 Forbidden@ (access denied).
 putObjectLegalHold_expectedBucketOwner :: Lens.Lens' PutObjectLegalHold (Prelude.Maybe Prelude.Text)
-putObjectLegalHold_expectedBucketOwner = Lens.lens (\PutObjectLegalHold' {expectedBucketOwner} -> expectedBucketOwner) (\s@PutObjectLegalHold' {} a -> s {expectedBucketOwner = a} :: PutObjectLegalHold)
+putObjectLegalHold_expectedBucketOwner = Lens.lens (\ PutObjectLegalHold'{expectedBucketOwner} -> expectedBucketOwner) (\ s@PutObjectLegalHold'{} a -> s{expectedBucketOwner = a} :: PutObjectLegalHold)
 
 -- | Undocumented member.
 putObjectLegalHold_requestPayer :: Lens.Lens' PutObjectLegalHold (Prelude.Maybe RequestPayer)
-putObjectLegalHold_requestPayer = Lens.lens (\PutObjectLegalHold' {requestPayer} -> requestPayer) (\s@PutObjectLegalHold' {} a -> s {requestPayer = a} :: PutObjectLegalHold)
+putObjectLegalHold_requestPayer = Lens.lens (\ PutObjectLegalHold'{requestPayer} -> requestPayer) (\ s@PutObjectLegalHold'{} a -> s{requestPayer = a} :: PutObjectLegalHold)
 
 -- | Container element for the legal hold configuration you want to apply to
 -- the specified object.
 putObjectLegalHold_legalHold :: Lens.Lens' PutObjectLegalHold (Prelude.Maybe ObjectLockLegalHold)
-putObjectLegalHold_legalHold = Lens.lens (\PutObjectLegalHold' {legalHold} -> legalHold) (\s@PutObjectLegalHold' {} a -> s {legalHold = a} :: PutObjectLegalHold)
+putObjectLegalHold_legalHold = Lens.lens (\ PutObjectLegalHold'{legalHold} -> legalHold) (\ s@PutObjectLegalHold'{} a -> s{legalHold = a} :: PutObjectLegalHold)
 
 -- | The version ID of the object that you want to place a legal hold on.
 putObjectLegalHold_versionId :: Lens.Lens' PutObjectLegalHold (Prelude.Maybe ObjectVersionId)
-putObjectLegalHold_versionId = Lens.lens (\PutObjectLegalHold' {versionId} -> versionId) (\s@PutObjectLegalHold' {} a -> s {versionId = a} :: PutObjectLegalHold)
+putObjectLegalHold_versionId = Lens.lens (\ PutObjectLegalHold'{versionId} -> versionId) (\ s@PutObjectLegalHold'{} a -> s{versionId = a} :: PutObjectLegalHold)
 
 -- | The bucket name containing the object that you want to place a legal
 -- hold on.
---
+-- 
 -- When using this action with an access point, you must direct requests to
 -- the access point hostname. The access point hostname takes the form
 -- /AccessPointName/-/AccountId/.s3-accesspoint./Region/.amazonaws.com.
@@ -226,83 +220,81 @@ putObjectLegalHold_versionId = Lens.lens (\PutObjectLegalHold' {versionId} -> ve
 -- <https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html Using access points>
 -- in the /Amazon S3 User Guide/.
 putObjectLegalHold_bucket :: Lens.Lens' PutObjectLegalHold BucketName
-putObjectLegalHold_bucket = Lens.lens (\PutObjectLegalHold' {bucket} -> bucket) (\s@PutObjectLegalHold' {} a -> s {bucket = a} :: PutObjectLegalHold)
+putObjectLegalHold_bucket = Lens.lens (\ PutObjectLegalHold'{bucket} -> bucket) (\ s@PutObjectLegalHold'{} a -> s{bucket = a} :: PutObjectLegalHold)
 
 -- | The key name for the object that you want to place a legal hold on.
 putObjectLegalHold_key :: Lens.Lens' PutObjectLegalHold ObjectKey
-putObjectLegalHold_key = Lens.lens (\PutObjectLegalHold' {key} -> key) (\s@PutObjectLegalHold' {} a -> s {key = a} :: PutObjectLegalHold)
+putObjectLegalHold_key = Lens.lens (\ PutObjectLegalHold'{key} -> key) (\ s@PutObjectLegalHold'{} a -> s{key = a} :: PutObjectLegalHold)
 
 instance Core.AWSRequest PutObjectLegalHold where
-  type
-    AWSResponse PutObjectLegalHold =
-      PutObjectLegalHoldResponse
-  request =
-    Request.s3vhost
-      Prelude.. Request.putXML defaultService
-  response =
-    Response.receiveEmpty
-      ( \s h x ->
-          PutObjectLegalHoldResponse'
-            Prelude.<$> (h Core..#? "x-amz-request-charged")
-            Prelude.<*> (Prelude.pure (Prelude.fromEnum s))
-      )
+        type AWSResponse PutObjectLegalHold =
+             PutObjectLegalHoldResponse
+        request srv
+          = Request.s3vhost Prelude.. Request.putXML srv
+        response
+          = Response.receiveEmpty
+              (\ s h x ->
+                 PutObjectLegalHoldResponse' Prelude.<$>
+                   (h Core..#? "x-amz-request-charged") Prelude.<*>
+                     (Prelude.pure (Prelude.fromEnum s)))
+
+instance Core.AWSService PutObjectLegalHold where
+        service _proxy = defaultService
 
 instance Prelude.Hashable PutObjectLegalHold where
-  hashWithSalt _salt PutObjectLegalHold' {..} =
-    _salt `Prelude.hashWithSalt` checksumAlgorithm
-      `Prelude.hashWithSalt` contentMD5
-      `Prelude.hashWithSalt` expectedBucketOwner
-      `Prelude.hashWithSalt` requestPayer
-      `Prelude.hashWithSalt` legalHold
-      `Prelude.hashWithSalt` versionId
-      `Prelude.hashWithSalt` bucket
-      `Prelude.hashWithSalt` key
+        hashWithSalt _salt PutObjectLegalHold'{..}
+          = _salt `Prelude.hashWithSalt` checksumAlgorithm
+              `Prelude.hashWithSalt` contentMD5
+              `Prelude.hashWithSalt` expectedBucketOwner
+              `Prelude.hashWithSalt` requestPayer
+              `Prelude.hashWithSalt` legalHold
+              `Prelude.hashWithSalt` versionId
+              `Prelude.hashWithSalt` bucket
+              `Prelude.hashWithSalt` key
 
 instance Prelude.NFData PutObjectLegalHold where
-  rnf PutObjectLegalHold' {..} =
-    Prelude.rnf checksumAlgorithm
-      `Prelude.seq` Prelude.rnf contentMD5
-      `Prelude.seq` Prelude.rnf expectedBucketOwner
-      `Prelude.seq` Prelude.rnf requestPayer
-      `Prelude.seq` Prelude.rnf legalHold
-      `Prelude.seq` Prelude.rnf versionId
-      `Prelude.seq` Prelude.rnf bucket
-      `Prelude.seq` Prelude.rnf key
+        rnf PutObjectLegalHold'{..}
+          = Prelude.rnf checksumAlgorithm `Prelude.seq`
+              Prelude.rnf contentMD5 `Prelude.seq`
+                Prelude.rnf expectedBucketOwner `Prelude.seq`
+                  Prelude.rnf requestPayer `Prelude.seq`
+                    Prelude.rnf legalHold `Prelude.seq`
+                      Prelude.rnf versionId `Prelude.seq`
+                        Prelude.rnf bucket `Prelude.seq` Prelude.rnf key
 
 instance Core.ToElement PutObjectLegalHold where
-  toElement PutObjectLegalHold' {..} =
-    Core.mkElement
-      "{http://s3.amazonaws.com/doc/2006-03-01/}LegalHold"
-      legalHold
+        toElement PutObjectLegalHold'{..}
+          = Core.mkElement
+              "{http://s3.amazonaws.com/doc/2006-03-01/}LegalHold"
+              legalHold
 
 instance Core.ToHeaders PutObjectLegalHold where
-  toHeaders PutObjectLegalHold' {..} =
-    Prelude.mconcat
-      [ "x-amz-sdk-checksum-algorithm"
-          Core.=# checksumAlgorithm,
-        "Content-MD5" Core.=# contentMD5,
-        "x-amz-expected-bucket-owner"
-          Core.=# expectedBucketOwner,
-        "x-amz-request-payer" Core.=# requestPayer
-      ]
+        toHeaders PutObjectLegalHold'{..}
+          = Prelude.mconcat
+              ["x-amz-sdk-checksum-algorithm" Core.=#
+                 checksumAlgorithm,
+               "Content-MD5" Core.=# contentMD5,
+               "x-amz-expected-bucket-owner" Core.=#
+                 expectedBucketOwner,
+               "x-amz-request-payer" Core.=# requestPayer]
 
 instance Core.ToPath PutObjectLegalHold where
-  toPath PutObjectLegalHold' {..} =
-    Prelude.mconcat
-      ["/", Core.toBS bucket, "/", Core.toBS key]
+        toPath PutObjectLegalHold'{..}
+          = Prelude.mconcat
+              ["/", Core.toBS bucket, "/", Core.toBS key]
 
 instance Core.ToQuery PutObjectLegalHold where
-  toQuery PutObjectLegalHold' {..} =
-    Prelude.mconcat
-      ["versionId" Core.=: versionId, "legal-hold"]
+        toQuery PutObjectLegalHold'{..}
+          = Prelude.mconcat
+              ["versionId" Core.=: versionId, "legal-hold"]
 
 -- | /See:/ 'newPutObjectLegalHoldResponse' smart constructor.
 data PutObjectLegalHoldResponse = PutObjectLegalHoldResponse'
-  { requestCharged :: Prelude.Maybe RequestCharged,
+    {
+    requestCharged :: Prelude.Maybe RequestCharged
     -- | The response's http status code.
-    httpStatus :: Prelude.Int
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , httpStatus :: Prelude.Int
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'PutObjectLegalHoldResponse' with all optional fields omitted.
@@ -315,26 +307,24 @@ data PutObjectLegalHoldResponse = PutObjectLegalHoldResponse'
 -- 'requestCharged', 'putObjectLegalHoldResponse_requestCharged' - Undocumented member.
 --
 -- 'httpStatus', 'putObjectLegalHoldResponse_httpStatus' - The response's http status code.
-newPutObjectLegalHoldResponse ::
-  -- | 'httpStatus'
-  Prelude.Int ->
-  PutObjectLegalHoldResponse
-newPutObjectLegalHoldResponse pHttpStatus_ =
-  PutObjectLegalHoldResponse'
-    { requestCharged =
-        Prelude.Nothing,
-      httpStatus = pHttpStatus_
-    }
+newPutObjectLegalHoldResponse
+    :: Prelude.Int -- ^ 'httpStatus'
+    -> PutObjectLegalHoldResponse
+newPutObjectLegalHoldResponse pHttpStatus_
+  = PutObjectLegalHoldResponse'{requestCharged =
+                                  Prelude.Nothing,
+                                httpStatus = pHttpStatus_}
 
 -- | Undocumented member.
 putObjectLegalHoldResponse_requestCharged :: Lens.Lens' PutObjectLegalHoldResponse (Prelude.Maybe RequestCharged)
-putObjectLegalHoldResponse_requestCharged = Lens.lens (\PutObjectLegalHoldResponse' {requestCharged} -> requestCharged) (\s@PutObjectLegalHoldResponse' {} a -> s {requestCharged = a} :: PutObjectLegalHoldResponse)
+putObjectLegalHoldResponse_requestCharged = Lens.lens (\ PutObjectLegalHoldResponse'{requestCharged} -> requestCharged) (\ s@PutObjectLegalHoldResponse'{} a -> s{requestCharged = a} :: PutObjectLegalHoldResponse)
 
 -- | The response's http status code.
 putObjectLegalHoldResponse_httpStatus :: Lens.Lens' PutObjectLegalHoldResponse Prelude.Int
-putObjectLegalHoldResponse_httpStatus = Lens.lens (\PutObjectLegalHoldResponse' {httpStatus} -> httpStatus) (\s@PutObjectLegalHoldResponse' {} a -> s {httpStatus = a} :: PutObjectLegalHoldResponse)
+putObjectLegalHoldResponse_httpStatus = Lens.lens (\ PutObjectLegalHoldResponse'{httpStatus} -> httpStatus) (\ s@PutObjectLegalHoldResponse'{} a -> s{httpStatus = a} :: PutObjectLegalHoldResponse)
 
-instance Prelude.NFData PutObjectLegalHoldResponse where
-  rnf PutObjectLegalHoldResponse' {..} =
-    Prelude.rnf requestCharged
-      `Prelude.seq` Prelude.rnf httpStatus
+instance Prelude.NFData PutObjectLegalHoldResponse
+         where
+        rnf PutObjectLegalHoldResponse'{..}
+          = Prelude.rnf requestCharged `Prelude.seq`
+              Prelude.rnf httpStatus

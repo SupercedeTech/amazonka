@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,12 +18,13 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.ScanRange where
 
+import Amazonka.S3.Internal
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
 
 -- | Specifies the byte range of the object to get the records from. A record
 -- is processed when its first byte is contained by the range. This
@@ -32,21 +34,21 @@ import Amazonka.S3.Internal
 --
 -- /See:/ 'newScanRange' smart constructor.
 data ScanRange = ScanRange'
-  { -- | Specifies the start of the byte range. This parameter is optional. Valid
+    {
+    -- | Specifies the start of the byte range. This parameter is optional. Valid
     -- values: non-negative integers. The default value is 0. If only @start@
     -- is supplied, it means scan from that point to the end of the file. For
     -- example, @\<scanrange>\<start>50\<\/start>\<\/scanrange>@ means scan
     -- from byte 50 until the end of the file.
-    start :: Prelude.Maybe Prelude.Integer,
+    start :: Prelude.Maybe Prelude.Integer
     -- | Specifies the end of the byte range. This parameter is optional. Valid
     -- values: non-negative integers. The default value is one less than the
     -- size of the object being queried. If only the End parameter is supplied,
     -- it is interpreted to mean scan the last N bytes of the file. For
     -- example, @\<scanrange>\<end>50\<\/end>\<\/scanrange>@ means scan the
     -- last 50 bytes.
-    end :: Prelude.Maybe Prelude.Integer
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , end :: Prelude.Maybe Prelude.Integer
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'ScanRange' with all optional fields omitted.
@@ -68,13 +70,11 @@ data ScanRange = ScanRange'
 -- it is interpreted to mean scan the last N bytes of the file. For
 -- example, @\<scanrange>\<end>50\<\/end>\<\/scanrange>@ means scan the
 -- last 50 bytes.
-newScanRange ::
-  ScanRange
-newScanRange =
-  ScanRange'
-    { start = Prelude.Nothing,
-      end = Prelude.Nothing
-    }
+newScanRange
+    :: ScanRange
+newScanRange
+  = ScanRange'{start = Prelude.Nothing,
+               end = Prelude.Nothing}
 
 -- | Specifies the start of the byte range. This parameter is optional. Valid
 -- values: non-negative integers. The default value is 0. If only @start@
@@ -82,7 +82,7 @@ newScanRange =
 -- example, @\<scanrange>\<start>50\<\/start>\<\/scanrange>@ means scan
 -- from byte 50 until the end of the file.
 scanRange_start :: Lens.Lens' ScanRange (Prelude.Maybe Prelude.Integer)
-scanRange_start = Lens.lens (\ScanRange' {start} -> start) (\s@ScanRange' {} a -> s {start = a} :: ScanRange)
+scanRange_start = Lens.lens (\ ScanRange'{start} -> start) (\ s@ScanRange'{} a -> s{start = a} :: ScanRange)
 
 -- | Specifies the end of the byte range. This parameter is optional. Valid
 -- values: non-negative integers. The default value is one less than the
@@ -91,18 +91,18 @@ scanRange_start = Lens.lens (\ScanRange' {start} -> start) (\s@ScanRange' {} a -
 -- example, @\<scanrange>\<end>50\<\/end>\<\/scanrange>@ means scan the
 -- last 50 bytes.
 scanRange_end :: Lens.Lens' ScanRange (Prelude.Maybe Prelude.Integer)
-scanRange_end = Lens.lens (\ScanRange' {end} -> end) (\s@ScanRange' {} a -> s {end = a} :: ScanRange)
+scanRange_end = Lens.lens (\ ScanRange'{end} -> end) (\ s@ScanRange'{} a -> s{end = a} :: ScanRange)
 
 instance Prelude.Hashable ScanRange where
-  hashWithSalt _salt ScanRange' {..} =
-    _salt `Prelude.hashWithSalt` start
-      `Prelude.hashWithSalt` end
+        hashWithSalt _salt ScanRange'{..}
+          = _salt `Prelude.hashWithSalt` start
+              `Prelude.hashWithSalt` end
 
 instance Prelude.NFData ScanRange where
-  rnf ScanRange' {..} =
-    Prelude.rnf start `Prelude.seq` Prelude.rnf end
+        rnf ScanRange'{..}
+          = Prelude.rnf start `Prelude.seq` Prelude.rnf end
 
 instance Core.ToXML ScanRange where
-  toXML ScanRange' {..} =
-    Prelude.mconcat
-      ["Start" Core.@= start, "End" Core.@= end]
+        toXML ScanRange'{..}
+          = Prelude.mconcat
+              ["Start" Core.@= start, "End" Core.@= end]

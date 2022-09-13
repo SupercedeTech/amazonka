@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,26 +18,27 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.ErrorDocument where
 
+import Amazonka.S3.Internal
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
 
 -- | The error information.
 --
 -- /See:/ 'newErrorDocument' smart constructor.
 data ErrorDocument = ErrorDocument'
-  { -- | The object key name to use when a 4XX class error occurs.
-    --
+    {
+    -- | The object key name to use when a 4XX class error occurs.
+    -- 
     -- Replacement must be made for object keys containing special characters
     -- (such as carriage returns) when using XML requests. For more
     -- information, see
     -- <https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints XML related object key constraints>.
     key :: ObjectKey
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'ErrorDocument' with all optional fields omitted.
@@ -47,37 +49,36 @@ data ErrorDocument = ErrorDocument'
 -- for backwards compatibility:
 --
 -- 'key', 'errorDocument_key' - The object key name to use when a 4XX class error occurs.
---
+-- 
 -- Replacement must be made for object keys containing special characters
 -- (such as carriage returns) when using XML requests. For more
 -- information, see
 -- <https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints XML related object key constraints>.
-newErrorDocument ::
-  -- | 'key'
-  ObjectKey ->
-  ErrorDocument
-newErrorDocument pKey_ = ErrorDocument' {key = pKey_}
+newErrorDocument
+    :: ObjectKey -- ^ 'key'
+    -> ErrorDocument
+newErrorDocument pKey_ = ErrorDocument'{key = pKey_}
 
 -- | The object key name to use when a 4XX class error occurs.
---
+-- 
 -- Replacement must be made for object keys containing special characters
 -- (such as carriage returns) when using XML requests. For more
 -- information, see
 -- <https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints XML related object key constraints>.
 errorDocument_key :: Lens.Lens' ErrorDocument ObjectKey
-errorDocument_key = Lens.lens (\ErrorDocument' {key} -> key) (\s@ErrorDocument' {} a -> s {key = a} :: ErrorDocument)
+errorDocument_key = Lens.lens (\ ErrorDocument'{key} -> key) (\ s@ErrorDocument'{} a -> s{key = a} :: ErrorDocument)
 
 instance Core.FromXML ErrorDocument where
-  parseXML x =
-    ErrorDocument' Prelude.<$> (x Core..@ "Key")
+        parseXML x
+          = ErrorDocument' Prelude.<$> (x Core..@ "Key")
 
 instance Prelude.Hashable ErrorDocument where
-  hashWithSalt _salt ErrorDocument' {..} =
-    _salt `Prelude.hashWithSalt` key
+        hashWithSalt _salt ErrorDocument'{..}
+          = _salt `Prelude.hashWithSalt` key
 
 instance Prelude.NFData ErrorDocument where
-  rnf ErrorDocument' {..} = Prelude.rnf key
+        rnf ErrorDocument'{..} = Prelude.rnf key
 
 instance Core.ToXML ErrorDocument where
-  toXML ErrorDocument' {..} =
-    Prelude.mconcat ["Key" Core.@= key]
+        toXML ErrorDocument'{..}
+          = Prelude.mconcat ["Key" Core.@= key]

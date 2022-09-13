@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,22 +18,23 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.JSONInput where
 
+import Amazonka.S3.Internal
+import Amazonka.S3.Types.JSONType
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
-import Amazonka.S3.Types.JSONType
 
 -- | Specifies JSON as object\'s input serialization format.
 --
 -- /See:/ 'newJSONInput' smart constructor.
 data JSONInput = JSONInput'
-  { -- | The type of JSON. Valid values: Document, Lines.
+    {
+    -- | The type of JSON. Valid values: Document, Lines.
     type' :: Prelude.Maybe JSONType
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'JSONInput' with all optional fields omitted.
@@ -43,21 +45,21 @@ data JSONInput = JSONInput'
 -- for backwards compatibility:
 --
 -- 'type'', 'jSONInput_type' - The type of JSON. Valid values: Document, Lines.
-newJSONInput ::
-  JSONInput
-newJSONInput = JSONInput' {type' = Prelude.Nothing}
+newJSONInput
+    :: JSONInput
+newJSONInput = JSONInput'{type' = Prelude.Nothing}
 
 -- | The type of JSON. Valid values: Document, Lines.
 jSONInput_type :: Lens.Lens' JSONInput (Prelude.Maybe JSONType)
-jSONInput_type = Lens.lens (\JSONInput' {type'} -> type') (\s@JSONInput' {} a -> s {type' = a} :: JSONInput)
+jSONInput_type = Lens.lens (\ JSONInput'{type'} -> type') (\ s@JSONInput'{} a -> s{type' = a} :: JSONInput)
 
 instance Prelude.Hashable JSONInput where
-  hashWithSalt _salt JSONInput' {..} =
-    _salt `Prelude.hashWithSalt` type'
+        hashWithSalt _salt JSONInput'{..}
+          = _salt `Prelude.hashWithSalt` type'
 
 instance Prelude.NFData JSONInput where
-  rnf JSONInput' {..} = Prelude.rnf type'
+        rnf JSONInput'{..} = Prelude.rnf type'
 
 instance Core.ToXML JSONInput where
-  toXML JSONInput' {..} =
-    Prelude.mconcat ["Type" Core.@= type']
+        toXML JSONInput'{..}
+          = Prelude.mconcat ["Type" Core.@= type']

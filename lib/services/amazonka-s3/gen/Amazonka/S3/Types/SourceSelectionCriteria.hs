@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,14 +18,15 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.SourceSelectionCriteria where
 
-import qualified Amazonka.Core as Core
-import qualified Amazonka.Lens as Lens
-import qualified Amazonka.Prelude as Prelude
 import Amazonka.S3.Internal
 import Amazonka.S3.Types.ReplicaModifications
 import Amazonka.S3.Types.SseKmsEncryptedObjects
+import qualified Amazonka.Core as Core
+import qualified Amazonka.Lens as Lens
+import qualified Amazonka.Prelude as Prelude
 
 -- | A container that describes additional filters for identifying the source
 -- objects that you want to replicate. You can choose to enable or disable
@@ -35,23 +37,23 @@ import Amazonka.S3.Types.SseKmsEncryptedObjects
 --
 -- /See:/ 'newSourceSelectionCriteria' smart constructor.
 data SourceSelectionCriteria = SourceSelectionCriteria'
-  { -- | A filter that you can specify for selections for modifications on
+    {
+    -- | A filter that you can specify for selections for modifications on
     -- replicas. Amazon S3 doesn\'t replicate replica modifications by default.
     -- In the latest version of replication configuration (when @Filter@ is
     -- specified), you can specify this element and set the status to @Enabled@
     -- to replicate modifications on replicas.
-    --
+    -- 
     -- If you don\'t specify the @Filter@ element, Amazon S3 assumes that the
     -- replication configuration is the earlier version, V1. In the earlier
     -- version, this element is not allowed
-    replicaModifications :: Prelude.Maybe ReplicaModifications,
+    replicaModifications :: Prelude.Maybe ReplicaModifications
     -- | A container for filter information for the selection of Amazon S3
     -- objects encrypted with Amazon Web Services KMS. If you include
     -- @SourceSelectionCriteria@ in the replication configuration, this element
     -- is required.
-    sseKmsEncryptedObjects :: Prelude.Maybe SseKmsEncryptedObjects
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , sseKmsEncryptedObjects :: Prelude.Maybe SseKmsEncryptedObjects
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'SourceSelectionCriteria' with all optional fields omitted.
@@ -66,7 +68,7 @@ data SourceSelectionCriteria = SourceSelectionCriteria'
 -- In the latest version of replication configuration (when @Filter@ is
 -- specified), you can specify this element and set the status to @Enabled@
 -- to replicate modifications on replicas.
---
+-- 
 -- If you don\'t specify the @Filter@ element, Amazon S3 assumes that the
 -- replication configuration is the earlier version, V1. In the earlier
 -- version, this element is not allowed
@@ -75,54 +77,52 @@ data SourceSelectionCriteria = SourceSelectionCriteria'
 -- objects encrypted with Amazon Web Services KMS. If you include
 -- @SourceSelectionCriteria@ in the replication configuration, this element
 -- is required.
-newSourceSelectionCriteria ::
-  SourceSelectionCriteria
-newSourceSelectionCriteria =
-  SourceSelectionCriteria'
-    { replicaModifications =
-        Prelude.Nothing,
-      sseKmsEncryptedObjects = Prelude.Nothing
-    }
+newSourceSelectionCriteria
+    :: SourceSelectionCriteria
+newSourceSelectionCriteria
+  = SourceSelectionCriteria'{replicaModifications =
+                               Prelude.Nothing,
+                             sseKmsEncryptedObjects = Prelude.Nothing}
 
 -- | A filter that you can specify for selections for modifications on
 -- replicas. Amazon S3 doesn\'t replicate replica modifications by default.
 -- In the latest version of replication configuration (when @Filter@ is
 -- specified), you can specify this element and set the status to @Enabled@
 -- to replicate modifications on replicas.
---
+-- 
 -- If you don\'t specify the @Filter@ element, Amazon S3 assumes that the
 -- replication configuration is the earlier version, V1. In the earlier
 -- version, this element is not allowed
 sourceSelectionCriteria_replicaModifications :: Lens.Lens' SourceSelectionCriteria (Prelude.Maybe ReplicaModifications)
-sourceSelectionCriteria_replicaModifications = Lens.lens (\SourceSelectionCriteria' {replicaModifications} -> replicaModifications) (\s@SourceSelectionCriteria' {} a -> s {replicaModifications = a} :: SourceSelectionCriteria)
+sourceSelectionCriteria_replicaModifications = Lens.lens (\ SourceSelectionCriteria'{replicaModifications} -> replicaModifications) (\ s@SourceSelectionCriteria'{} a -> s{replicaModifications = a} :: SourceSelectionCriteria)
 
 -- | A container for filter information for the selection of Amazon S3
 -- objects encrypted with Amazon Web Services KMS. If you include
 -- @SourceSelectionCriteria@ in the replication configuration, this element
 -- is required.
 sourceSelectionCriteria_sseKmsEncryptedObjects :: Lens.Lens' SourceSelectionCriteria (Prelude.Maybe SseKmsEncryptedObjects)
-sourceSelectionCriteria_sseKmsEncryptedObjects = Lens.lens (\SourceSelectionCriteria' {sseKmsEncryptedObjects} -> sseKmsEncryptedObjects) (\s@SourceSelectionCriteria' {} a -> s {sseKmsEncryptedObjects = a} :: SourceSelectionCriteria)
+sourceSelectionCriteria_sseKmsEncryptedObjects = Lens.lens (\ SourceSelectionCriteria'{sseKmsEncryptedObjects} -> sseKmsEncryptedObjects) (\ s@SourceSelectionCriteria'{} a -> s{sseKmsEncryptedObjects = a} :: SourceSelectionCriteria)
 
 instance Core.FromXML SourceSelectionCriteria where
-  parseXML x =
-    SourceSelectionCriteria'
-      Prelude.<$> (x Core..@? "ReplicaModifications")
-      Prelude.<*> (x Core..@? "SseKmsEncryptedObjects")
+        parseXML x
+          = SourceSelectionCriteria' Prelude.<$>
+              (x Core..@? "ReplicaModifications") Prelude.<*>
+                (x Core..@? "SseKmsEncryptedObjects")
 
-instance Prelude.Hashable SourceSelectionCriteria where
-  hashWithSalt _salt SourceSelectionCriteria' {..} =
-    _salt `Prelude.hashWithSalt` replicaModifications
-      `Prelude.hashWithSalt` sseKmsEncryptedObjects
+instance Prelude.Hashable SourceSelectionCriteria
+         where
+        hashWithSalt _salt SourceSelectionCriteria'{..}
+          = _salt `Prelude.hashWithSalt` replicaModifications
+              `Prelude.hashWithSalt` sseKmsEncryptedObjects
 
 instance Prelude.NFData SourceSelectionCriteria where
-  rnf SourceSelectionCriteria' {..} =
-    Prelude.rnf replicaModifications
-      `Prelude.seq` Prelude.rnf sseKmsEncryptedObjects
+        rnf SourceSelectionCriteria'{..}
+          = Prelude.rnf replicaModifications `Prelude.seq`
+              Prelude.rnf sseKmsEncryptedObjects
 
 instance Core.ToXML SourceSelectionCriteria where
-  toXML SourceSelectionCriteria' {..} =
-    Prelude.mconcat
-      [ "ReplicaModifications" Core.@= replicaModifications,
-        "SseKmsEncryptedObjects"
-          Core.@= sseKmsEncryptedObjects
-      ]
+        toXML SourceSelectionCriteria'{..}
+          = Prelude.mconcat
+              ["ReplicaModifications" Core.@= replicaModifications,
+               "SseKmsEncryptedObjects" Core.@=
+                 sseKmsEncryptedObjects]

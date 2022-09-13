@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,30 +18,31 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.ReplicaModifications where
 
+import Amazonka.S3.Internal
+import Amazonka.S3.Types.ReplicaModificationsStatus
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
-import Amazonka.S3.Types.ReplicaModificationsStatus
 
 -- | A filter that you can specify for selection for modifications on
 -- replicas. Amazon S3 doesn\'t replicate replica modifications by default.
 -- In the latest version of replication configuration (when @Filter@ is
 -- specified), you can specify this element and set the status to @Enabled@
 -- to replicate modifications on replicas.
---
+-- 
 -- If you don\'t specify the @Filter@ element, Amazon S3 assumes that the
 -- replication configuration is the earlier version, V1. In the earlier
 -- version, this element is not allowed.
 --
 -- /See:/ 'newReplicaModifications' smart constructor.
 data ReplicaModifications = ReplicaModifications'
-  { -- | Specifies whether Amazon S3 replicates modifications on replicas.
+    {
+    -- | Specifies whether Amazon S3 replicates modifications on replicas.
     status :: ReplicaModificationsStatus
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'ReplicaModifications' with all optional fields omitted.
@@ -51,29 +53,28 @@ data ReplicaModifications = ReplicaModifications'
 -- for backwards compatibility:
 --
 -- 'status', 'replicaModifications_status' - Specifies whether Amazon S3 replicates modifications on replicas.
-newReplicaModifications ::
-  -- | 'status'
-  ReplicaModificationsStatus ->
-  ReplicaModifications
-newReplicaModifications pStatus_ =
-  ReplicaModifications' {status = pStatus_}
+newReplicaModifications
+    :: ReplicaModificationsStatus -- ^ 'status'
+    -> ReplicaModifications
+newReplicaModifications pStatus_
+  = ReplicaModifications'{status = pStatus_}
 
 -- | Specifies whether Amazon S3 replicates modifications on replicas.
 replicaModifications_status :: Lens.Lens' ReplicaModifications ReplicaModificationsStatus
-replicaModifications_status = Lens.lens (\ReplicaModifications' {status} -> status) (\s@ReplicaModifications' {} a -> s {status = a} :: ReplicaModifications)
+replicaModifications_status = Lens.lens (\ ReplicaModifications'{status} -> status) (\ s@ReplicaModifications'{} a -> s{status = a} :: ReplicaModifications)
 
 instance Core.FromXML ReplicaModifications where
-  parseXML x =
-    ReplicaModifications'
-      Prelude.<$> (x Core..@ "Status")
+        parseXML x
+          = ReplicaModifications' Prelude.<$>
+              (x Core..@ "Status")
 
 instance Prelude.Hashable ReplicaModifications where
-  hashWithSalt _salt ReplicaModifications' {..} =
-    _salt `Prelude.hashWithSalt` status
+        hashWithSalt _salt ReplicaModifications'{..}
+          = _salt `Prelude.hashWithSalt` status
 
 instance Prelude.NFData ReplicaModifications where
-  rnf ReplicaModifications' {..} = Prelude.rnf status
+        rnf ReplicaModifications'{..} = Prelude.rnf status
 
 instance Core.ToXML ReplicaModifications where
-  toXML ReplicaModifications' {..} =
-    Prelude.mconcat ["Status" Core.@= status]
+        toXML ReplicaModifications'{..}
+          = Prelude.mconcat ["Status" Core.@= status]

@@ -1,13 +1,14 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE TypeFamilies          #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds   #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- Derived from AWS service descriptions, licensed under Apache 2.0.
@@ -23,18 +24,18 @@
 -- Decodes additional information about the authorization status of a
 -- request from an encoded message returned in response to an Amazon Web
 -- Services request.
---
+-- 
 -- For example, if a user is not authorized to perform an operation that he
 -- or she has requested, the request returns a
 -- @Client.UnauthorizedOperation@ response (an HTTP 403 response). Some
 -- Amazon Web Services operations additionally return an encoded message
 -- that can provide details about this authorization failure.
---
+-- 
 -- Only certain Amazon Web Services operations return an encoded
 -- authorization message. The documentation for an individual operation
 -- indicates whether that operation returns an encoded message in addition
 -- to returning an HTTP code.
---
+-- 
 -- The message is encoded because the details of the authorization status
 -- can contain privileged information that the user who requested the
 -- operation should not see. To decode an authorization status message, a
@@ -42,52 +43,50 @@
 -- <https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html policy>
 -- to request the @DecodeAuthorizationMessage@
 -- (@sts:DecodeAuthorizationMessage@) action.
---
+-- 
 -- The decoded message includes the following type of information:
---
+-- 
 -- -   Whether the request was denied due to an explicit deny or due to the
 --     absence of an explicit allow. For more information, see
 --     <https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-denyallow Determining Whether a Request is Allowed or Denied>
 --     in the /IAM User Guide/.
---
+-- 
 -- -   The principal who made the request.
---
+-- 
 -- -   The requested action.
---
+-- 
 -- -   The requested resource.
---
+-- 
 -- -   The values of condition keys in the context of the user\'s request.
 module Amazonka.STS.DecodeAuthorizationMessage
-  ( -- * Creating a Request
-    DecodeAuthorizationMessage (..),
-    newDecodeAuthorizationMessage,
-
+    (
+    -- * Creating a Request
+      DecodeAuthorizationMessage (..)
+    , newDecodeAuthorizationMessage 
     -- * Request Lenses
-    decodeAuthorizationMessage_encodedMessage,
+    , decodeAuthorizationMessage_encodedMessage
 
     -- * Destructuring the Response
-    DecodeAuthorizationMessageResponse (..),
-    newDecodeAuthorizationMessageResponse,
-
+    , DecodeAuthorizationMessageResponse (..)
+    , newDecodeAuthorizationMessageResponse 
     -- * Response Lenses
-    decodeAuthorizationMessageResponse_decodedMessage,
-    decodeAuthorizationMessageResponse_httpStatus,
-  )
-where
+    , decodeAuthorizationMessageResponse_decodedMessage
+    , decodeAuthorizationMessageResponse_httpStatus
+    ) where
 
+import Amazonka.STS.Types
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
 import qualified Amazonka.Request as Request
 import qualified Amazonka.Response as Response
-import Amazonka.STS.Types
 
 -- | /See:/ 'newDecodeAuthorizationMessage' smart constructor.
 data DecodeAuthorizationMessage = DecodeAuthorizationMessage'
-  { -- | The encoded message that was returned with the response.
+    {
+    -- | The encoded message that was returned with the response.
     encodedMessage :: Prelude.Text
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'DecodeAuthorizationMessage' with all optional fields omitted.
@@ -98,57 +97,60 @@ data DecodeAuthorizationMessage = DecodeAuthorizationMessage'
 -- for backwards compatibility:
 --
 -- 'encodedMessage', 'decodeAuthorizationMessage_encodedMessage' - The encoded message that was returned with the response.
-newDecodeAuthorizationMessage ::
-  -- | 'encodedMessage'
-  Prelude.Text ->
-  DecodeAuthorizationMessage
-newDecodeAuthorizationMessage pEncodedMessage_ =
-  DecodeAuthorizationMessage'
-    { encodedMessage =
-        pEncodedMessage_
-    }
+newDecodeAuthorizationMessage
+    :: Prelude.Text -- ^ 'encodedMessage'
+    -> DecodeAuthorizationMessage
+newDecodeAuthorizationMessage pEncodedMessage_
+  = DecodeAuthorizationMessage'{encodedMessage =
+                                  pEncodedMessage_}
 
 -- | The encoded message that was returned with the response.
 decodeAuthorizationMessage_encodedMessage :: Lens.Lens' DecodeAuthorizationMessage Prelude.Text
-decodeAuthorizationMessage_encodedMessage = Lens.lens (\DecodeAuthorizationMessage' {encodedMessage} -> encodedMessage) (\s@DecodeAuthorizationMessage' {} a -> s {encodedMessage = a} :: DecodeAuthorizationMessage)
+decodeAuthorizationMessage_encodedMessage = Lens.lens (\ DecodeAuthorizationMessage'{encodedMessage} -> encodedMessage) (\ s@DecodeAuthorizationMessage'{} a -> s{encodedMessage = a} :: DecodeAuthorizationMessage)
 
-instance Core.AWSRequest DecodeAuthorizationMessage where
-  type
-    AWSResponse DecodeAuthorizationMessage =
-      DecodeAuthorizationMessageResponse
-  request = Request.postQuery defaultService
-  response =
-    Response.receiveXMLWrapper
-      "DecodeAuthorizationMessageResult"
-      ( \s h x ->
-          DecodeAuthorizationMessageResponse'
-            Prelude.<$> (x Core..@? "DecodedMessage")
-            Prelude.<*> (Prelude.pure (Prelude.fromEnum s))
-      )
+instance Core.AWSRequest DecodeAuthorizationMessage
+         where
+        type AWSResponse DecodeAuthorizationMessage =
+             DecodeAuthorizationMessageResponse
+        request srv = Request.postQuery srv
+        response
+          = Response.receiveXMLWrapper
+              "DecodeAuthorizationMessageResult"
+              (\ s h x ->
+                 DecodeAuthorizationMessageResponse' Prelude.<$>
+                   (x Core..@? "DecodedMessage") Prelude.<*>
+                     (Prelude.pure (Prelude.fromEnum s)))
 
-instance Prelude.Hashable DecodeAuthorizationMessage where
-  hashWithSalt _salt DecodeAuthorizationMessage' {..} =
-    _salt `Prelude.hashWithSalt` encodedMessage
+instance Core.AWSService DecodeAuthorizationMessage
+         where
+        service _proxy = defaultService
 
-instance Prelude.NFData DecodeAuthorizationMessage where
-  rnf DecodeAuthorizationMessage' {..} =
-    Prelude.rnf encodedMessage
+instance Prelude.Hashable DecodeAuthorizationMessage
+         where
+        hashWithSalt _salt DecodeAuthorizationMessage'{..}
+          = _salt `Prelude.hashWithSalt` encodedMessage
 
-instance Core.ToHeaders DecodeAuthorizationMessage where
-  toHeaders = Prelude.const Prelude.mempty
+instance Prelude.NFData DecodeAuthorizationMessage
+         where
+        rnf DecodeAuthorizationMessage'{..}
+          = Prelude.rnf encodedMessage
+
+instance Core.ToHeaders DecodeAuthorizationMessage
+         where
+        toHeaders = Prelude.const Prelude.mempty
 
 instance Core.ToPath DecodeAuthorizationMessage where
-  toPath = Prelude.const "/"
+        toPath = Prelude.const "/"
 
-instance Core.ToQuery DecodeAuthorizationMessage where
-  toQuery DecodeAuthorizationMessage' {..} =
-    Prelude.mconcat
-      [ "Action"
-          Core.=: ("DecodeAuthorizationMessage" :: Prelude.ByteString),
-        "Version"
-          Core.=: ("2011-06-15" :: Prelude.ByteString),
-        "EncodedMessage" Core.=: encodedMessage
-      ]
+instance Core.ToQuery DecodeAuthorizationMessage
+         where
+        toQuery DecodeAuthorizationMessage'{..}
+          = Prelude.mconcat
+              ["Action" Core.=:
+                 ("DecodeAuthorizationMessage" :: Prelude.ByteString),
+               "Version" Core.=:
+                 ("2011-06-15" :: Prelude.ByteString),
+               "EncodedMessage" Core.=: encodedMessage]
 
 -- | A document that contains additional information about the authorization
 -- status of a request from an encoded message that is returned in response
@@ -156,12 +158,12 @@ instance Core.ToQuery DecodeAuthorizationMessage where
 --
 -- /See:/ 'newDecodeAuthorizationMessageResponse' smart constructor.
 data DecodeAuthorizationMessageResponse = DecodeAuthorizationMessageResponse'
-  { -- | The API returns a response with the decoded message.
-    decodedMessage :: Prelude.Maybe Prelude.Text,
+    {
+    -- | The API returns a response with the decoded message.
+    decodedMessage :: Prelude.Maybe Prelude.Text
     -- | The response's http status code.
-    httpStatus :: Prelude.Int
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , httpStatus :: Prelude.Int
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'DecodeAuthorizationMessageResponse' with all optional fields omitted.
@@ -174,29 +176,25 @@ data DecodeAuthorizationMessageResponse = DecodeAuthorizationMessageResponse'
 -- 'decodedMessage', 'decodeAuthorizationMessageResponse_decodedMessage' - The API returns a response with the decoded message.
 --
 -- 'httpStatus', 'decodeAuthorizationMessageResponse_httpStatus' - The response's http status code.
-newDecodeAuthorizationMessageResponse ::
-  -- | 'httpStatus'
-  Prelude.Int ->
-  DecodeAuthorizationMessageResponse
-newDecodeAuthorizationMessageResponse pHttpStatus_ =
-  DecodeAuthorizationMessageResponse'
-    { decodedMessage =
-        Prelude.Nothing,
-      httpStatus = pHttpStatus_
-    }
+newDecodeAuthorizationMessageResponse
+    :: Prelude.Int -- ^ 'httpStatus'
+    -> DecodeAuthorizationMessageResponse
+newDecodeAuthorizationMessageResponse pHttpStatus_
+  = DecodeAuthorizationMessageResponse'{decodedMessage
+                                          = Prelude.Nothing,
+                                        httpStatus = pHttpStatus_}
 
 -- | The API returns a response with the decoded message.
 decodeAuthorizationMessageResponse_decodedMessage :: Lens.Lens' DecodeAuthorizationMessageResponse (Prelude.Maybe Prelude.Text)
-decodeAuthorizationMessageResponse_decodedMessage = Lens.lens (\DecodeAuthorizationMessageResponse' {decodedMessage} -> decodedMessage) (\s@DecodeAuthorizationMessageResponse' {} a -> s {decodedMessage = a} :: DecodeAuthorizationMessageResponse)
+decodeAuthorizationMessageResponse_decodedMessage = Lens.lens (\ DecodeAuthorizationMessageResponse'{decodedMessage} -> decodedMessage) (\ s@DecodeAuthorizationMessageResponse'{} a -> s{decodedMessage = a} :: DecodeAuthorizationMessageResponse)
 
 -- | The response's http status code.
 decodeAuthorizationMessageResponse_httpStatus :: Lens.Lens' DecodeAuthorizationMessageResponse Prelude.Int
-decodeAuthorizationMessageResponse_httpStatus = Lens.lens (\DecodeAuthorizationMessageResponse' {httpStatus} -> httpStatus) (\s@DecodeAuthorizationMessageResponse' {} a -> s {httpStatus = a} :: DecodeAuthorizationMessageResponse)
+decodeAuthorizationMessageResponse_httpStatus = Lens.lens (\ DecodeAuthorizationMessageResponse'{httpStatus} -> httpStatus) (\ s@DecodeAuthorizationMessageResponse'{} a -> s{httpStatus = a} :: DecodeAuthorizationMessageResponse)
 
-instance
-  Prelude.NFData
-    DecodeAuthorizationMessageResponse
-  where
-  rnf DecodeAuthorizationMessageResponse' {..} =
-    Prelude.rnf decodedMessage
-      `Prelude.seq` Prelude.rnf httpStatus
+instance Prelude.NFData
+           DecodeAuthorizationMessageResponse
+         where
+        rnf DecodeAuthorizationMessageResponse'{..}
+          = Prelude.rnf decodedMessage `Prelude.seq`
+              Prelude.rnf httpStatus

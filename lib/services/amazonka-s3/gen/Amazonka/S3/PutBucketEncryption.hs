@@ -1,13 +1,14 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE TypeFamilies          #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds   #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- Derived from AWS service descriptions, licensed under Apache 2.0.
@@ -22,7 +23,7 @@
 --
 -- This action uses the @encryption@ subresource to configure default
 -- encryption and Amazon S3 Bucket Key for an existing bucket.
---
+-- 
 -- Default encryption for a bucket can use server-side encryption with
 -- Amazon S3-managed keys (SSE-S3) or customer managed keys (SSE-KMS). If
 -- you specify default encryption using SSE-KMS, you can also configure
@@ -35,11 +36,11 @@
 -- Keys, see
 -- <https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html Amazon S3 Bucket Keys>
 -- in the /Amazon S3 User Guide/.
---
+-- 
 -- This action requires Amazon Web Services Signature Version 4. For more
 -- information, see
 -- <https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html Authenticating Requests (Amazon Web Services Signature Version 4)>.
---
+-- 
 -- To use this operation, you must have permissions to perform the
 -- @s3:PutEncryptionConfiguration@ action. The bucket owner has this
 -- permission by default. The bucket owner can grant this permission to
@@ -48,40 +49,40 @@
 -- and
 -- <https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html Managing Access Permissions to Your Amazon S3 Resources>
 -- in the Amazon S3 User Guide.
---
+-- 
 -- __Related Resources__
---
+-- 
 -- -   <https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketEncryption.html GetBucketEncryption>
---
+-- 
 -- -   <https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketEncryption.html DeleteBucketEncryption>
 module Amazonka.S3.PutBucketEncryption
-  ( -- * Creating a Request
-    PutBucketEncryption (..),
-    newPutBucketEncryption,
-
+    (
+    -- * Creating a Request
+      PutBucketEncryption (..)
+    , newPutBucketEncryption 
     -- * Request Lenses
-    putBucketEncryption_checksumAlgorithm,
-    putBucketEncryption_contentMD5,
-    putBucketEncryption_expectedBucketOwner,
-    putBucketEncryption_bucket,
-    putBucketEncryption_serverSideEncryptionConfiguration,
+    , putBucketEncryption_checksumAlgorithm
+    , putBucketEncryption_contentMD5
+    , putBucketEncryption_expectedBucketOwner
+    , putBucketEncryption_bucket
+    , putBucketEncryption_serverSideEncryptionConfiguration
 
     -- * Destructuring the Response
-    PutBucketEncryptionResponse (..),
-    newPutBucketEncryptionResponse,
-  )
-where
+    , PutBucketEncryptionResponse (..)
+    , newPutBucketEncryptionResponse 
+    ) where
 
+import Amazonka.S3.Types
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
 import qualified Amazonka.Request as Request
 import qualified Amazonka.Response as Response
-import Amazonka.S3.Types
 
 -- | /See:/ 'newPutBucketEncryption' smart constructor.
 data PutBucketEncryption = PutBucketEncryption'
-  { -- | Indicates the algorithm used to create the checksum for the object when
+    {
+    -- | Indicates the algorithm used to create the checksum for the object when
     -- using the SDK. This header will not provide any additional functionality
     -- if not using the SDK. When sending this header, there must be a
     -- corresponding @x-amz-checksum@ or @x-amz-trailer@ header sent.
@@ -89,30 +90,29 @@ data PutBucketEncryption = PutBucketEncryption'
     -- @400 Bad Request@. For more information, see
     -- <https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html Checking object integrity>
     -- in the /Amazon S3 User Guide/.
-    --
+    -- 
     -- If you provide an individual checksum, Amazon S3 ignores any provided
     -- @ChecksumAlgorithm@ parameter.
-    checksumAlgorithm :: Prelude.Maybe ChecksumAlgorithm,
+    checksumAlgorithm :: Prelude.Maybe ChecksumAlgorithm
     -- | The base64-encoded 128-bit MD5 digest of the server-side encryption
     -- configuration.
-    --
+    -- 
     -- For requests made using the Amazon Web Services Command Line Interface
     -- (CLI) or Amazon Web Services SDKs, this field is calculated
     -- automatically.
-    contentMD5 :: Prelude.Maybe Prelude.Text,
+    , contentMD5 :: Prelude.Maybe Prelude.Text
     -- | The account ID of the expected bucket owner. If the bucket is owned by a
     -- different account, the request fails with the HTTP status code
     -- @403 Forbidden@ (access denied).
-    expectedBucketOwner :: Prelude.Maybe Prelude.Text,
+    , expectedBucketOwner :: Prelude.Maybe Prelude.Text
     -- | Specifies default encryption for a bucket using server-side encryption
     -- with Amazon S3-managed keys (SSE-S3) or customer managed keys (SSE-KMS).
     -- For information about the Amazon S3 default encryption feature, see
     -- <https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html Amazon S3 Default Bucket Encryption>
     -- in the /Amazon S3 User Guide/.
-    bucket :: BucketName,
-    serverSideEncryptionConfiguration :: ServerSideEncryptionConfiguration
-  }
-  deriving (Prelude.Eq, Prelude.Show, Prelude.Generic)
+    , bucket :: BucketName
+    , serverSideEncryptionConfiguration :: ServerSideEncryptionConfiguration
+    } deriving (Prelude.Eq, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'PutBucketEncryption' with all optional fields omitted.
@@ -130,13 +130,13 @@ data PutBucketEncryption = PutBucketEncryption'
 -- @400 Bad Request@. For more information, see
 -- <https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html Checking object integrity>
 -- in the /Amazon S3 User Guide/.
---
+-- 
 -- If you provide an individual checksum, Amazon S3 ignores any provided
 -- @ChecksumAlgorithm@ parameter.
 --
 -- 'contentMD5', 'putBucketEncryption_contentMD5' - The base64-encoded 128-bit MD5 digest of the server-side encryption
 -- configuration.
---
+-- 
 -- For requests made using the Amazon Web Services Command Line Interface
 -- (CLI) or Amazon Web Services SDKs, this field is calculated
 -- automatically.
@@ -152,24 +152,19 @@ data PutBucketEncryption = PutBucketEncryption'
 -- in the /Amazon S3 User Guide/.
 --
 -- 'serverSideEncryptionConfiguration', 'putBucketEncryption_serverSideEncryptionConfiguration' - Undocumented member.
-newPutBucketEncryption ::
-  -- | 'bucket'
-  BucketName ->
-  -- | 'serverSideEncryptionConfiguration'
-  ServerSideEncryptionConfiguration ->
-  PutBucketEncryption
 newPutBucketEncryption
-  pBucket_
-  pServerSideEncryptionConfiguration_ =
-    PutBucketEncryption'
-      { checksumAlgorithm =
-          Prelude.Nothing,
-        contentMD5 = Prelude.Nothing,
-        expectedBucketOwner = Prelude.Nothing,
-        bucket = pBucket_,
-        serverSideEncryptionConfiguration =
-          pServerSideEncryptionConfiguration_
-      }
+    :: BucketName -- ^ 'bucket'
+    -> ServerSideEncryptionConfiguration -- ^ 'serverSideEncryptionConfiguration'
+    -> PutBucketEncryption
+newPutBucketEncryption pBucket_
+  pServerSideEncryptionConfiguration_
+  = PutBucketEncryption'{checksumAlgorithm =
+                           Prelude.Nothing,
+                         contentMD5 = Prelude.Nothing,
+                         expectedBucketOwner = Prelude.Nothing,
+                         bucket = pBucket_,
+                         serverSideEncryptionConfiguration =
+                           pServerSideEncryptionConfiguration_}
 
 -- | Indicates the algorithm used to create the checksum for the object when
 -- using the SDK. This header will not provide any additional functionality
@@ -179,26 +174,26 @@ newPutBucketEncryption
 -- @400 Bad Request@. For more information, see
 -- <https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html Checking object integrity>
 -- in the /Amazon S3 User Guide/.
---
+-- 
 -- If you provide an individual checksum, Amazon S3 ignores any provided
 -- @ChecksumAlgorithm@ parameter.
 putBucketEncryption_checksumAlgorithm :: Lens.Lens' PutBucketEncryption (Prelude.Maybe ChecksumAlgorithm)
-putBucketEncryption_checksumAlgorithm = Lens.lens (\PutBucketEncryption' {checksumAlgorithm} -> checksumAlgorithm) (\s@PutBucketEncryption' {} a -> s {checksumAlgorithm = a} :: PutBucketEncryption)
+putBucketEncryption_checksumAlgorithm = Lens.lens (\ PutBucketEncryption'{checksumAlgorithm} -> checksumAlgorithm) (\ s@PutBucketEncryption'{} a -> s{checksumAlgorithm = a} :: PutBucketEncryption)
 
 -- | The base64-encoded 128-bit MD5 digest of the server-side encryption
 -- configuration.
---
+-- 
 -- For requests made using the Amazon Web Services Command Line Interface
 -- (CLI) or Amazon Web Services SDKs, this field is calculated
 -- automatically.
 putBucketEncryption_contentMD5 :: Lens.Lens' PutBucketEncryption (Prelude.Maybe Prelude.Text)
-putBucketEncryption_contentMD5 = Lens.lens (\PutBucketEncryption' {contentMD5} -> contentMD5) (\s@PutBucketEncryption' {} a -> s {contentMD5 = a} :: PutBucketEncryption)
+putBucketEncryption_contentMD5 = Lens.lens (\ PutBucketEncryption'{contentMD5} -> contentMD5) (\ s@PutBucketEncryption'{} a -> s{contentMD5 = a} :: PutBucketEncryption)
 
 -- | The account ID of the expected bucket owner. If the bucket is owned by a
 -- different account, the request fails with the HTTP status code
 -- @403 Forbidden@ (access denied).
 putBucketEncryption_expectedBucketOwner :: Lens.Lens' PutBucketEncryption (Prelude.Maybe Prelude.Text)
-putBucketEncryption_expectedBucketOwner = Lens.lens (\PutBucketEncryption' {expectedBucketOwner} -> expectedBucketOwner) (\s@PutBucketEncryption' {} a -> s {expectedBucketOwner = a} :: PutBucketEncryption)
+putBucketEncryption_expectedBucketOwner = Lens.lens (\ PutBucketEncryption'{expectedBucketOwner} -> expectedBucketOwner) (\ s@PutBucketEncryption'{} a -> s{expectedBucketOwner = a} :: PutBucketEncryption)
 
 -- | Specifies default encryption for a bucket using server-side encryption
 -- with Amazon S3-managed keys (SSE-S3) or customer managed keys (SSE-KMS).
@@ -206,76 +201,78 @@ putBucketEncryption_expectedBucketOwner = Lens.lens (\PutBucketEncryption' {expe
 -- <https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html Amazon S3 Default Bucket Encryption>
 -- in the /Amazon S3 User Guide/.
 putBucketEncryption_bucket :: Lens.Lens' PutBucketEncryption BucketName
-putBucketEncryption_bucket = Lens.lens (\PutBucketEncryption' {bucket} -> bucket) (\s@PutBucketEncryption' {} a -> s {bucket = a} :: PutBucketEncryption)
+putBucketEncryption_bucket = Lens.lens (\ PutBucketEncryption'{bucket} -> bucket) (\ s@PutBucketEncryption'{} a -> s{bucket = a} :: PutBucketEncryption)
 
 -- | Undocumented member.
 putBucketEncryption_serverSideEncryptionConfiguration :: Lens.Lens' PutBucketEncryption ServerSideEncryptionConfiguration
-putBucketEncryption_serverSideEncryptionConfiguration = Lens.lens (\PutBucketEncryption' {serverSideEncryptionConfiguration} -> serverSideEncryptionConfiguration) (\s@PutBucketEncryption' {} a -> s {serverSideEncryptionConfiguration = a} :: PutBucketEncryption)
+putBucketEncryption_serverSideEncryptionConfiguration = Lens.lens (\ PutBucketEncryption'{serverSideEncryptionConfiguration} -> serverSideEncryptionConfiguration) (\ s@PutBucketEncryption'{} a -> s{serverSideEncryptionConfiguration = a} :: PutBucketEncryption)
 
 instance Core.AWSRequest PutBucketEncryption where
-  type
-    AWSResponse PutBucketEncryption =
-      PutBucketEncryptionResponse
-  request =
-    Request.s3vhost
-      Prelude.. Request.putXML defaultService
-  response =
-    Response.receiveNull PutBucketEncryptionResponse'
+        type AWSResponse PutBucketEncryption =
+             PutBucketEncryptionResponse
+        request srv
+          = Request.s3vhost Prelude.. Request.putXML srv
+        response
+          = Response.receiveNull PutBucketEncryptionResponse'
+
+instance Core.AWSService PutBucketEncryption where
+        service _proxy = defaultService
 
 instance Prelude.Hashable PutBucketEncryption where
-  hashWithSalt _salt PutBucketEncryption' {..} =
-    _salt `Prelude.hashWithSalt` checksumAlgorithm
-      `Prelude.hashWithSalt` contentMD5
-      `Prelude.hashWithSalt` expectedBucketOwner
-      `Prelude.hashWithSalt` bucket
-      `Prelude.hashWithSalt` serverSideEncryptionConfiguration
+        hashWithSalt _salt PutBucketEncryption'{..}
+          = _salt `Prelude.hashWithSalt` checksumAlgorithm
+              `Prelude.hashWithSalt` contentMD5
+              `Prelude.hashWithSalt` expectedBucketOwner
+              `Prelude.hashWithSalt` bucket
+              `Prelude.hashWithSalt`
+              serverSideEncryptionConfiguration
 
 instance Prelude.NFData PutBucketEncryption where
-  rnf PutBucketEncryption' {..} =
-    Prelude.rnf checksumAlgorithm
-      `Prelude.seq` Prelude.rnf contentMD5
-      `Prelude.seq` Prelude.rnf expectedBucketOwner
-      `Prelude.seq` Prelude.rnf bucket
-      `Prelude.seq` Prelude.rnf serverSideEncryptionConfiguration
+        rnf PutBucketEncryption'{..}
+          = Prelude.rnf checksumAlgorithm `Prelude.seq`
+              Prelude.rnf contentMD5 `Prelude.seq`
+                Prelude.rnf expectedBucketOwner `Prelude.seq`
+                  Prelude.rnf bucket `Prelude.seq`
+                    Prelude.rnf serverSideEncryptionConfiguration
 
 instance Core.ToElement PutBucketEncryption where
-  toElement PutBucketEncryption' {..} =
-    Core.mkElement
-      "{http://s3.amazonaws.com/doc/2006-03-01/}ServerSideEncryptionConfiguration"
-      serverSideEncryptionConfiguration
+        toElement PutBucketEncryption'{..}
+          = Core.mkElement
+              "{http://s3.amazonaws.com/doc/2006-03-01/}ServerSideEncryptionConfiguration"
+              serverSideEncryptionConfiguration
 
 instance Core.ToHeaders PutBucketEncryption where
-  toHeaders PutBucketEncryption' {..} =
-    Prelude.mconcat
-      [ "x-amz-sdk-checksum-algorithm"
-          Core.=# checksumAlgorithm,
-        "Content-MD5" Core.=# contentMD5,
-        "x-amz-expected-bucket-owner"
-          Core.=# expectedBucketOwner
-      ]
+        toHeaders PutBucketEncryption'{..}
+          = Prelude.mconcat
+              ["x-amz-sdk-checksum-algorithm" Core.=#
+                 checksumAlgorithm,
+               "Content-MD5" Core.=# contentMD5,
+               "x-amz-expected-bucket-owner" Core.=#
+                 expectedBucketOwner]
 
 instance Core.ToPath PutBucketEncryption where
-  toPath PutBucketEncryption' {..} =
-    Prelude.mconcat ["/", Core.toBS bucket]
+        toPath PutBucketEncryption'{..}
+          = Prelude.mconcat ["/", Core.toBS bucket]
 
 instance Core.ToQuery PutBucketEncryption where
-  toQuery =
-    Prelude.const (Prelude.mconcat ["encryption"])
+        toQuery
+          = Prelude.const (Prelude.mconcat ["encryption"])
 
 -- | /See:/ 'newPutBucketEncryptionResponse' smart constructor.
 data PutBucketEncryptionResponse = PutBucketEncryptionResponse'
-  {
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    {
+
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'PutBucketEncryptionResponse' with all optional fields omitted.
 --
 -- Use <https://hackage.haskell.org/package/generic-lens generic-lens> or <https://hackage.haskell.org/package/optics optics> to modify other optional fields.
-newPutBucketEncryptionResponse ::
-  PutBucketEncryptionResponse
-newPutBucketEncryptionResponse =
-  PutBucketEncryptionResponse'
+newPutBucketEncryptionResponse
+    :: PutBucketEncryptionResponse
+newPutBucketEncryptionResponse
+  = PutBucketEncryptionResponse'
 
-instance Prelude.NFData PutBucketEncryptionResponse where
-  rnf _ = ()
+instance Prelude.NFData PutBucketEncryptionResponse
+         where
+        rnf _ = ()

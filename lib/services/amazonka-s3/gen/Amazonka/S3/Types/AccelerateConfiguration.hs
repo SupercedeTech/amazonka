@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,13 +18,14 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.AccelerateConfiguration where
 
+import Amazonka.S3.Internal
+import Amazonka.S3.Types.BucketAccelerateStatus
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
-import Amazonka.S3.Types.BucketAccelerateStatus
 
 -- | Configures the transfer acceleration state for an Amazon S3 bucket. For
 -- more information, see
@@ -32,10 +34,10 @@ import Amazonka.S3.Types.BucketAccelerateStatus
 --
 -- /See:/ 'newAccelerateConfiguration' smart constructor.
 data AccelerateConfiguration = AccelerateConfiguration'
-  { -- | Specifies the transfer acceleration status of the bucket.
+    {
+    -- | Specifies the transfer acceleration status of the bucket.
     status :: Prelude.Maybe BucketAccelerateStatus
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'AccelerateConfiguration' with all optional fields omitted.
@@ -46,22 +48,23 @@ data AccelerateConfiguration = AccelerateConfiguration'
 -- for backwards compatibility:
 --
 -- 'status', 'accelerateConfiguration_status' - Specifies the transfer acceleration status of the bucket.
-newAccelerateConfiguration ::
-  AccelerateConfiguration
-newAccelerateConfiguration =
-  AccelerateConfiguration' {status = Prelude.Nothing}
+newAccelerateConfiguration
+    :: AccelerateConfiguration
+newAccelerateConfiguration
+  = AccelerateConfiguration'{status = Prelude.Nothing}
 
 -- | Specifies the transfer acceleration status of the bucket.
 accelerateConfiguration_status :: Lens.Lens' AccelerateConfiguration (Prelude.Maybe BucketAccelerateStatus)
-accelerateConfiguration_status = Lens.lens (\AccelerateConfiguration' {status} -> status) (\s@AccelerateConfiguration' {} a -> s {status = a} :: AccelerateConfiguration)
+accelerateConfiguration_status = Lens.lens (\ AccelerateConfiguration'{status} -> status) (\ s@AccelerateConfiguration'{} a -> s{status = a} :: AccelerateConfiguration)
 
-instance Prelude.Hashable AccelerateConfiguration where
-  hashWithSalt _salt AccelerateConfiguration' {..} =
-    _salt `Prelude.hashWithSalt` status
+instance Prelude.Hashable AccelerateConfiguration
+         where
+        hashWithSalt _salt AccelerateConfiguration'{..}
+          = _salt `Prelude.hashWithSalt` status
 
 instance Prelude.NFData AccelerateConfiguration where
-  rnf AccelerateConfiguration' {..} = Prelude.rnf status
+        rnf AccelerateConfiguration'{..} = Prelude.rnf status
 
 instance Core.ToXML AccelerateConfiguration where
-  toXML AccelerateConfiguration' {..} =
-    Prelude.mconcat ["Status" Core.@= status]
+        toXML AccelerateConfiguration'{..}
+          = Prelude.mconcat ["Status" Core.@= status]

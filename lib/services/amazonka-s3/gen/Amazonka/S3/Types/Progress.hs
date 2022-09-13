@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,25 +18,26 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.Progress where
 
+import Amazonka.S3.Internal
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
 
 -- | This data type contains information about progress of an operation.
 --
 -- /See:/ 'newProgress' smart constructor.
 data Progress = Progress'
-  { -- | The current number of object bytes scanned.
-    bytesScanned :: Prelude.Maybe Prelude.Integer,
+    {
+    -- | The current number of object bytes scanned.
+    bytesScanned :: Prelude.Maybe Prelude.Integer
     -- | The current number of bytes of records payload data returned.
-    bytesReturned :: Prelude.Maybe Prelude.Integer,
+    , bytesReturned :: Prelude.Maybe Prelude.Integer
     -- | The current number of uncompressed object bytes processed.
-    bytesProcessed :: Prelude.Maybe Prelude.Integer
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , bytesProcessed :: Prelude.Maybe Prelude.Integer
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'Progress' with all optional fields omitted.
@@ -50,42 +52,40 @@ data Progress = Progress'
 -- 'bytesReturned', 'progress_bytesReturned' - The current number of bytes of records payload data returned.
 --
 -- 'bytesProcessed', 'progress_bytesProcessed' - The current number of uncompressed object bytes processed.
-newProgress ::
-  Progress
-newProgress =
-  Progress'
-    { bytesScanned = Prelude.Nothing,
-      bytesReturned = Prelude.Nothing,
-      bytesProcessed = Prelude.Nothing
-    }
+newProgress
+    :: Progress
+newProgress
+  = Progress'{bytesScanned = Prelude.Nothing,
+              bytesReturned = Prelude.Nothing,
+              bytesProcessed = Prelude.Nothing}
 
 -- | The current number of object bytes scanned.
 progress_bytesScanned :: Lens.Lens' Progress (Prelude.Maybe Prelude.Integer)
-progress_bytesScanned = Lens.lens (\Progress' {bytesScanned} -> bytesScanned) (\s@Progress' {} a -> s {bytesScanned = a} :: Progress)
+progress_bytesScanned = Lens.lens (\ Progress'{bytesScanned} -> bytesScanned) (\ s@Progress'{} a -> s{bytesScanned = a} :: Progress)
 
 -- | The current number of bytes of records payload data returned.
 progress_bytesReturned :: Lens.Lens' Progress (Prelude.Maybe Prelude.Integer)
-progress_bytesReturned = Lens.lens (\Progress' {bytesReturned} -> bytesReturned) (\s@Progress' {} a -> s {bytesReturned = a} :: Progress)
+progress_bytesReturned = Lens.lens (\ Progress'{bytesReturned} -> bytesReturned) (\ s@Progress'{} a -> s{bytesReturned = a} :: Progress)
 
 -- | The current number of uncompressed object bytes processed.
 progress_bytesProcessed :: Lens.Lens' Progress (Prelude.Maybe Prelude.Integer)
-progress_bytesProcessed = Lens.lens (\Progress' {bytesProcessed} -> bytesProcessed) (\s@Progress' {} a -> s {bytesProcessed = a} :: Progress)
+progress_bytesProcessed = Lens.lens (\ Progress'{bytesProcessed} -> bytesProcessed) (\ s@Progress'{} a -> s{bytesProcessed = a} :: Progress)
 
 instance Core.FromXML Progress where
-  parseXML x =
-    Progress'
-      Prelude.<$> (x Core..@? "BytesScanned")
-      Prelude.<*> (x Core..@? "BytesReturned")
-      Prelude.<*> (x Core..@? "BytesProcessed")
+        parseXML x
+          = Progress' Prelude.<$>
+              (x Core..@? "BytesScanned") Prelude.<*>
+                (x Core..@? "BytesReturned")
+                Prelude.<*> (x Core..@? "BytesProcessed")
 
 instance Prelude.Hashable Progress where
-  hashWithSalt _salt Progress' {..} =
-    _salt `Prelude.hashWithSalt` bytesScanned
-      `Prelude.hashWithSalt` bytesReturned
-      `Prelude.hashWithSalt` bytesProcessed
+        hashWithSalt _salt Progress'{..}
+          = _salt `Prelude.hashWithSalt` bytesScanned
+              `Prelude.hashWithSalt` bytesReturned
+              `Prelude.hashWithSalt` bytesProcessed
 
 instance Prelude.NFData Progress where
-  rnf Progress' {..} =
-    Prelude.rnf bytesScanned
-      `Prelude.seq` Prelude.rnf bytesReturned
-      `Prelude.seq` Prelude.rnf bytesProcessed
+        rnf Progress'{..}
+          = Prelude.rnf bytesScanned `Prelude.seq`
+              Prelude.rnf bytesReturned `Prelude.seq`
+                Prelude.rnf bytesProcessed

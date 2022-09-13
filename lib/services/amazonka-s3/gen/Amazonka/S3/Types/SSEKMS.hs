@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,23 +18,24 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.SSEKMS where
 
+import Amazonka.S3.Internal
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
 
 -- | Specifies the use of SSE-KMS to encrypt delivered inventory reports.
 --
 -- /See:/ 'newSSEKMS' smart constructor.
 data SSEKMS = SSEKMS'
-  { -- | Specifies the ID of the Amazon Web Services Key Management Service
+    {
+    -- | Specifies the ID of the Amazon Web Services Key Management Service
     -- (Amazon Web Services KMS) symmetric customer managed key to use for
     -- encrypting inventory reports.
     keyId :: Core.Sensitive Prelude.Text
-  }
-  deriving (Prelude.Eq, Prelude.Show, Prelude.Generic)
+    } deriving (Prelude.Eq, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'SSEKMS' with all optional fields omitted.
@@ -46,29 +48,28 @@ data SSEKMS = SSEKMS'
 -- 'keyId', 'ssekms_keyId' - Specifies the ID of the Amazon Web Services Key Management Service
 -- (Amazon Web Services KMS) symmetric customer managed key to use for
 -- encrypting inventory reports.
-newSSEKMS ::
-  -- | 'keyId'
-  Prelude.Text ->
-  SSEKMS
-newSSEKMS pKeyId_ =
-  SSEKMS' {keyId = Core._Sensitive Lens.# pKeyId_}
+newSSEKMS
+    :: Prelude.Text -- ^ 'keyId'
+    -> SSEKMS
+newSSEKMS pKeyId_
+  = SSEKMS'{keyId = Core._Sensitive Lens.# pKeyId_}
 
 -- | Specifies the ID of the Amazon Web Services Key Management Service
 -- (Amazon Web Services KMS) symmetric customer managed key to use for
 -- encrypting inventory reports.
 ssekms_keyId :: Lens.Lens' SSEKMS Prelude.Text
-ssekms_keyId = Lens.lens (\SSEKMS' {keyId} -> keyId) (\s@SSEKMS' {} a -> s {keyId = a} :: SSEKMS) Prelude.. Core._Sensitive
+ssekms_keyId = Lens.lens (\ SSEKMS'{keyId} -> keyId) (\ s@SSEKMS'{} a -> s{keyId = a} :: SSEKMS) Prelude.. Core._Sensitive
 
 instance Core.FromXML SSEKMS where
-  parseXML x = SSEKMS' Prelude.<$> (x Core..@ "KeyId")
+        parseXML x = SSEKMS' Prelude.<$> (x Core..@ "KeyId")
 
 instance Prelude.Hashable SSEKMS where
-  hashWithSalt _salt SSEKMS' {..} =
-    _salt `Prelude.hashWithSalt` keyId
+        hashWithSalt _salt SSEKMS'{..}
+          = _salt `Prelude.hashWithSalt` keyId
 
 instance Prelude.NFData SSEKMS where
-  rnf SSEKMS' {..} = Prelude.rnf keyId
+        rnf SSEKMS'{..} = Prelude.rnf keyId
 
 instance Core.ToXML SSEKMS where
-  toXML SSEKMS' {..} =
-    Prelude.mconcat ["KeyId" Core.@= keyId]
+        toXML SSEKMS'{..}
+          = Prelude.mconcat ["KeyId" Core.@= keyId]

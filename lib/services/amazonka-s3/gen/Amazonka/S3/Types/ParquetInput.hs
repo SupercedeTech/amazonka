@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,35 +18,36 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.ParquetInput where
 
+import Amazonka.S3.Internal
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
 
 -- | Container for Parquet.
 --
 -- /See:/ 'newParquetInput' smart constructor.
 data ParquetInput = ParquetInput'
-  {
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    {
+
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'ParquetInput' with all optional fields omitted.
 --
 -- Use <https://hackage.haskell.org/package/generic-lens generic-lens> or <https://hackage.haskell.org/package/optics optics> to modify other optional fields.
-newParquetInput ::
-  ParquetInput
+newParquetInput
+    :: ParquetInput
 newParquetInput = ParquetInput'
 
 instance Prelude.Hashable ParquetInput where
-  hashWithSalt _salt _ =
-    _salt `Prelude.hashWithSalt` ()
+        hashWithSalt _salt _
+          = _salt `Prelude.hashWithSalt` ()
 
 instance Prelude.NFData ParquetInput where
-  rnf _ = ()
+        rnf _ = ()
 
 instance Core.ToXML ParquetInput where
-  toXML = Prelude.const Prelude.mempty
+        toXML = Prelude.const Prelude.mempty

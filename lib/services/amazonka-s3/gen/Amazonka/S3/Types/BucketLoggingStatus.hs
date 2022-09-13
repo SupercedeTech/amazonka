@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,21 +18,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.BucketLoggingStatus where
 
+import Amazonka.S3.Internal
+import Amazonka.S3.Types.LoggingEnabled
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
-import Amazonka.S3.Types.LoggingEnabled
 
 -- | Container for logging status information.
 --
 -- /See:/ 'newBucketLoggingStatus' smart constructor.
 data BucketLoggingStatus = BucketLoggingStatus'
-  { loggingEnabled :: Prelude.Maybe LoggingEnabled
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    {
+    loggingEnabled :: Prelude.Maybe LoggingEnabled
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'BucketLoggingStatus' with all optional fields omitted.
@@ -42,27 +44,25 @@ data BucketLoggingStatus = BucketLoggingStatus'
 -- for backwards compatibility:
 --
 -- 'loggingEnabled', 'bucketLoggingStatus_loggingEnabled' - Undocumented member.
-newBucketLoggingStatus ::
-  BucketLoggingStatus
-newBucketLoggingStatus =
-  BucketLoggingStatus'
-    { loggingEnabled =
-        Prelude.Nothing
-    }
+newBucketLoggingStatus
+    :: BucketLoggingStatus
+newBucketLoggingStatus
+  = BucketLoggingStatus'{loggingEnabled =
+                           Prelude.Nothing}
 
 -- | Undocumented member.
 bucketLoggingStatus_loggingEnabled :: Lens.Lens' BucketLoggingStatus (Prelude.Maybe LoggingEnabled)
-bucketLoggingStatus_loggingEnabled = Lens.lens (\BucketLoggingStatus' {loggingEnabled} -> loggingEnabled) (\s@BucketLoggingStatus' {} a -> s {loggingEnabled = a} :: BucketLoggingStatus)
+bucketLoggingStatus_loggingEnabled = Lens.lens (\ BucketLoggingStatus'{loggingEnabled} -> loggingEnabled) (\ s@BucketLoggingStatus'{} a -> s{loggingEnabled = a} :: BucketLoggingStatus)
 
 instance Prelude.Hashable BucketLoggingStatus where
-  hashWithSalt _salt BucketLoggingStatus' {..} =
-    _salt `Prelude.hashWithSalt` loggingEnabled
+        hashWithSalt _salt BucketLoggingStatus'{..}
+          = _salt `Prelude.hashWithSalt` loggingEnabled
 
 instance Prelude.NFData BucketLoggingStatus where
-  rnf BucketLoggingStatus' {..} =
-    Prelude.rnf loggingEnabled
+        rnf BucketLoggingStatus'{..}
+          = Prelude.rnf loggingEnabled
 
 instance Core.ToXML BucketLoggingStatus where
-  toXML BucketLoggingStatus' {..} =
-    Prelude.mconcat
-      ["LoggingEnabled" Core.@= loggingEnabled]
+        toXML BucketLoggingStatus'{..}
+          = Prelude.mconcat
+              ["LoggingEnabled" Core.@= loggingEnabled]

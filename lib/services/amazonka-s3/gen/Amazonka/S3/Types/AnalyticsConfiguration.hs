@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,32 +18,33 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.AnalyticsConfiguration where
 
-import qualified Amazonka.Core as Core
-import qualified Amazonka.Lens as Lens
-import qualified Amazonka.Prelude as Prelude
 import Amazonka.S3.Internal
 import Amazonka.S3.Types.AnalyticsFilter
 import Amazonka.S3.Types.StorageClassAnalysis
+import qualified Amazonka.Core as Core
+import qualified Amazonka.Lens as Lens
+import qualified Amazonka.Prelude as Prelude
 
 -- | Specifies the configuration and any analyses for the analytics filter of
 -- an Amazon S3 bucket.
 --
 -- /See:/ 'newAnalyticsConfiguration' smart constructor.
 data AnalyticsConfiguration = AnalyticsConfiguration'
-  { -- | The filter used to describe a set of objects for analyses. A filter must
+    {
+    -- | The filter used to describe a set of objects for analyses. A filter must
     -- have exactly one prefix, one tag, or one conjunction
     -- (AnalyticsAndOperator). If no filter is provided, all objects will be
     -- considered in any analysis.
-    filter' :: Prelude.Maybe AnalyticsFilter,
+    filter' :: Prelude.Maybe AnalyticsFilter
     -- | The ID that identifies the analytics configuration.
-    id :: Prelude.Text,
+    , id :: Prelude.Text
     -- | Contains data related to access patterns to be collected and made
     -- available to analyze the tradeoffs between different storage classes.
-    storageClassAnalysis :: StorageClassAnalysis
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , storageClassAnalysis :: StorageClassAnalysis
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'AnalyticsConfiguration' with all optional fields omitted.
@@ -61,58 +63,52 @@ data AnalyticsConfiguration = AnalyticsConfiguration'
 --
 -- 'storageClassAnalysis', 'analyticsConfiguration_storageClassAnalysis' - Contains data related to access patterns to be collected and made
 -- available to analyze the tradeoffs between different storage classes.
-newAnalyticsConfiguration ::
-  -- | 'id'
-  Prelude.Text ->
-  -- | 'storageClassAnalysis'
-  StorageClassAnalysis ->
-  AnalyticsConfiguration
-newAnalyticsConfiguration pId_ pStorageClassAnalysis_ =
-  AnalyticsConfiguration'
-    { filter' = Prelude.Nothing,
-      id = pId_,
-      storageClassAnalysis = pStorageClassAnalysis_
-    }
+newAnalyticsConfiguration
+    :: Prelude.Text -- ^ 'id'
+    -> StorageClassAnalysis -- ^ 'storageClassAnalysis'
+    -> AnalyticsConfiguration
+newAnalyticsConfiguration pId_ pStorageClassAnalysis_
+  = AnalyticsConfiguration'{filter' = Prelude.Nothing,
+                            id = pId_,
+                            storageClassAnalysis = pStorageClassAnalysis_}
 
 -- | The filter used to describe a set of objects for analyses. A filter must
 -- have exactly one prefix, one tag, or one conjunction
 -- (AnalyticsAndOperator). If no filter is provided, all objects will be
 -- considered in any analysis.
 analyticsConfiguration_filter :: Lens.Lens' AnalyticsConfiguration (Prelude.Maybe AnalyticsFilter)
-analyticsConfiguration_filter = Lens.lens (\AnalyticsConfiguration' {filter'} -> filter') (\s@AnalyticsConfiguration' {} a -> s {filter' = a} :: AnalyticsConfiguration)
+analyticsConfiguration_filter = Lens.lens (\ AnalyticsConfiguration'{filter'} -> filter') (\ s@AnalyticsConfiguration'{} a -> s{filter' = a} :: AnalyticsConfiguration)
 
 -- | The ID that identifies the analytics configuration.
 analyticsConfiguration_id :: Lens.Lens' AnalyticsConfiguration Prelude.Text
-analyticsConfiguration_id = Lens.lens (\AnalyticsConfiguration' {id} -> id) (\s@AnalyticsConfiguration' {} a -> s {id = a} :: AnalyticsConfiguration)
+analyticsConfiguration_id = Lens.lens (\ AnalyticsConfiguration'{id} -> id) (\ s@AnalyticsConfiguration'{} a -> s{id = a} :: AnalyticsConfiguration)
 
 -- | Contains data related to access patterns to be collected and made
 -- available to analyze the tradeoffs between different storage classes.
 analyticsConfiguration_storageClassAnalysis :: Lens.Lens' AnalyticsConfiguration StorageClassAnalysis
-analyticsConfiguration_storageClassAnalysis = Lens.lens (\AnalyticsConfiguration' {storageClassAnalysis} -> storageClassAnalysis) (\s@AnalyticsConfiguration' {} a -> s {storageClassAnalysis = a} :: AnalyticsConfiguration)
+analyticsConfiguration_storageClassAnalysis = Lens.lens (\ AnalyticsConfiguration'{storageClassAnalysis} -> storageClassAnalysis) (\ s@AnalyticsConfiguration'{} a -> s{storageClassAnalysis = a} :: AnalyticsConfiguration)
 
 instance Core.FromXML AnalyticsConfiguration where
-  parseXML x =
-    AnalyticsConfiguration'
-      Prelude.<$> (x Core..@? "Filter")
-      Prelude.<*> (x Core..@ "Id")
-      Prelude.<*> (x Core..@ "StorageClassAnalysis")
+        parseXML x
+          = AnalyticsConfiguration' Prelude.<$>
+              (x Core..@? "Filter") Prelude.<*> (x Core..@ "Id")
+                Prelude.<*> (x Core..@ "StorageClassAnalysis")
 
-instance Prelude.Hashable AnalyticsConfiguration where
-  hashWithSalt _salt AnalyticsConfiguration' {..} =
-    _salt `Prelude.hashWithSalt` filter'
-      `Prelude.hashWithSalt` id
-      `Prelude.hashWithSalt` storageClassAnalysis
+instance Prelude.Hashable AnalyticsConfiguration
+         where
+        hashWithSalt _salt AnalyticsConfiguration'{..}
+          = _salt `Prelude.hashWithSalt` filter'
+              `Prelude.hashWithSalt` id
+              `Prelude.hashWithSalt` storageClassAnalysis
 
 instance Prelude.NFData AnalyticsConfiguration where
-  rnf AnalyticsConfiguration' {..} =
-    Prelude.rnf filter'
-      `Prelude.seq` Prelude.rnf id
-      `Prelude.seq` Prelude.rnf storageClassAnalysis
+        rnf AnalyticsConfiguration'{..}
+          = Prelude.rnf filter' `Prelude.seq`
+              Prelude.rnf id `Prelude.seq`
+                Prelude.rnf storageClassAnalysis
 
 instance Core.ToXML AnalyticsConfiguration where
-  toXML AnalyticsConfiguration' {..} =
-    Prelude.mconcat
-      [ "Filter" Core.@= filter',
-        "Id" Core.@= id,
-        "StorageClassAnalysis" Core.@= storageClassAnalysis
-      ]
+        toXML AnalyticsConfiguration'{..}
+          = Prelude.mconcat
+              ["Filter" Core.@= filter', "Id" Core.@= id,
+               "StorageClassAnalysis" Core.@= storageClassAnalysis]

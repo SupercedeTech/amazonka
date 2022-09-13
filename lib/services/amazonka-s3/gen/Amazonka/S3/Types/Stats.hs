@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,25 +18,26 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.Stats where
 
+import Amazonka.S3.Internal
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
 
 -- | Container for the stats details.
 --
 -- /See:/ 'newStats' smart constructor.
 data Stats = Stats'
-  { -- | The total number of object bytes scanned.
-    bytesScanned :: Prelude.Maybe Prelude.Integer,
+    {
+    -- | The total number of object bytes scanned.
+    bytesScanned :: Prelude.Maybe Prelude.Integer
     -- | The total number of bytes of records payload data returned.
-    bytesReturned :: Prelude.Maybe Prelude.Integer,
+    , bytesReturned :: Prelude.Maybe Prelude.Integer
     -- | The total number of uncompressed object bytes processed.
-    bytesProcessed :: Prelude.Maybe Prelude.Integer
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , bytesProcessed :: Prelude.Maybe Prelude.Integer
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'Stats' with all optional fields omitted.
@@ -50,42 +52,40 @@ data Stats = Stats'
 -- 'bytesReturned', 'stats_bytesReturned' - The total number of bytes of records payload data returned.
 --
 -- 'bytesProcessed', 'stats_bytesProcessed' - The total number of uncompressed object bytes processed.
-newStats ::
-  Stats
-newStats =
-  Stats'
-    { bytesScanned = Prelude.Nothing,
-      bytesReturned = Prelude.Nothing,
-      bytesProcessed = Prelude.Nothing
-    }
+newStats
+    :: Stats
+newStats
+  = Stats'{bytesScanned = Prelude.Nothing,
+           bytesReturned = Prelude.Nothing,
+           bytesProcessed = Prelude.Nothing}
 
 -- | The total number of object bytes scanned.
 stats_bytesScanned :: Lens.Lens' Stats (Prelude.Maybe Prelude.Integer)
-stats_bytesScanned = Lens.lens (\Stats' {bytesScanned} -> bytesScanned) (\s@Stats' {} a -> s {bytesScanned = a} :: Stats)
+stats_bytesScanned = Lens.lens (\ Stats'{bytesScanned} -> bytesScanned) (\ s@Stats'{} a -> s{bytesScanned = a} :: Stats)
 
 -- | The total number of bytes of records payload data returned.
 stats_bytesReturned :: Lens.Lens' Stats (Prelude.Maybe Prelude.Integer)
-stats_bytesReturned = Lens.lens (\Stats' {bytesReturned} -> bytesReturned) (\s@Stats' {} a -> s {bytesReturned = a} :: Stats)
+stats_bytesReturned = Lens.lens (\ Stats'{bytesReturned} -> bytesReturned) (\ s@Stats'{} a -> s{bytesReturned = a} :: Stats)
 
 -- | The total number of uncompressed object bytes processed.
 stats_bytesProcessed :: Lens.Lens' Stats (Prelude.Maybe Prelude.Integer)
-stats_bytesProcessed = Lens.lens (\Stats' {bytesProcessed} -> bytesProcessed) (\s@Stats' {} a -> s {bytesProcessed = a} :: Stats)
+stats_bytesProcessed = Lens.lens (\ Stats'{bytesProcessed} -> bytesProcessed) (\ s@Stats'{} a -> s{bytesProcessed = a} :: Stats)
 
 instance Core.FromXML Stats where
-  parseXML x =
-    Stats'
-      Prelude.<$> (x Core..@? "BytesScanned")
-      Prelude.<*> (x Core..@? "BytesReturned")
-      Prelude.<*> (x Core..@? "BytesProcessed")
+        parseXML x
+          = Stats' Prelude.<$>
+              (x Core..@? "BytesScanned") Prelude.<*>
+                (x Core..@? "BytesReturned")
+                Prelude.<*> (x Core..@? "BytesProcessed")
 
 instance Prelude.Hashable Stats where
-  hashWithSalt _salt Stats' {..} =
-    _salt `Prelude.hashWithSalt` bytesScanned
-      `Prelude.hashWithSalt` bytesReturned
-      `Prelude.hashWithSalt` bytesProcessed
+        hashWithSalt _salt Stats'{..}
+          = _salt `Prelude.hashWithSalt` bytesScanned
+              `Prelude.hashWithSalt` bytesReturned
+              `Prelude.hashWithSalt` bytesProcessed
 
 instance Prelude.NFData Stats where
-  rnf Stats' {..} =
-    Prelude.rnf bytesScanned
-      `Prelude.seq` Prelude.rnf bytesReturned
-      `Prelude.seq` Prelude.rnf bytesProcessed
+        rnf Stats'{..}
+          = Prelude.rnf bytesScanned `Prelude.seq`
+              Prelude.rnf bytesReturned `Prelude.seq`
+                Prelude.rnf bytesProcessed

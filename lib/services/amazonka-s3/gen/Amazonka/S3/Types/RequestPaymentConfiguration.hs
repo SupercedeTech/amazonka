@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,22 +18,23 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.RequestPaymentConfiguration where
 
+import Amazonka.S3.Internal
+import Amazonka.S3.Types.Payer
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
-import Amazonka.S3.Types.Payer
 
 -- | Container for Payer.
 --
 -- /See:/ 'newRequestPaymentConfiguration' smart constructor.
 data RequestPaymentConfiguration = RequestPaymentConfiguration'
-  { -- | Specifies who pays for the download and request fees.
+    {
+    -- | Specifies who pays for the download and request fees.
     payer :: Payer
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'RequestPaymentConfiguration' with all optional fields omitted.
@@ -43,25 +45,26 @@ data RequestPaymentConfiguration = RequestPaymentConfiguration'
 -- for backwards compatibility:
 --
 -- 'payer', 'requestPaymentConfiguration_payer' - Specifies who pays for the download and request fees.
-newRequestPaymentConfiguration ::
-  -- | 'payer'
-  Payer ->
-  RequestPaymentConfiguration
-newRequestPaymentConfiguration pPayer_ =
-  RequestPaymentConfiguration' {payer = pPayer_}
+newRequestPaymentConfiguration
+    :: Payer -- ^ 'payer'
+    -> RequestPaymentConfiguration
+newRequestPaymentConfiguration pPayer_
+  = RequestPaymentConfiguration'{payer = pPayer_}
 
 -- | Specifies who pays for the download and request fees.
 requestPaymentConfiguration_payer :: Lens.Lens' RequestPaymentConfiguration Payer
-requestPaymentConfiguration_payer = Lens.lens (\RequestPaymentConfiguration' {payer} -> payer) (\s@RequestPaymentConfiguration' {} a -> s {payer = a} :: RequestPaymentConfiguration)
+requestPaymentConfiguration_payer = Lens.lens (\ RequestPaymentConfiguration'{payer} -> payer) (\ s@RequestPaymentConfiguration'{} a -> s{payer = a} :: RequestPaymentConfiguration)
 
-instance Prelude.Hashable RequestPaymentConfiguration where
-  hashWithSalt _salt RequestPaymentConfiguration' {..} =
-    _salt `Prelude.hashWithSalt` payer
+instance Prelude.Hashable RequestPaymentConfiguration
+         where
+        hashWithSalt _salt RequestPaymentConfiguration'{..}
+          = _salt `Prelude.hashWithSalt` payer
 
-instance Prelude.NFData RequestPaymentConfiguration where
-  rnf RequestPaymentConfiguration' {..} =
-    Prelude.rnf payer
+instance Prelude.NFData RequestPaymentConfiguration
+         where
+        rnf RequestPaymentConfiguration'{..}
+          = Prelude.rnf payer
 
 instance Core.ToXML RequestPaymentConfiguration where
-  toXML RequestPaymentConfiguration' {..} =
-    Prelude.mconcat ["Payer" Core.@= payer]
+        toXML RequestPaymentConfiguration'{..}
+          = Prelude.mconcat ["Payer" Core.@= payer]

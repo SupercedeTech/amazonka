@@ -1,13 +1,14 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE TypeFamilies          #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds   #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- Derived from AWS service descriptions, licensed under Apache 2.0.
@@ -25,7 +26,7 @@
 -- feature, see
 -- <https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html Amazon S3 Default Bucket Encryption>
 -- in the /Amazon S3 User Guide/.
---
+-- 
 -- To use this operation, you must have permissions to perform the
 -- @s3:PutEncryptionConfiguration@ action. The bucket owner has this
 -- permission by default. The bucket owner can grant this permission to
@@ -34,45 +35,44 @@
 -- and
 -- <https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html Managing Access Permissions to your Amazon S3 Resources>
 -- in the /Amazon S3 User Guide/.
---
+-- 
 -- __Related Resources__
---
+-- 
 -- -   <https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketEncryption.html PutBucketEncryption>
---
+-- 
 -- -   <https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketEncryption.html GetBucketEncryption>
 module Amazonka.S3.DeleteBucketEncryption
-  ( -- * Creating a Request
-    DeleteBucketEncryption (..),
-    newDeleteBucketEncryption,
-
+    (
+    -- * Creating a Request
+      DeleteBucketEncryption (..)
+    , newDeleteBucketEncryption 
     -- * Request Lenses
-    deleteBucketEncryption_expectedBucketOwner,
-    deleteBucketEncryption_bucket,
+    , deleteBucketEncryption_expectedBucketOwner
+    , deleteBucketEncryption_bucket
 
     -- * Destructuring the Response
-    DeleteBucketEncryptionResponse (..),
-    newDeleteBucketEncryptionResponse,
-  )
-where
+    , DeleteBucketEncryptionResponse (..)
+    , newDeleteBucketEncryptionResponse 
+    ) where
 
+import Amazonka.S3.Types
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
 import qualified Amazonka.Request as Request
 import qualified Amazonka.Response as Response
-import Amazonka.S3.Types
 
 -- | /See:/ 'newDeleteBucketEncryption' smart constructor.
 data DeleteBucketEncryption = DeleteBucketEncryption'
-  { -- | The account ID of the expected bucket owner. If the bucket is owned by a
+    {
+    -- | The account ID of the expected bucket owner. If the bucket is owned by a
     -- different account, the request fails with the HTTP status code
     -- @403 Forbidden@ (access denied).
-    expectedBucketOwner :: Prelude.Maybe Prelude.Text,
+    expectedBucketOwner :: Prelude.Maybe Prelude.Text
     -- | The name of the bucket containing the server-side encryption
     -- configuration to delete.
-    bucket :: BucketName
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , bucket :: BucketName
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'DeleteBucketEncryption' with all optional fields omitted.
@@ -88,81 +88,78 @@ data DeleteBucketEncryption = DeleteBucketEncryption'
 --
 -- 'bucket', 'deleteBucketEncryption_bucket' - The name of the bucket containing the server-side encryption
 -- configuration to delete.
-newDeleteBucketEncryption ::
-  -- | 'bucket'
-  BucketName ->
-  DeleteBucketEncryption
-newDeleteBucketEncryption pBucket_ =
-  DeleteBucketEncryption'
-    { expectedBucketOwner =
-        Prelude.Nothing,
-      bucket = pBucket_
-    }
+newDeleteBucketEncryption
+    :: BucketName -- ^ 'bucket'
+    -> DeleteBucketEncryption
+newDeleteBucketEncryption pBucket_
+  = DeleteBucketEncryption'{expectedBucketOwner =
+                              Prelude.Nothing,
+                            bucket = pBucket_}
 
 -- | The account ID of the expected bucket owner. If the bucket is owned by a
 -- different account, the request fails with the HTTP status code
 -- @403 Forbidden@ (access denied).
 deleteBucketEncryption_expectedBucketOwner :: Lens.Lens' DeleteBucketEncryption (Prelude.Maybe Prelude.Text)
-deleteBucketEncryption_expectedBucketOwner = Lens.lens (\DeleteBucketEncryption' {expectedBucketOwner} -> expectedBucketOwner) (\s@DeleteBucketEncryption' {} a -> s {expectedBucketOwner = a} :: DeleteBucketEncryption)
+deleteBucketEncryption_expectedBucketOwner = Lens.lens (\ DeleteBucketEncryption'{expectedBucketOwner} -> expectedBucketOwner) (\ s@DeleteBucketEncryption'{} a -> s{expectedBucketOwner = a} :: DeleteBucketEncryption)
 
 -- | The name of the bucket containing the server-side encryption
 -- configuration to delete.
 deleteBucketEncryption_bucket :: Lens.Lens' DeleteBucketEncryption BucketName
-deleteBucketEncryption_bucket = Lens.lens (\DeleteBucketEncryption' {bucket} -> bucket) (\s@DeleteBucketEncryption' {} a -> s {bucket = a} :: DeleteBucketEncryption)
+deleteBucketEncryption_bucket = Lens.lens (\ DeleteBucketEncryption'{bucket} -> bucket) (\ s@DeleteBucketEncryption'{} a -> s{bucket = a} :: DeleteBucketEncryption)
 
 instance Core.AWSRequest DeleteBucketEncryption where
-  type
-    AWSResponse DeleteBucketEncryption =
-      DeleteBucketEncryptionResponse
-  request =
-    Request.s3vhost
-      Prelude.. Request.delete defaultService
-  response =
-    Response.receiveNull
-      DeleteBucketEncryptionResponse'
+        type AWSResponse DeleteBucketEncryption =
+             DeleteBucketEncryptionResponse
+        request srv
+          = Request.s3vhost Prelude.. Request.delete srv
+        response
+          = Response.receiveNull
+              DeleteBucketEncryptionResponse'
 
-instance Prelude.Hashable DeleteBucketEncryption where
-  hashWithSalt _salt DeleteBucketEncryption' {..} =
-    _salt `Prelude.hashWithSalt` expectedBucketOwner
-      `Prelude.hashWithSalt` bucket
+instance Core.AWSService DeleteBucketEncryption where
+        service _proxy = defaultService
+
+instance Prelude.Hashable DeleteBucketEncryption
+         where
+        hashWithSalt _salt DeleteBucketEncryption'{..}
+          = _salt `Prelude.hashWithSalt` expectedBucketOwner
+              `Prelude.hashWithSalt` bucket
 
 instance Prelude.NFData DeleteBucketEncryption where
-  rnf DeleteBucketEncryption' {..} =
-    Prelude.rnf expectedBucketOwner
-      `Prelude.seq` Prelude.rnf bucket
+        rnf DeleteBucketEncryption'{..}
+          = Prelude.rnf expectedBucketOwner `Prelude.seq`
+              Prelude.rnf bucket
 
 instance Core.ToHeaders DeleteBucketEncryption where
-  toHeaders DeleteBucketEncryption' {..} =
-    Prelude.mconcat
-      [ "x-amz-expected-bucket-owner"
-          Core.=# expectedBucketOwner
-      ]
+        toHeaders DeleteBucketEncryption'{..}
+          = Prelude.mconcat
+              ["x-amz-expected-bucket-owner" Core.=#
+                 expectedBucketOwner]
 
 instance Core.ToPath DeleteBucketEncryption where
-  toPath DeleteBucketEncryption' {..} =
-    Prelude.mconcat ["/", Core.toBS bucket]
+        toPath DeleteBucketEncryption'{..}
+          = Prelude.mconcat ["/", Core.toBS bucket]
 
 instance Core.ToQuery DeleteBucketEncryption where
-  toQuery =
-    Prelude.const (Prelude.mconcat ["encryption"])
+        toQuery
+          = Prelude.const (Prelude.mconcat ["encryption"])
 
 -- | /See:/ 'newDeleteBucketEncryptionResponse' smart constructor.
 data DeleteBucketEncryptionResponse = DeleteBucketEncryptionResponse'
-  {
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    {
+
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'DeleteBucketEncryptionResponse' with all optional fields omitted.
 --
 -- Use <https://hackage.haskell.org/package/generic-lens generic-lens> or <https://hackage.haskell.org/package/optics optics> to modify other optional fields.
-newDeleteBucketEncryptionResponse ::
-  DeleteBucketEncryptionResponse
-newDeleteBucketEncryptionResponse =
-  DeleteBucketEncryptionResponse'
+newDeleteBucketEncryptionResponse
+    :: DeleteBucketEncryptionResponse
+newDeleteBucketEncryptionResponse
+  = DeleteBucketEncryptionResponse'
 
-instance
-  Prelude.NFData
-    DeleteBucketEncryptionResponse
-  where
-  rnf _ = ()
+instance Prelude.NFData
+           DeleteBucketEncryptionResponse
+         where
+        rnf _ = ()

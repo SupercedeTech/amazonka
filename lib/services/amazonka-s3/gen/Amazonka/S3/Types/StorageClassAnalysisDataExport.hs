@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,27 +18,28 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.StorageClassAnalysisDataExport where
 
-import qualified Amazonka.Core as Core
-import qualified Amazonka.Lens as Lens
-import qualified Amazonka.Prelude as Prelude
 import Amazonka.S3.Internal
 import Amazonka.S3.Types.AnalyticsExportDestination
 import Amazonka.S3.Types.StorageClassAnalysisSchemaVersion
+import qualified Amazonka.Core as Core
+import qualified Amazonka.Lens as Lens
+import qualified Amazonka.Prelude as Prelude
 
 -- | Container for data related to the storage class analysis for an Amazon
 -- S3 bucket for export.
 --
 -- /See:/ 'newStorageClassAnalysisDataExport' smart constructor.
 data StorageClassAnalysisDataExport = StorageClassAnalysisDataExport'
-  { -- | The version of the output schema to use when exporting data. Must be
+    {
+    -- | The version of the output schema to use when exporting data. Must be
     -- @V_1@.
-    outputSchemaVersion :: StorageClassAnalysisSchemaVersion,
+    outputSchemaVersion :: StorageClassAnalysisSchemaVersion
     -- | The place to store the data for an analysis.
-    destination :: AnalyticsExportDestination
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , destination :: AnalyticsExportDestination
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'StorageClassAnalysisDataExport' with all optional fields omitted.
@@ -51,57 +53,50 @@ data StorageClassAnalysisDataExport = StorageClassAnalysisDataExport'
 -- @V_1@.
 --
 -- 'destination', 'storageClassAnalysisDataExport_destination' - The place to store the data for an analysis.
-newStorageClassAnalysisDataExport ::
-  -- | 'outputSchemaVersion'
-  StorageClassAnalysisSchemaVersion ->
-  -- | 'destination'
-  AnalyticsExportDestination ->
-  StorageClassAnalysisDataExport
 newStorageClassAnalysisDataExport
-  pOutputSchemaVersion_
-  pDestination_ =
-    StorageClassAnalysisDataExport'
-      { outputSchemaVersion =
-          pOutputSchemaVersion_,
-        destination = pDestination_
-      }
+    :: StorageClassAnalysisSchemaVersion -- ^ 'outputSchemaVersion'
+    -> AnalyticsExportDestination -- ^ 'destination'
+    -> StorageClassAnalysisDataExport
+newStorageClassAnalysisDataExport
+  pOutputSchemaVersion_ pDestination_
+  = StorageClassAnalysisDataExport'{outputSchemaVersion
+                                      = pOutputSchemaVersion_,
+                                    destination = pDestination_}
 
 -- | The version of the output schema to use when exporting data. Must be
 -- @V_1@.
 storageClassAnalysisDataExport_outputSchemaVersion :: Lens.Lens' StorageClassAnalysisDataExport StorageClassAnalysisSchemaVersion
-storageClassAnalysisDataExport_outputSchemaVersion = Lens.lens (\StorageClassAnalysisDataExport' {outputSchemaVersion} -> outputSchemaVersion) (\s@StorageClassAnalysisDataExport' {} a -> s {outputSchemaVersion = a} :: StorageClassAnalysisDataExport)
+storageClassAnalysisDataExport_outputSchemaVersion = Lens.lens (\ StorageClassAnalysisDataExport'{outputSchemaVersion} -> outputSchemaVersion) (\ s@StorageClassAnalysisDataExport'{} a -> s{outputSchemaVersion = a} :: StorageClassAnalysisDataExport)
 
 -- | The place to store the data for an analysis.
 storageClassAnalysisDataExport_destination :: Lens.Lens' StorageClassAnalysisDataExport AnalyticsExportDestination
-storageClassAnalysisDataExport_destination = Lens.lens (\StorageClassAnalysisDataExport' {destination} -> destination) (\s@StorageClassAnalysisDataExport' {} a -> s {destination = a} :: StorageClassAnalysisDataExport)
+storageClassAnalysisDataExport_destination = Lens.lens (\ StorageClassAnalysisDataExport'{destination} -> destination) (\ s@StorageClassAnalysisDataExport'{} a -> s{destination = a} :: StorageClassAnalysisDataExport)
 
-instance Core.FromXML StorageClassAnalysisDataExport where
-  parseXML x =
-    StorageClassAnalysisDataExport'
-      Prelude.<$> (x Core..@ "OutputSchemaVersion")
-      Prelude.<*> (x Core..@ "Destination")
+instance Core.FromXML StorageClassAnalysisDataExport
+         where
+        parseXML x
+          = StorageClassAnalysisDataExport' Prelude.<$>
+              (x Core..@ "OutputSchemaVersion") Prelude.<*>
+                (x Core..@ "Destination")
 
-instance
-  Prelude.Hashable
-    StorageClassAnalysisDataExport
-  where
-  hashWithSalt
-    _salt
-    StorageClassAnalysisDataExport' {..} =
-      _salt `Prelude.hashWithSalt` outputSchemaVersion
-        `Prelude.hashWithSalt` destination
+instance Prelude.Hashable
+           StorageClassAnalysisDataExport
+         where
+        hashWithSalt _salt
+          StorageClassAnalysisDataExport'{..}
+          = _salt `Prelude.hashWithSalt` outputSchemaVersion
+              `Prelude.hashWithSalt` destination
 
-instance
-  Prelude.NFData
-    StorageClassAnalysisDataExport
-  where
-  rnf StorageClassAnalysisDataExport' {..} =
-    Prelude.rnf outputSchemaVersion
-      `Prelude.seq` Prelude.rnf destination
+instance Prelude.NFData
+           StorageClassAnalysisDataExport
+         where
+        rnf StorageClassAnalysisDataExport'{..}
+          = Prelude.rnf outputSchemaVersion `Prelude.seq`
+              Prelude.rnf destination
 
-instance Core.ToXML StorageClassAnalysisDataExport where
-  toXML StorageClassAnalysisDataExport' {..} =
-    Prelude.mconcat
-      [ "OutputSchemaVersion" Core.@= outputSchemaVersion,
-        "Destination" Core.@= destination
-      ]
+instance Core.ToXML StorageClassAnalysisDataExport
+         where
+        toXML StorageClassAnalysisDataExport'{..}
+          = Prelude.mconcat
+              ["OutputSchemaVersion" Core.@= outputSchemaVersion,
+               "Destination" Core.@= destination]

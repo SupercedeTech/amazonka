@@ -1,13 +1,14 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE TypeFamilies          #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds   #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- Derived from AWS service descriptions, licensed under Apache 2.0.
@@ -21,14 +22,14 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Returns the account identifier for the specified access key ID.
---
+-- 
 -- Access keys consist of two parts: an access key ID (for example,
 -- @AKIAIOSFODNN7EXAMPLE@) and a secret access key (for example,
 -- @wJalrXUtnFEMI\/K7MDENG\/bPxRfiCYEXAMPLEKEY@). For more information
 -- about access keys, see
 -- <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html Managing Access Keys for IAM Users>
 -- in the /IAM User Guide/.
---
+-- 
 -- When you pass an access key ID to this operation, it returns the ID of
 -- the Amazon Web Services account to which the keys belong. Access key IDs
 -- beginning with @AKIA@ are long-term credentials for an IAM user or the
@@ -42,45 +43,43 @@
 -- your
 -- <https://docs.aws.amazon.com/IAM/latest/UserGuide/cloudtrail-integration.html CloudTrail logs>
 -- in the /IAM User Guide/.
---
+-- 
 -- This operation does not indicate the state of the access key. The key
 -- might be active, inactive, or deleted. Active keys might not have
 -- permissions to perform an operation. Providing a deleted access key
 -- might return an error that the key doesn\'t exist.
 module Amazonka.STS.GetAccessKeyInfo
-  ( -- * Creating a Request
-    GetAccessKeyInfo (..),
-    newGetAccessKeyInfo,
-
+    (
+    -- * Creating a Request
+      GetAccessKeyInfo (..)
+    , newGetAccessKeyInfo 
     -- * Request Lenses
-    getAccessKeyInfo_accessKeyId,
+    , getAccessKeyInfo_accessKeyId
 
     -- * Destructuring the Response
-    GetAccessKeyInfoResponse (..),
-    newGetAccessKeyInfoResponse,
-
+    , GetAccessKeyInfoResponse (..)
+    , newGetAccessKeyInfoResponse 
     -- * Response Lenses
-    getAccessKeyInfoResponse_account,
-    getAccessKeyInfoResponse_httpStatus,
-  )
-where
+    , getAccessKeyInfoResponse_account
+    , getAccessKeyInfoResponse_httpStatus
+    ) where
 
+import Amazonka.STS.Types
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
 import qualified Amazonka.Request as Request
 import qualified Amazonka.Response as Response
-import Amazonka.STS.Types
 
 -- | /See:/ 'newGetAccessKeyInfo' smart constructor.
 data GetAccessKeyInfo = GetAccessKeyInfo'
-  { -- | The identifier of an access key.
-    --
+    {
+    -- | The identifier of an access key.
+    -- 
     -- This parameter allows (through its regex pattern) a string of characters
     -- that can consist of any upper- or lowercase letter or digit.
     accessKeyId :: Core.AccessKey
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'GetAccessKeyInfo' with all optional fields omitted.
@@ -91,68 +90,66 @@ data GetAccessKeyInfo = GetAccessKeyInfo'
 -- for backwards compatibility:
 --
 -- 'accessKeyId', 'getAccessKeyInfo_accessKeyId' - The identifier of an access key.
---
+-- 
 -- This parameter allows (through its regex pattern) a string of characters
 -- that can consist of any upper- or lowercase letter or digit.
-newGetAccessKeyInfo ::
-  -- | 'accessKeyId'
-  Core.AccessKey ->
-  GetAccessKeyInfo
-newGetAccessKeyInfo pAccessKeyId_ =
-  GetAccessKeyInfo' {accessKeyId = pAccessKeyId_}
+newGetAccessKeyInfo
+    :: Core.AccessKey -- ^ 'accessKeyId'
+    -> GetAccessKeyInfo
+newGetAccessKeyInfo pAccessKeyId_
+  = GetAccessKeyInfo'{accessKeyId = pAccessKeyId_}
 
 -- | The identifier of an access key.
---
+-- 
 -- This parameter allows (through its regex pattern) a string of characters
 -- that can consist of any upper- or lowercase letter or digit.
 getAccessKeyInfo_accessKeyId :: Lens.Lens' GetAccessKeyInfo Core.AccessKey
-getAccessKeyInfo_accessKeyId = Lens.lens (\GetAccessKeyInfo' {accessKeyId} -> accessKeyId) (\s@GetAccessKeyInfo' {} a -> s {accessKeyId = a} :: GetAccessKeyInfo)
+getAccessKeyInfo_accessKeyId = Lens.lens (\ GetAccessKeyInfo'{accessKeyId} -> accessKeyId) (\ s@GetAccessKeyInfo'{} a -> s{accessKeyId = a} :: GetAccessKeyInfo)
 
 instance Core.AWSRequest GetAccessKeyInfo where
-  type
-    AWSResponse GetAccessKeyInfo =
-      GetAccessKeyInfoResponse
-  request = Request.postQuery defaultService
-  response =
-    Response.receiveXMLWrapper
-      "GetAccessKeyInfoResult"
-      ( \s h x ->
-          GetAccessKeyInfoResponse'
-            Prelude.<$> (x Core..@? "Account")
-            Prelude.<*> (Prelude.pure (Prelude.fromEnum s))
-      )
+        type AWSResponse GetAccessKeyInfo =
+             GetAccessKeyInfoResponse
+        request srv = Request.postQuery srv
+        response
+          = Response.receiveXMLWrapper "GetAccessKeyInfoResult"
+              (\ s h x ->
+                 GetAccessKeyInfoResponse' Prelude.<$>
+                   (x Core..@? "Account") Prelude.<*>
+                     (Prelude.pure (Prelude.fromEnum s)))
+
+instance Core.AWSService GetAccessKeyInfo where
+        service _proxy = defaultService
 
 instance Prelude.Hashable GetAccessKeyInfo where
-  hashWithSalt _salt GetAccessKeyInfo' {..} =
-    _salt `Prelude.hashWithSalt` accessKeyId
+        hashWithSalt _salt GetAccessKeyInfo'{..}
+          = _salt `Prelude.hashWithSalt` accessKeyId
 
 instance Prelude.NFData GetAccessKeyInfo where
-  rnf GetAccessKeyInfo' {..} = Prelude.rnf accessKeyId
+        rnf GetAccessKeyInfo'{..} = Prelude.rnf accessKeyId
 
 instance Core.ToHeaders GetAccessKeyInfo where
-  toHeaders = Prelude.const Prelude.mempty
+        toHeaders = Prelude.const Prelude.mempty
 
 instance Core.ToPath GetAccessKeyInfo where
-  toPath = Prelude.const "/"
+        toPath = Prelude.const "/"
 
 instance Core.ToQuery GetAccessKeyInfo where
-  toQuery GetAccessKeyInfo' {..} =
-    Prelude.mconcat
-      [ "Action"
-          Core.=: ("GetAccessKeyInfo" :: Prelude.ByteString),
-        "Version"
-          Core.=: ("2011-06-15" :: Prelude.ByteString),
-        "AccessKeyId" Core.=: accessKeyId
-      ]
+        toQuery GetAccessKeyInfo'{..}
+          = Prelude.mconcat
+              ["Action" Core.=:
+                 ("GetAccessKeyInfo" :: Prelude.ByteString),
+               "Version" Core.=:
+                 ("2011-06-15" :: Prelude.ByteString),
+               "AccessKeyId" Core.=: accessKeyId]
 
 -- | /See:/ 'newGetAccessKeyInfoResponse' smart constructor.
 data GetAccessKeyInfoResponse = GetAccessKeyInfoResponse'
-  { -- | The number used to identify the Amazon Web Services account.
-    account :: Prelude.Maybe Prelude.Text,
+    {
+    -- | The number used to identify the Amazon Web Services account.
+    account :: Prelude.Maybe Prelude.Text
     -- | The response's http status code.
-    httpStatus :: Prelude.Int
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , httpStatus :: Prelude.Int
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'GetAccessKeyInfoResponse' with all optional fields omitted.
@@ -165,26 +162,24 @@ data GetAccessKeyInfoResponse = GetAccessKeyInfoResponse'
 -- 'account', 'getAccessKeyInfoResponse_account' - The number used to identify the Amazon Web Services account.
 --
 -- 'httpStatus', 'getAccessKeyInfoResponse_httpStatus' - The response's http status code.
-newGetAccessKeyInfoResponse ::
-  -- | 'httpStatus'
-  Prelude.Int ->
-  GetAccessKeyInfoResponse
-newGetAccessKeyInfoResponse pHttpStatus_ =
-  GetAccessKeyInfoResponse'
-    { account =
-        Prelude.Nothing,
-      httpStatus = pHttpStatus_
-    }
+newGetAccessKeyInfoResponse
+    :: Prelude.Int -- ^ 'httpStatus'
+    -> GetAccessKeyInfoResponse
+newGetAccessKeyInfoResponse pHttpStatus_
+  = GetAccessKeyInfoResponse'{account =
+                                Prelude.Nothing,
+                              httpStatus = pHttpStatus_}
 
 -- | The number used to identify the Amazon Web Services account.
 getAccessKeyInfoResponse_account :: Lens.Lens' GetAccessKeyInfoResponse (Prelude.Maybe Prelude.Text)
-getAccessKeyInfoResponse_account = Lens.lens (\GetAccessKeyInfoResponse' {account} -> account) (\s@GetAccessKeyInfoResponse' {} a -> s {account = a} :: GetAccessKeyInfoResponse)
+getAccessKeyInfoResponse_account = Lens.lens (\ GetAccessKeyInfoResponse'{account} -> account) (\ s@GetAccessKeyInfoResponse'{} a -> s{account = a} :: GetAccessKeyInfoResponse)
 
 -- | The response's http status code.
 getAccessKeyInfoResponse_httpStatus :: Lens.Lens' GetAccessKeyInfoResponse Prelude.Int
-getAccessKeyInfoResponse_httpStatus = Lens.lens (\GetAccessKeyInfoResponse' {httpStatus} -> httpStatus) (\s@GetAccessKeyInfoResponse' {} a -> s {httpStatus = a} :: GetAccessKeyInfoResponse)
+getAccessKeyInfoResponse_httpStatus = Lens.lens (\ GetAccessKeyInfoResponse'{httpStatus} -> httpStatus) (\ s@GetAccessKeyInfoResponse'{} a -> s{httpStatus = a} :: GetAccessKeyInfoResponse)
 
-instance Prelude.NFData GetAccessKeyInfoResponse where
-  rnf GetAccessKeyInfoResponse' {..} =
-    Prelude.rnf account
-      `Prelude.seq` Prelude.rnf httpStatus
+instance Prelude.NFData GetAccessKeyInfoResponse
+         where
+        rnf GetAccessKeyInfoResponse'{..}
+          = Prelude.rnf account `Prelude.seq`
+              Prelude.rnf httpStatus

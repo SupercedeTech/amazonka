@@ -1,13 +1,14 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE TypeFamilies          #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds   #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- Derived from AWS service descriptions, licensed under Apache 2.0.
@@ -26,7 +27,7 @@
 -- Amazon and Facebook, or any OpenID Connect-compatible identity provider
 -- such as Google or
 -- <https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html Amazon Cognito federated identities>.
---
+-- 
 -- For mobile applications, we recommend that you use Amazon Cognito. You
 -- can use Amazon Cognito with the
 -- <http://aws.amazon.com/sdkforios/ Amazon Web Services SDK for iOS Developer Guide>
@@ -34,13 +35,13 @@
 -- <http://aws.amazon.com/sdkforandroid/ Amazon Web Services SDK for Android Developer Guide>
 -- to uniquely identify a user. You can also supply the user with a
 -- consistent identity throughout the lifetime of an application.
---
+-- 
 -- To learn more about Amazon Cognito, see
 -- <https://docs.aws.amazon.com/mobile/sdkforandroid/developerguide/cognito-auth.html#d0e840 Amazon Cognito Overview>
 -- in /Amazon Web Services SDK for Android Developer Guide/ and
 -- <https://docs.aws.amazon.com/mobile/sdkforios/developerguide/cognito-auth.html#d0e664 Amazon Cognito Overview>
 -- in the /Amazon Web Services SDK for iOS Developer Guide/.
---
+-- 
 -- Calling @AssumeRoleWithWebIdentity@ does not require the use of Amazon
 -- Web Services security credentials. Therefore, you can distribute an
 -- application (for example, on mobile devices) that requests temporary
@@ -55,14 +56,14 @@
 -- and
 -- <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#stsapi_comparison Comparing the Amazon Web Services STS API operations>
 -- in the /IAM User Guide/.
---
+-- 
 -- The temporary security credentials returned by this API consist of an
 -- access key ID, a secret access key, and a security token. Applications
 -- can use these temporary security credentials to sign calls to Amazon Web
 -- Services service API operations.
---
+-- 
 -- __Session Duration__
---
+-- 
 -- By default, the temporary security credentials created by
 -- @AssumeRoleWithWebIdentity@ last for one hour. However, you can use the
 -- optional @DurationSeconds@ parameter to specify the duration of your
@@ -77,14 +78,14 @@
 -- to create a console URL. For more information, see
 -- <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html Using IAM Roles>
 -- in the /IAM User Guide/.
---
+-- 
 -- __Permissions__
---
+-- 
 -- The temporary security credentials created by
 -- @AssumeRoleWithWebIdentity@ can be used to make API calls to any Amazon
 -- Web Services service with the following exception: you cannot call the
 -- STS @GetFederationToken@ or @GetSessionToken@ API operations.
---
+-- 
 -- (Optional) You can pass inline or managed
 -- <https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session session policies>
 -- to this operation. You can pass a single JSON policy document to use as
@@ -101,52 +102,52 @@
 -- information, see
 -- <https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session Session Policies>
 -- in the /IAM User Guide/.
---
+-- 
 -- __Tags__
---
+-- 
 -- (Optional) You can configure your IdP to pass attributes into your web
 -- identity token as session tags. Each session tag consists of a key name
 -- and an associated value. For more information about session tags, see
 -- <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html Passing Session Tags in STS>
 -- in the /IAM User Guide/.
---
+-- 
 -- You can pass up to 50 session tags. The plaintext session tag keys can’t
 -- exceed 128 characters and the values can’t exceed 256 characters. For
 -- these and additional limits, see
 -- <https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html#reference_iam-limits-entity-length IAM and STS Character Limits>
 -- in the /IAM User Guide/.
---
+-- 
 -- An Amazon Web Services conversion compresses the passed session policies
 -- and session tags into a packed binary format that has a separate limit.
 -- Your request can fail for this limit even if your plaintext meets the
 -- other requirements. The @PackedPolicySize@ response element indicates by
 -- percentage how close the policies and tags for your request are to the
 -- upper size limit.
---
+-- 
 -- You can pass a session tag with the same key as a tag that is attached
 -- to the role. When you do, the session tag overrides the role tag with
 -- the same key.
---
+-- 
 -- An administrator must grant you the permissions necessary to pass
 -- session tags. The administrator can also create granular permissions to
 -- allow you to pass only specific session tags. For more information, see
 -- <https://docs.aws.amazon.com/IAM/latest/UserGuide/tutorial_attribute-based-access-control.html Tutorial: Using Tags for Attribute-Based Access Control>
 -- in the /IAM User Guide/.
---
+-- 
 -- You can set the session tags as transitive. Transitive tags persist
 -- during role chaining. For more information, see
 -- <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html#id_session-tags_role-chaining Chaining Roles with Session Tags>
 -- in the /IAM User Guide/.
---
+-- 
 -- __Identities__
---
+-- 
 -- Before your application can call @AssumeRoleWithWebIdentity@, you must
 -- have an identity token from a supported identity provider and create a
 -- role that the application can assume. The role that your application
 -- assumes must trust the identity provider that is associated with the
 -- identity token. In other words, the identity provider must be specified
 -- in the role\'s trust policy.
---
+-- 
 -- Calling @AssumeRoleWithWebIdentity@ can result in an entry in your
 -- CloudTrail logs. The entry includes the
 -- <http://openid.net/specs/openid-connect-core-1_0.html#Claims Subject> of
@@ -154,20 +155,20 @@
 -- personally identifiable information (PII) in this field. For example,
 -- you could instead use a GUID or a pairwise identifier, as
 -- <http://openid.net/specs/openid-connect-core-1_0.html#SubjectIDTypes suggested in the OIDC specification>.
---
+-- 
 -- For more information about how to use web identity federation and the
 -- @AssumeRoleWithWebIdentity@ API, see the following resources:
---
+-- 
 -- -   <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc_manual.html Using Web Identity Federation API Operations for Mobile Apps>
 --     and
 --     <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_assumerolewithwebidentity Federation Through a Web-based Identity Provider>.
---
+-- 
 -- -   <https://aws.amazon.com/blogs/aws/the-aws-web-identity-federation-playground/ Web Identity Federation Playground>.
 --     Walk through the process of authenticating through Login with
 --     Amazon, Facebook, or Google, getting temporary security credentials,
 --     and then using those credentials to make a request to Amazon Web
 --     Services.
---
+-- 
 -- -   <http://aws.amazon.com/sdkforios/ Amazon Web Services SDK for iOS Developer Guide>
 --     and
 --     <http://aws.amazon.com/sdkforandroid/ Amazon Web Services SDK for Android Developer Guide>.
@@ -175,53 +176,52 @@
 --     identity providers. The toolkits then show how to use the
 --     information from these providers to get and use temporary security
 --     credentials.
---
+-- 
 -- -   <http://aws.amazon.com/articles/web-identity-federation-with-mobile-applications Web Identity Federation with Mobile Applications>.
 --     This article discusses web identity federation and shows an example
 --     of how to use web identity federation to get access to content in
 --     Amazon S3.
 module Amazonka.STS.AssumeRoleWithWebIdentity
-  ( -- * Creating a Request
-    AssumeRoleWithWebIdentity (..),
-    newAssumeRoleWithWebIdentity,
-
+    (
+    -- * Creating a Request
+      AssumeRoleWithWebIdentity (..)
+    , newAssumeRoleWithWebIdentity 
     -- * Request Lenses
-    assumeRoleWithWebIdentity_policy,
-    assumeRoleWithWebIdentity_policyArns,
-    assumeRoleWithWebIdentity_durationSeconds,
-    assumeRoleWithWebIdentity_providerId,
-    assumeRoleWithWebIdentity_roleArn,
-    assumeRoleWithWebIdentity_roleSessionName,
-    assumeRoleWithWebIdentity_webIdentityToken,
+    , assumeRoleWithWebIdentity_policy
+    , assumeRoleWithWebIdentity_policyArns
+    , assumeRoleWithWebIdentity_durationSeconds
+    , assumeRoleWithWebIdentity_providerId
+    , assumeRoleWithWebIdentity_roleArn
+    , assumeRoleWithWebIdentity_roleSessionName
+    , assumeRoleWithWebIdentity_webIdentityToken
 
     -- * Destructuring the Response
-    AssumeRoleWithWebIdentityResponse (..),
-    newAssumeRoleWithWebIdentityResponse,
-
+    , AssumeRoleWithWebIdentityResponse (..)
+    , newAssumeRoleWithWebIdentityResponse 
     -- * Response Lenses
-    assumeRoleWithWebIdentityResponse_subjectFromWebIdentityToken,
-    assumeRoleWithWebIdentityResponse_provider,
-    assumeRoleWithWebIdentityResponse_assumedRoleUser,
-    assumeRoleWithWebIdentityResponse_audience,
-    assumeRoleWithWebIdentityResponse_sourceIdentity,
-    assumeRoleWithWebIdentityResponse_packedPolicySize,
-    assumeRoleWithWebIdentityResponse_httpStatus,
-    assumeRoleWithWebIdentityResponse_credentials,
-  )
-where
+    , assumeRoleWithWebIdentityResponse_subjectFromWebIdentityToken
+    , assumeRoleWithWebIdentityResponse_provider
+    , assumeRoleWithWebIdentityResponse_assumedRoleUser
+    , assumeRoleWithWebIdentityResponse_audience
+    , assumeRoleWithWebIdentityResponse_sourceIdentity
+    , assumeRoleWithWebIdentityResponse_packedPolicySize
+    , assumeRoleWithWebIdentityResponse_httpStatus
+    , assumeRoleWithWebIdentityResponse_credentials
+    ) where
 
+import Amazonka.STS.Types
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
 import qualified Amazonka.Request as Request
 import qualified Amazonka.Response as Response
-import Amazonka.STS.Types
 
 -- | /See:/ 'newAssumeRoleWithWebIdentity' smart constructor.
 data AssumeRoleWithWebIdentity = AssumeRoleWithWebIdentity'
-  { -- | An IAM policy in JSON format that you want to use as an inline session
+    {
+    -- | An IAM policy in JSON format that you want to use as an inline session
     -- policy.
-    --
+    -- 
     -- This parameter is optional. Passing policies to this operation returns
     -- new temporary credentials. The resulting session\'s permissions are the
     -- intersection of the role\'s identity-based policy and the session
@@ -232,38 +232,38 @@ data AssumeRoleWithWebIdentity = AssumeRoleWithWebIdentity'
     -- being assumed. For more information, see
     -- <https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session Session Policies>
     -- in the /IAM User Guide/.
-    --
+    -- 
     -- The plaintext that you use for both inline and managed session policies
     -- can\'t exceed 2,048 characters. The JSON policy characters can be any
     -- ASCII character from the space character to the end of the valid
     -- character list (\\u0020 through \\u00FF). It can also include the tab
     -- (\\u0009), linefeed (\\u000A), and carriage return (\\u000D) characters.
-    --
+    -- 
     -- An Amazon Web Services conversion compresses the passed session policies
     -- and session tags into a packed binary format that has a separate limit.
     -- Your request can fail for this limit even if your plaintext meets the
     -- other requirements. The @PackedPolicySize@ response element indicates by
     -- percentage how close the policies and tags for your request are to the
     -- upper size limit.
-    policy :: Prelude.Maybe Prelude.Text,
+    policy :: Prelude.Maybe Prelude.Text
     -- | The Amazon Resource Names (ARNs) of the IAM managed policies that you
     -- want to use as managed session policies. The policies must exist in the
     -- same account as the role.
-    --
+    -- 
     -- This parameter is optional. You can provide up to 10 managed policy
     -- ARNs. However, the plaintext that you use for both inline and managed
     -- session policies can\'t exceed 2,048 characters. For more information
     -- about ARNs, see
     -- <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces>
     -- in the Amazon Web Services General Reference.
-    --
+    -- 
     -- An Amazon Web Services conversion compresses the passed session policies
     -- and session tags into a packed binary format that has a separate limit.
     -- Your request can fail for this limit even if your plaintext meets the
     -- other requirements. The @PackedPolicySize@ response element indicates by
     -- percentage how close the policies and tags for your request are to the
     -- upper size limit.
-    --
+    -- 
     -- Passing policies to this operation returns new temporary credentials.
     -- The resulting session\'s permissions are the intersection of the role\'s
     -- identity-based policy and the session policies. You can use the role\'s
@@ -274,7 +274,7 @@ data AssumeRoleWithWebIdentity = AssumeRoleWithWebIdentity'
     -- information, see
     -- <https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session Session Policies>
     -- in the /IAM User Guide/.
-    policyArns :: Prelude.Maybe [PolicyDescriptorType],
+    , policyArns :: Prelude.Maybe [PolicyDescriptorType]
     -- | The duration, in seconds, of the role session. The value can range from
     -- 900 seconds (15 minutes) up to the maximum session duration setting for
     -- the role. This setting can have a value from 1 hour to 12 hours. If you
@@ -285,9 +285,9 @@ data AssumeRoleWithWebIdentity = AssumeRoleWithWebIdentity'
     -- see
     -- <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session View the Maximum Session Duration Setting for a Role>
     -- in the /IAM User Guide/.
-    --
+    -- 
     -- By default, the value is set to @3600@ seconds.
-    --
+    -- 
     -- The @DurationSeconds@ parameter is separate from the duration of a
     -- console session that you might request using the returned credentials.
     -- The request to the federation endpoint for a console sign-in token takes
@@ -295,39 +295,38 @@ data AssumeRoleWithWebIdentity = AssumeRoleWithWebIdentity'
     -- console session. For more information, see
     -- <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html Creating a URL that Enables Federated Users to Access the Amazon Web Services Management Console>
     -- in the /IAM User Guide/.
-    durationSeconds :: Prelude.Maybe Prelude.Natural,
+    , durationSeconds :: Prelude.Maybe Prelude.Natural
     -- | The fully qualified host component of the domain name of the OAuth 2.0
     -- identity provider. Do not specify this value for an OpenID Connect
     -- identity provider.
-    --
+    -- 
     -- Currently @www.amazon.com@ and @graph.facebook.com@ are the only
     -- supported identity providers for OAuth 2.0 access tokens. Do not include
     -- URL schemes and port numbers.
-    --
+    -- 
     -- Do not specify this value for OpenID Connect ID tokens.
-    providerId :: Prelude.Maybe Prelude.Text,
+    , providerId :: Prelude.Maybe Prelude.Text
     -- | The Amazon Resource Name (ARN) of the role that the caller is assuming.
-    roleArn :: Prelude.Text,
+    , roleArn :: Prelude.Text
     -- | An identifier for the assumed role session. Typically, you pass the name
     -- or identifier that is associated with the user who is using your
     -- application. That way, the temporary security credentials that your
     -- application will use are associated with that user. This session name is
     -- included as part of the ARN and assumed role ID in the @AssumedRoleUser@
     -- response element.
-    --
+    -- 
     -- The regex used to validate this parameter is a string of characters
     -- consisting of upper- and lower-case alphanumeric characters with no
     -- spaces. You can also include underscores or any of the following
     -- characters: =,.\@-
-    roleSessionName :: Prelude.Text,
+    , roleSessionName :: Prelude.Text
     -- | The OAuth 2.0 access token or OpenID Connect ID token that is provided
     -- by the identity provider. Your application must get this token by
     -- authenticating the user who is using your application with a web
     -- identity provider before the application makes an
     -- @AssumeRoleWithWebIdentity@ call.
-    webIdentityToken :: Prelude.Text
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , webIdentityToken :: Prelude.Text
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'AssumeRoleWithWebIdentity' with all optional fields omitted.
@@ -339,7 +338,7 @@ data AssumeRoleWithWebIdentity = AssumeRoleWithWebIdentity'
 --
 -- 'policy', 'assumeRoleWithWebIdentity_policy' - An IAM policy in JSON format that you want to use as an inline session
 -- policy.
---
+-- 
 -- This parameter is optional. Passing policies to this operation returns
 -- new temporary credentials. The resulting session\'s permissions are the
 -- intersection of the role\'s identity-based policy and the session
@@ -350,13 +349,13 @@ data AssumeRoleWithWebIdentity = AssumeRoleWithWebIdentity'
 -- being assumed. For more information, see
 -- <https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session Session Policies>
 -- in the /IAM User Guide/.
---
+-- 
 -- The plaintext that you use for both inline and managed session policies
 -- can\'t exceed 2,048 characters. The JSON policy characters can be any
 -- ASCII character from the space character to the end of the valid
 -- character list (\\u0020 through \\u00FF). It can also include the tab
 -- (\\u0009), linefeed (\\u000A), and carriage return (\\u000D) characters.
---
+-- 
 -- An Amazon Web Services conversion compresses the passed session policies
 -- and session tags into a packed binary format that has a separate limit.
 -- Your request can fail for this limit even if your plaintext meets the
@@ -367,21 +366,21 @@ data AssumeRoleWithWebIdentity = AssumeRoleWithWebIdentity'
 -- 'policyArns', 'assumeRoleWithWebIdentity_policyArns' - The Amazon Resource Names (ARNs) of the IAM managed policies that you
 -- want to use as managed session policies. The policies must exist in the
 -- same account as the role.
---
+-- 
 -- This parameter is optional. You can provide up to 10 managed policy
 -- ARNs. However, the plaintext that you use for both inline and managed
 -- session policies can\'t exceed 2,048 characters. For more information
 -- about ARNs, see
 -- <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces>
 -- in the Amazon Web Services General Reference.
---
+-- 
 -- An Amazon Web Services conversion compresses the passed session policies
 -- and session tags into a packed binary format that has a separate limit.
 -- Your request can fail for this limit even if your plaintext meets the
 -- other requirements. The @PackedPolicySize@ response element indicates by
 -- percentage how close the policies and tags for your request are to the
 -- upper size limit.
---
+-- 
 -- Passing policies to this operation returns new temporary credentials.
 -- The resulting session\'s permissions are the intersection of the role\'s
 -- identity-based policy and the session policies. You can use the role\'s
@@ -403,9 +402,9 @@ data AssumeRoleWithWebIdentity = AssumeRoleWithWebIdentity'
 -- see
 -- <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session View the Maximum Session Duration Setting for a Role>
 -- in the /IAM User Guide/.
---
+-- 
 -- By default, the value is set to @3600@ seconds.
---
+-- 
 -- The @DurationSeconds@ parameter is separate from the duration of a
 -- console session that you might request using the returned credentials.
 -- The request to the federation endpoint for a console sign-in token takes
@@ -417,11 +416,11 @@ data AssumeRoleWithWebIdentity = AssumeRoleWithWebIdentity'
 -- 'providerId', 'assumeRoleWithWebIdentity_providerId' - The fully qualified host component of the domain name of the OAuth 2.0
 -- identity provider. Do not specify this value for an OpenID Connect
 -- identity provider.
---
+-- 
 -- Currently @www.amazon.com@ and @graph.facebook.com@ are the only
 -- supported identity providers for OAuth 2.0 access tokens. Do not include
 -- URL schemes and port numbers.
---
+-- 
 -- Do not specify this value for OpenID Connect ID tokens.
 --
 -- 'roleArn', 'assumeRoleWithWebIdentity_roleArn' - The Amazon Resource Name (ARN) of the role that the caller is assuming.
@@ -432,7 +431,7 @@ data AssumeRoleWithWebIdentity = AssumeRoleWithWebIdentity'
 -- application will use are associated with that user. This session name is
 -- included as part of the ARN and assumed role ID in the @AssumedRoleUser@
 -- response element.
---
+-- 
 -- The regex used to validate this parameter is a string of characters
 -- consisting of upper- and lower-case alphanumeric characters with no
 -- spaces. You can also include underscores or any of the following
@@ -443,32 +442,25 @@ data AssumeRoleWithWebIdentity = AssumeRoleWithWebIdentity'
 -- authenticating the user who is using your application with a web
 -- identity provider before the application makes an
 -- @AssumeRoleWithWebIdentity@ call.
-newAssumeRoleWithWebIdentity ::
-  -- | 'roleArn'
-  Prelude.Text ->
-  -- | 'roleSessionName'
-  Prelude.Text ->
-  -- | 'webIdentityToken'
-  Prelude.Text ->
-  AssumeRoleWithWebIdentity
 newAssumeRoleWithWebIdentity
-  pRoleArn_
-  pRoleSessionName_
-  pWebIdentityToken_ =
-    AssumeRoleWithWebIdentity'
-      { policy =
-          Prelude.Nothing,
-        policyArns = Prelude.Nothing,
-        durationSeconds = Prelude.Nothing,
-        providerId = Prelude.Nothing,
-        roleArn = pRoleArn_,
-        roleSessionName = pRoleSessionName_,
-        webIdentityToken = pWebIdentityToken_
-      }
+    :: Prelude.Text -- ^ 'roleArn'
+    -> Prelude.Text -- ^ 'roleSessionName'
+    -> Prelude.Text -- ^ 'webIdentityToken'
+    -> AssumeRoleWithWebIdentity
+newAssumeRoleWithWebIdentity pRoleArn_
+  pRoleSessionName_ pWebIdentityToken_
+  = AssumeRoleWithWebIdentity'{policy =
+                                 Prelude.Nothing,
+                               policyArns = Prelude.Nothing,
+                               durationSeconds = Prelude.Nothing,
+                               providerId = Prelude.Nothing,
+                               roleArn = pRoleArn_,
+                               roleSessionName = pRoleSessionName_,
+                               webIdentityToken = pWebIdentityToken_}
 
 -- | An IAM policy in JSON format that you want to use as an inline session
 -- policy.
---
+-- 
 -- This parameter is optional. Passing policies to this operation returns
 -- new temporary credentials. The resulting session\'s permissions are the
 -- intersection of the role\'s identity-based policy and the session
@@ -479,13 +471,13 @@ newAssumeRoleWithWebIdentity
 -- being assumed. For more information, see
 -- <https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session Session Policies>
 -- in the /IAM User Guide/.
---
+-- 
 -- The plaintext that you use for both inline and managed session policies
 -- can\'t exceed 2,048 characters. The JSON policy characters can be any
 -- ASCII character from the space character to the end of the valid
 -- character list (\\u0020 through \\u00FF). It can also include the tab
 -- (\\u0009), linefeed (\\u000A), and carriage return (\\u000D) characters.
---
+-- 
 -- An Amazon Web Services conversion compresses the passed session policies
 -- and session tags into a packed binary format that has a separate limit.
 -- Your request can fail for this limit even if your plaintext meets the
@@ -493,26 +485,26 @@ newAssumeRoleWithWebIdentity
 -- percentage how close the policies and tags for your request are to the
 -- upper size limit.
 assumeRoleWithWebIdentity_policy :: Lens.Lens' AssumeRoleWithWebIdentity (Prelude.Maybe Prelude.Text)
-assumeRoleWithWebIdentity_policy = Lens.lens (\AssumeRoleWithWebIdentity' {policy} -> policy) (\s@AssumeRoleWithWebIdentity' {} a -> s {policy = a} :: AssumeRoleWithWebIdentity)
+assumeRoleWithWebIdentity_policy = Lens.lens (\ AssumeRoleWithWebIdentity'{policy} -> policy) (\ s@AssumeRoleWithWebIdentity'{} a -> s{policy = a} :: AssumeRoleWithWebIdentity)
 
 -- | The Amazon Resource Names (ARNs) of the IAM managed policies that you
 -- want to use as managed session policies. The policies must exist in the
 -- same account as the role.
---
+-- 
 -- This parameter is optional. You can provide up to 10 managed policy
 -- ARNs. However, the plaintext that you use for both inline and managed
 -- session policies can\'t exceed 2,048 characters. For more information
 -- about ARNs, see
 -- <https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces>
 -- in the Amazon Web Services General Reference.
---
+-- 
 -- An Amazon Web Services conversion compresses the passed session policies
 -- and session tags into a packed binary format that has a separate limit.
 -- Your request can fail for this limit even if your plaintext meets the
 -- other requirements. The @PackedPolicySize@ response element indicates by
 -- percentage how close the policies and tags for your request are to the
 -- upper size limit.
---
+-- 
 -- Passing policies to this operation returns new temporary credentials.
 -- The resulting session\'s permissions are the intersection of the role\'s
 -- identity-based policy and the session policies. You can use the role\'s
@@ -524,7 +516,7 @@ assumeRoleWithWebIdentity_policy = Lens.lens (\AssumeRoleWithWebIdentity' {polic
 -- <https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session Session Policies>
 -- in the /IAM User Guide/.
 assumeRoleWithWebIdentity_policyArns :: Lens.Lens' AssumeRoleWithWebIdentity (Prelude.Maybe [PolicyDescriptorType])
-assumeRoleWithWebIdentity_policyArns = Lens.lens (\AssumeRoleWithWebIdentity' {policyArns} -> policyArns) (\s@AssumeRoleWithWebIdentity' {} a -> s {policyArns = a} :: AssumeRoleWithWebIdentity) Prelude.. Lens.mapping Lens.coerced
+assumeRoleWithWebIdentity_policyArns = Lens.lens (\ AssumeRoleWithWebIdentity'{policyArns} -> policyArns) (\ s@AssumeRoleWithWebIdentity'{} a -> s{policyArns = a} :: AssumeRoleWithWebIdentity) Prelude.. Lens.mapping Lens.coerced
 
 -- | The duration, in seconds, of the role session. The value can range from
 -- 900 seconds (15 minutes) up to the maximum session duration setting for
@@ -536,9 +528,9 @@ assumeRoleWithWebIdentity_policyArns = Lens.lens (\AssumeRoleWithWebIdentity' {p
 -- see
 -- <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html#id_roles_use_view-role-max-session View the Maximum Session Duration Setting for a Role>
 -- in the /IAM User Guide/.
---
+-- 
 -- By default, the value is set to @3600@ seconds.
---
+-- 
 -- The @DurationSeconds@ parameter is separate from the duration of a
 -- console session that you might request using the returned credentials.
 -- The request to the federation endpoint for a console sign-in token takes
@@ -547,23 +539,23 @@ assumeRoleWithWebIdentity_policyArns = Lens.lens (\AssumeRoleWithWebIdentity' {p
 -- <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html Creating a URL that Enables Federated Users to Access the Amazon Web Services Management Console>
 -- in the /IAM User Guide/.
 assumeRoleWithWebIdentity_durationSeconds :: Lens.Lens' AssumeRoleWithWebIdentity (Prelude.Maybe Prelude.Natural)
-assumeRoleWithWebIdentity_durationSeconds = Lens.lens (\AssumeRoleWithWebIdentity' {durationSeconds} -> durationSeconds) (\s@AssumeRoleWithWebIdentity' {} a -> s {durationSeconds = a} :: AssumeRoleWithWebIdentity)
+assumeRoleWithWebIdentity_durationSeconds = Lens.lens (\ AssumeRoleWithWebIdentity'{durationSeconds} -> durationSeconds) (\ s@AssumeRoleWithWebIdentity'{} a -> s{durationSeconds = a} :: AssumeRoleWithWebIdentity)
 
 -- | The fully qualified host component of the domain name of the OAuth 2.0
 -- identity provider. Do not specify this value for an OpenID Connect
 -- identity provider.
---
+-- 
 -- Currently @www.amazon.com@ and @graph.facebook.com@ are the only
 -- supported identity providers for OAuth 2.0 access tokens. Do not include
 -- URL schemes and port numbers.
---
+-- 
 -- Do not specify this value for OpenID Connect ID tokens.
 assumeRoleWithWebIdentity_providerId :: Lens.Lens' AssumeRoleWithWebIdentity (Prelude.Maybe Prelude.Text)
-assumeRoleWithWebIdentity_providerId = Lens.lens (\AssumeRoleWithWebIdentity' {providerId} -> providerId) (\s@AssumeRoleWithWebIdentity' {} a -> s {providerId = a} :: AssumeRoleWithWebIdentity)
+assumeRoleWithWebIdentity_providerId = Lens.lens (\ AssumeRoleWithWebIdentity'{providerId} -> providerId) (\ s@AssumeRoleWithWebIdentity'{} a -> s{providerId = a} :: AssumeRoleWithWebIdentity)
 
 -- | The Amazon Resource Name (ARN) of the role that the caller is assuming.
 assumeRoleWithWebIdentity_roleArn :: Lens.Lens' AssumeRoleWithWebIdentity Prelude.Text
-assumeRoleWithWebIdentity_roleArn = Lens.lens (\AssumeRoleWithWebIdentity' {roleArn} -> roleArn) (\s@AssumeRoleWithWebIdentity' {} a -> s {roleArn = a} :: AssumeRoleWithWebIdentity)
+assumeRoleWithWebIdentity_roleArn = Lens.lens (\ AssumeRoleWithWebIdentity'{roleArn} -> roleArn) (\ s@AssumeRoleWithWebIdentity'{} a -> s{roleArn = a} :: AssumeRoleWithWebIdentity)
 
 -- | An identifier for the assumed role session. Typically, you pass the name
 -- or identifier that is associated with the user who is using your
@@ -571,13 +563,13 @@ assumeRoleWithWebIdentity_roleArn = Lens.lens (\AssumeRoleWithWebIdentity' {role
 -- application will use are associated with that user. This session name is
 -- included as part of the ARN and assumed role ID in the @AssumedRoleUser@
 -- response element.
---
+-- 
 -- The regex used to validate this parameter is a string of characters
 -- consisting of upper- and lower-case alphanumeric characters with no
 -- spaces. You can also include underscores or any of the following
 -- characters: =,.\@-
 assumeRoleWithWebIdentity_roleSessionName :: Lens.Lens' AssumeRoleWithWebIdentity Prelude.Text
-assumeRoleWithWebIdentity_roleSessionName = Lens.lens (\AssumeRoleWithWebIdentity' {roleSessionName} -> roleSessionName) (\s@AssumeRoleWithWebIdentity' {} a -> s {roleSessionName = a} :: AssumeRoleWithWebIdentity)
+assumeRoleWithWebIdentity_roleSessionName = Lens.lens (\ AssumeRoleWithWebIdentity'{roleSessionName} -> roleSessionName) (\ s@AssumeRoleWithWebIdentity'{} a -> s{roleSessionName = a} :: AssumeRoleWithWebIdentity)
 
 -- | The OAuth 2.0 access token or OpenID Connect ID token that is provided
 -- by the identity provider. Your application must get this token by
@@ -585,71 +577,76 @@ assumeRoleWithWebIdentity_roleSessionName = Lens.lens (\AssumeRoleWithWebIdentit
 -- identity provider before the application makes an
 -- @AssumeRoleWithWebIdentity@ call.
 assumeRoleWithWebIdentity_webIdentityToken :: Lens.Lens' AssumeRoleWithWebIdentity Prelude.Text
-assumeRoleWithWebIdentity_webIdentityToken = Lens.lens (\AssumeRoleWithWebIdentity' {webIdentityToken} -> webIdentityToken) (\s@AssumeRoleWithWebIdentity' {} a -> s {webIdentityToken = a} :: AssumeRoleWithWebIdentity)
+assumeRoleWithWebIdentity_webIdentityToken = Lens.lens (\ AssumeRoleWithWebIdentity'{webIdentityToken} -> webIdentityToken) (\ s@AssumeRoleWithWebIdentity'{} a -> s{webIdentityToken = a} :: AssumeRoleWithWebIdentity)
 
-instance Core.AWSRequest AssumeRoleWithWebIdentity where
-  type
-    AWSResponse AssumeRoleWithWebIdentity =
-      AssumeRoleWithWebIdentityResponse
-  request = Request.postQuery defaultService
-  response =
-    Response.receiveXMLWrapper
-      "AssumeRoleWithWebIdentityResult"
-      ( \s h x ->
-          AssumeRoleWithWebIdentityResponse'
-            Prelude.<$> (x Core..@? "SubjectFromWebIdentityToken")
-            Prelude.<*> (x Core..@? "Provider")
-            Prelude.<*> (x Core..@? "AssumedRoleUser")
-            Prelude.<*> (x Core..@? "Audience")
-            Prelude.<*> (x Core..@? "SourceIdentity")
-            Prelude.<*> (x Core..@? "PackedPolicySize")
-            Prelude.<*> (Prelude.pure (Prelude.fromEnum s))
-            Prelude.<*> (x Core..@ "Credentials")
-      )
+instance Core.AWSRequest AssumeRoleWithWebIdentity
+         where
+        type AWSResponse AssumeRoleWithWebIdentity =
+             AssumeRoleWithWebIdentityResponse
+        request srv = Request.postQuery srv
+        response
+          = Response.receiveXMLWrapper
+              "AssumeRoleWithWebIdentityResult"
+              (\ s h x ->
+                 AssumeRoleWithWebIdentityResponse' Prelude.<$>
+                   (x Core..@? "SubjectFromWebIdentityToken")
+                     Prelude.<*> (x Core..@? "Provider")
+                     Prelude.<*> (x Core..@? "AssumedRoleUser")
+                     Prelude.<*> (x Core..@? "Audience")
+                     Prelude.<*> (x Core..@? "SourceIdentity")
+                     Prelude.<*> (x Core..@? "PackedPolicySize")
+                     Prelude.<*> (Prelude.pure (Prelude.fromEnum s))
+                     Prelude.<*> (x Core..@ "Credentials"))
 
-instance Prelude.Hashable AssumeRoleWithWebIdentity where
-  hashWithSalt _salt AssumeRoleWithWebIdentity' {..} =
-    _salt `Prelude.hashWithSalt` policy
-      `Prelude.hashWithSalt` policyArns
-      `Prelude.hashWithSalt` durationSeconds
-      `Prelude.hashWithSalt` providerId
-      `Prelude.hashWithSalt` roleArn
-      `Prelude.hashWithSalt` roleSessionName
-      `Prelude.hashWithSalt` webIdentityToken
+instance Core.AWSService AssumeRoleWithWebIdentity
+         where
+        service _proxy = defaultService
 
-instance Prelude.NFData AssumeRoleWithWebIdentity where
-  rnf AssumeRoleWithWebIdentity' {..} =
-    Prelude.rnf policy
-      `Prelude.seq` Prelude.rnf policyArns
-      `Prelude.seq` Prelude.rnf durationSeconds
-      `Prelude.seq` Prelude.rnf providerId
-      `Prelude.seq` Prelude.rnf roleArn
-      `Prelude.seq` Prelude.rnf roleSessionName
-      `Prelude.seq` Prelude.rnf webIdentityToken
+instance Prelude.Hashable AssumeRoleWithWebIdentity
+         where
+        hashWithSalt _salt AssumeRoleWithWebIdentity'{..}
+          = _salt `Prelude.hashWithSalt` policy
+              `Prelude.hashWithSalt` policyArns
+              `Prelude.hashWithSalt` durationSeconds
+              `Prelude.hashWithSalt` providerId
+              `Prelude.hashWithSalt` roleArn
+              `Prelude.hashWithSalt` roleSessionName
+              `Prelude.hashWithSalt` webIdentityToken
 
-instance Core.ToHeaders AssumeRoleWithWebIdentity where
-  toHeaders = Prelude.const Prelude.mempty
+instance Prelude.NFData AssumeRoleWithWebIdentity
+         where
+        rnf AssumeRoleWithWebIdentity'{..}
+          = Prelude.rnf policy `Prelude.seq`
+              Prelude.rnf policyArns `Prelude.seq`
+                Prelude.rnf durationSeconds `Prelude.seq`
+                  Prelude.rnf providerId `Prelude.seq`
+                    Prelude.rnf roleArn `Prelude.seq`
+                      Prelude.rnf roleSessionName `Prelude.seq`
+                        Prelude.rnf webIdentityToken
+
+instance Core.ToHeaders AssumeRoleWithWebIdentity
+         where
+        toHeaders = Prelude.const Prelude.mempty
 
 instance Core.ToPath AssumeRoleWithWebIdentity where
-  toPath = Prelude.const "/"
+        toPath = Prelude.const "/"
 
 instance Core.ToQuery AssumeRoleWithWebIdentity where
-  toQuery AssumeRoleWithWebIdentity' {..} =
-    Prelude.mconcat
-      [ "Action"
-          Core.=: ("AssumeRoleWithWebIdentity" :: Prelude.ByteString),
-        "Version"
-          Core.=: ("2011-06-15" :: Prelude.ByteString),
-        "Policy" Core.=: policy,
-        "PolicyArns"
-          Core.=: Core.toQuery
-            (Core.toQueryList "member" Prelude.<$> policyArns),
-        "DurationSeconds" Core.=: durationSeconds,
-        "ProviderId" Core.=: providerId,
-        "RoleArn" Core.=: roleArn,
-        "RoleSessionName" Core.=: roleSessionName,
-        "WebIdentityToken" Core.=: webIdentityToken
-      ]
+        toQuery AssumeRoleWithWebIdentity'{..}
+          = Prelude.mconcat
+              ["Action" Core.=:
+                 ("AssumeRoleWithWebIdentity" :: Prelude.ByteString),
+               "Version" Core.=:
+                 ("2011-06-15" :: Prelude.ByteString),
+               "Policy" Core.=: policy,
+               "PolicyArns" Core.=:
+                 Core.toQuery
+                   (Core.toQueryList "member" Prelude.<$> policyArns),
+               "DurationSeconds" Core.=: durationSeconds,
+               "ProviderId" Core.=: providerId,
+               "RoleArn" Core.=: roleArn,
+               "RoleSessionName" Core.=: roleSessionName,
+               "WebIdentityToken" Core.=: webIdentityToken]
 
 -- | Contains the response to a successful AssumeRoleWithWebIdentity request,
 -- including temporary Amazon Web Services credentials that can be used to
@@ -657,33 +654,34 @@ instance Core.ToQuery AssumeRoleWithWebIdentity where
 --
 -- /See:/ 'newAssumeRoleWithWebIdentityResponse' smart constructor.
 data AssumeRoleWithWebIdentityResponse = AssumeRoleWithWebIdentityResponse'
-  { -- | The unique user identifier that is returned by the identity provider.
+    {
+    -- | The unique user identifier that is returned by the identity provider.
     -- This identifier is associated with the @WebIdentityToken@ that was
     -- submitted with the @AssumeRoleWithWebIdentity@ call. The identifier is
     -- typically unique to the user and the application that acquired the
     -- @WebIdentityToken@ (pairwise identifier). For OpenID Connect ID tokens,
     -- this field contains the value returned by the identity provider as the
     -- token\'s @sub@ (Subject) claim.
-    subjectFromWebIdentityToken :: Prelude.Maybe Prelude.Text,
+    subjectFromWebIdentityToken :: Prelude.Maybe Prelude.Text
     -- | The issuing authority of the web identity token presented. For OpenID
     -- Connect ID tokens, this contains the value of the @iss@ field. For OAuth
     -- 2.0 access tokens, this contains the value of the @ProviderId@ parameter
     -- that was passed in the @AssumeRoleWithWebIdentity@ request.
-    provider :: Prelude.Maybe Prelude.Text,
+    , provider :: Prelude.Maybe Prelude.Text
     -- | The Amazon Resource Name (ARN) and the assumed role ID, which are
     -- identifiers that you can use to refer to the resulting temporary
     -- security credentials. For example, you can reference these credentials
     -- as a principal in a resource-based policy by using the ARN or assumed
     -- role ID. The ARN and ID include the @RoleSessionName@ that you specified
     -- when you called @AssumeRole@.
-    assumedRoleUser :: Prelude.Maybe AssumedRoleUser,
+    , assumedRoleUser :: Prelude.Maybe AssumedRoleUser
     -- | The intended audience (also known as client ID) of the web identity
     -- token. This is traditionally the client identifier issued to the
     -- application that requested the web identity token.
-    audience :: Prelude.Maybe Prelude.Text,
+    , audience :: Prelude.Maybe Prelude.Text
     -- | The value of the source identity that is returned in the JSON web token
     -- (JWT) from the identity provider.
-    --
+    -- 
     -- You can require users to set a source identity value when they assume a
     -- role. You do this by using the @sts:SourceIdentity@ condition key in a
     -- role trust policy. That way, actions that are taken with the role are
@@ -701,28 +699,27 @@ data AssumeRoleWithWebIdentityResponse = AssumeRoleWithWebIdentityResponse'
     -- using source identity, see
     -- <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html Monitor and control actions taken with assumed roles>
     -- in the /IAM User Guide/.
-    --
+    -- 
     -- The regex used to validate this parameter is a string of characters
     -- consisting of upper- and lower-case alphanumeric characters with no
     -- spaces. You can also include underscores or any of the following
     -- characters: =,.\@-
-    sourceIdentity :: Prelude.Maybe Prelude.Text,
+    , sourceIdentity :: Prelude.Maybe Prelude.Text
     -- | A percentage value that indicates the packed size of the session
     -- policies and session tags combined passed in the request. The request
     -- fails if the packed size is greater than 100 percent, which means the
     -- policies and tags exceeded the allowed space.
-    packedPolicySize :: Prelude.Maybe Prelude.Natural,
+    , packedPolicySize :: Prelude.Maybe Prelude.Natural
     -- | The response's http status code.
-    httpStatus :: Prelude.Int,
+    , httpStatus :: Prelude.Int
     -- | The temporary security credentials, which include an access key ID, a
     -- secret access key, and a security token.
-    --
+    -- 
     -- The size of the security token that STS API operations return is not
     -- fixed. We strongly recommend that you make no assumptions about the
     -- maximum size.
-    credentials :: Core.AuthEnv
-  }
-  deriving (Prelude.Eq, Prelude.Show, Prelude.Generic)
+    , credentials :: Core.AuthEnv
+    } deriving (Prelude.Eq, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'AssumeRoleWithWebIdentityResponse' with all optional fields omitted.
@@ -758,7 +755,7 @@ data AssumeRoleWithWebIdentityResponse = AssumeRoleWithWebIdentityResponse'
 --
 -- 'sourceIdentity', 'assumeRoleWithWebIdentityResponse_sourceIdentity' - The value of the source identity that is returned in the JSON web token
 -- (JWT) from the identity provider.
---
+-- 
 -- You can require users to set a source identity value when they assume a
 -- role. You do this by using the @sts:SourceIdentity@ condition key in a
 -- role trust policy. That way, actions that are taken with the role are
@@ -776,7 +773,7 @@ data AssumeRoleWithWebIdentityResponse = AssumeRoleWithWebIdentityResponse'
 -- using source identity, see
 -- <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html Monitor and control actions taken with assumed roles>
 -- in the /IAM User Guide/.
---
+-- 
 -- The regex used to validate this parameter is a string of characters
 -- consisting of upper- and lower-case alphanumeric characters with no
 -- spaces. You can also include underscores or any of the following
@@ -791,30 +788,25 @@ data AssumeRoleWithWebIdentityResponse = AssumeRoleWithWebIdentityResponse'
 --
 -- 'credentials', 'assumeRoleWithWebIdentityResponse_credentials' - The temporary security credentials, which include an access key ID, a
 -- secret access key, and a security token.
---
+-- 
 -- The size of the security token that STS API operations return is not
 -- fixed. We strongly recommend that you make no assumptions about the
 -- maximum size.
-newAssumeRoleWithWebIdentityResponse ::
-  -- | 'httpStatus'
-  Prelude.Int ->
-  -- | 'credentials'
-  Core.AuthEnv ->
-  AssumeRoleWithWebIdentityResponse
 newAssumeRoleWithWebIdentityResponse
-  pHttpStatus_
-  pCredentials_ =
-    AssumeRoleWithWebIdentityResponse'
-      { subjectFromWebIdentityToken =
-          Prelude.Nothing,
-        provider = Prelude.Nothing,
-        assumedRoleUser = Prelude.Nothing,
-        audience = Prelude.Nothing,
-        sourceIdentity = Prelude.Nothing,
-        packedPolicySize = Prelude.Nothing,
-        httpStatus = pHttpStatus_,
-        credentials = pCredentials_
-      }
+    :: Prelude.Int -- ^ 'httpStatus'
+    -> Core.AuthEnv -- ^ 'credentials'
+    -> AssumeRoleWithWebIdentityResponse
+newAssumeRoleWithWebIdentityResponse pHttpStatus_
+  pCredentials_
+  = AssumeRoleWithWebIdentityResponse'{subjectFromWebIdentityToken
+                                         = Prelude.Nothing,
+                                       provider = Prelude.Nothing,
+                                       assumedRoleUser = Prelude.Nothing,
+                                       audience = Prelude.Nothing,
+                                       sourceIdentity = Prelude.Nothing,
+                                       packedPolicySize = Prelude.Nothing,
+                                       httpStatus = pHttpStatus_,
+                                       credentials = pCredentials_}
 
 -- | The unique user identifier that is returned by the identity provider.
 -- This identifier is associated with the @WebIdentityToken@ that was
@@ -824,14 +816,14 @@ newAssumeRoleWithWebIdentityResponse
 -- this field contains the value returned by the identity provider as the
 -- token\'s @sub@ (Subject) claim.
 assumeRoleWithWebIdentityResponse_subjectFromWebIdentityToken :: Lens.Lens' AssumeRoleWithWebIdentityResponse (Prelude.Maybe Prelude.Text)
-assumeRoleWithWebIdentityResponse_subjectFromWebIdentityToken = Lens.lens (\AssumeRoleWithWebIdentityResponse' {subjectFromWebIdentityToken} -> subjectFromWebIdentityToken) (\s@AssumeRoleWithWebIdentityResponse' {} a -> s {subjectFromWebIdentityToken = a} :: AssumeRoleWithWebIdentityResponse)
+assumeRoleWithWebIdentityResponse_subjectFromWebIdentityToken = Lens.lens (\ AssumeRoleWithWebIdentityResponse'{subjectFromWebIdentityToken} -> subjectFromWebIdentityToken) (\ s@AssumeRoleWithWebIdentityResponse'{} a -> s{subjectFromWebIdentityToken = a} :: AssumeRoleWithWebIdentityResponse)
 
 -- | The issuing authority of the web identity token presented. For OpenID
 -- Connect ID tokens, this contains the value of the @iss@ field. For OAuth
 -- 2.0 access tokens, this contains the value of the @ProviderId@ parameter
 -- that was passed in the @AssumeRoleWithWebIdentity@ request.
 assumeRoleWithWebIdentityResponse_provider :: Lens.Lens' AssumeRoleWithWebIdentityResponse (Prelude.Maybe Prelude.Text)
-assumeRoleWithWebIdentityResponse_provider = Lens.lens (\AssumeRoleWithWebIdentityResponse' {provider} -> provider) (\s@AssumeRoleWithWebIdentityResponse' {} a -> s {provider = a} :: AssumeRoleWithWebIdentityResponse)
+assumeRoleWithWebIdentityResponse_provider = Lens.lens (\ AssumeRoleWithWebIdentityResponse'{provider} -> provider) (\ s@AssumeRoleWithWebIdentityResponse'{} a -> s{provider = a} :: AssumeRoleWithWebIdentityResponse)
 
 -- | The Amazon Resource Name (ARN) and the assumed role ID, which are
 -- identifiers that you can use to refer to the resulting temporary
@@ -840,17 +832,17 @@ assumeRoleWithWebIdentityResponse_provider = Lens.lens (\AssumeRoleWithWebIdenti
 -- role ID. The ARN and ID include the @RoleSessionName@ that you specified
 -- when you called @AssumeRole@.
 assumeRoleWithWebIdentityResponse_assumedRoleUser :: Lens.Lens' AssumeRoleWithWebIdentityResponse (Prelude.Maybe AssumedRoleUser)
-assumeRoleWithWebIdentityResponse_assumedRoleUser = Lens.lens (\AssumeRoleWithWebIdentityResponse' {assumedRoleUser} -> assumedRoleUser) (\s@AssumeRoleWithWebIdentityResponse' {} a -> s {assumedRoleUser = a} :: AssumeRoleWithWebIdentityResponse)
+assumeRoleWithWebIdentityResponse_assumedRoleUser = Lens.lens (\ AssumeRoleWithWebIdentityResponse'{assumedRoleUser} -> assumedRoleUser) (\ s@AssumeRoleWithWebIdentityResponse'{} a -> s{assumedRoleUser = a} :: AssumeRoleWithWebIdentityResponse)
 
 -- | The intended audience (also known as client ID) of the web identity
 -- token. This is traditionally the client identifier issued to the
 -- application that requested the web identity token.
 assumeRoleWithWebIdentityResponse_audience :: Lens.Lens' AssumeRoleWithWebIdentityResponse (Prelude.Maybe Prelude.Text)
-assumeRoleWithWebIdentityResponse_audience = Lens.lens (\AssumeRoleWithWebIdentityResponse' {audience} -> audience) (\s@AssumeRoleWithWebIdentityResponse' {} a -> s {audience = a} :: AssumeRoleWithWebIdentityResponse)
+assumeRoleWithWebIdentityResponse_audience = Lens.lens (\ AssumeRoleWithWebIdentityResponse'{audience} -> audience) (\ s@AssumeRoleWithWebIdentityResponse'{} a -> s{audience = a} :: AssumeRoleWithWebIdentityResponse)
 
 -- | The value of the source identity that is returned in the JSON web token
 -- (JWT) from the identity provider.
---
+-- 
 -- You can require users to set a source identity value when they assume a
 -- role. You do this by using the @sts:SourceIdentity@ condition key in a
 -- role trust policy. That way, actions that are taken with the role are
@@ -868,44 +860,44 @@ assumeRoleWithWebIdentityResponse_audience = Lens.lens (\AssumeRoleWithWebIdenti
 -- using source identity, see
 -- <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html Monitor and control actions taken with assumed roles>
 -- in the /IAM User Guide/.
---
+-- 
 -- The regex used to validate this parameter is a string of characters
 -- consisting of upper- and lower-case alphanumeric characters with no
 -- spaces. You can also include underscores or any of the following
 -- characters: =,.\@-
 assumeRoleWithWebIdentityResponse_sourceIdentity :: Lens.Lens' AssumeRoleWithWebIdentityResponse (Prelude.Maybe Prelude.Text)
-assumeRoleWithWebIdentityResponse_sourceIdentity = Lens.lens (\AssumeRoleWithWebIdentityResponse' {sourceIdentity} -> sourceIdentity) (\s@AssumeRoleWithWebIdentityResponse' {} a -> s {sourceIdentity = a} :: AssumeRoleWithWebIdentityResponse)
+assumeRoleWithWebIdentityResponse_sourceIdentity = Lens.lens (\ AssumeRoleWithWebIdentityResponse'{sourceIdentity} -> sourceIdentity) (\ s@AssumeRoleWithWebIdentityResponse'{} a -> s{sourceIdentity = a} :: AssumeRoleWithWebIdentityResponse)
 
 -- | A percentage value that indicates the packed size of the session
 -- policies and session tags combined passed in the request. The request
 -- fails if the packed size is greater than 100 percent, which means the
 -- policies and tags exceeded the allowed space.
 assumeRoleWithWebIdentityResponse_packedPolicySize :: Lens.Lens' AssumeRoleWithWebIdentityResponse (Prelude.Maybe Prelude.Natural)
-assumeRoleWithWebIdentityResponse_packedPolicySize = Lens.lens (\AssumeRoleWithWebIdentityResponse' {packedPolicySize} -> packedPolicySize) (\s@AssumeRoleWithWebIdentityResponse' {} a -> s {packedPolicySize = a} :: AssumeRoleWithWebIdentityResponse)
+assumeRoleWithWebIdentityResponse_packedPolicySize = Lens.lens (\ AssumeRoleWithWebIdentityResponse'{packedPolicySize} -> packedPolicySize) (\ s@AssumeRoleWithWebIdentityResponse'{} a -> s{packedPolicySize = a} :: AssumeRoleWithWebIdentityResponse)
 
 -- | The response's http status code.
 assumeRoleWithWebIdentityResponse_httpStatus :: Lens.Lens' AssumeRoleWithWebIdentityResponse Prelude.Int
-assumeRoleWithWebIdentityResponse_httpStatus = Lens.lens (\AssumeRoleWithWebIdentityResponse' {httpStatus} -> httpStatus) (\s@AssumeRoleWithWebIdentityResponse' {} a -> s {httpStatus = a} :: AssumeRoleWithWebIdentityResponse)
+assumeRoleWithWebIdentityResponse_httpStatus = Lens.lens (\ AssumeRoleWithWebIdentityResponse'{httpStatus} -> httpStatus) (\ s@AssumeRoleWithWebIdentityResponse'{} a -> s{httpStatus = a} :: AssumeRoleWithWebIdentityResponse)
 
 -- | The temporary security credentials, which include an access key ID, a
 -- secret access key, and a security token.
---
+-- 
 -- The size of the security token that STS API operations return is not
 -- fixed. We strongly recommend that you make no assumptions about the
 -- maximum size.
 assumeRoleWithWebIdentityResponse_credentials :: Lens.Lens' AssumeRoleWithWebIdentityResponse Core.AuthEnv
-assumeRoleWithWebIdentityResponse_credentials = Lens.lens (\AssumeRoleWithWebIdentityResponse' {credentials} -> credentials) (\s@AssumeRoleWithWebIdentityResponse' {} a -> s {credentials = a} :: AssumeRoleWithWebIdentityResponse)
+assumeRoleWithWebIdentityResponse_credentials = Lens.lens (\ AssumeRoleWithWebIdentityResponse'{credentials} -> credentials) (\ s@AssumeRoleWithWebIdentityResponse'{} a -> s{credentials = a} :: AssumeRoleWithWebIdentityResponse)
 
-instance
-  Prelude.NFData
-    AssumeRoleWithWebIdentityResponse
-  where
-  rnf AssumeRoleWithWebIdentityResponse' {..} =
-    Prelude.rnf subjectFromWebIdentityToken
-      `Prelude.seq` Prelude.rnf provider
-      `Prelude.seq` Prelude.rnf assumedRoleUser
-      `Prelude.seq` Prelude.rnf audience
-      `Prelude.seq` Prelude.rnf sourceIdentity
-      `Prelude.seq` Prelude.rnf packedPolicySize
-      `Prelude.seq` Prelude.rnf httpStatus
-      `Prelude.seq` Prelude.rnf credentials
+instance Prelude.NFData
+           AssumeRoleWithWebIdentityResponse
+         where
+        rnf AssumeRoleWithWebIdentityResponse'{..}
+          = Prelude.rnf subjectFromWebIdentityToken
+              `Prelude.seq`
+              Prelude.rnf provider `Prelude.seq`
+                Prelude.rnf assumedRoleUser `Prelude.seq`
+                  Prelude.rnf audience `Prelude.seq`
+                    Prelude.rnf sourceIdentity `Prelude.seq`
+                      Prelude.rnf packedPolicySize `Prelude.seq`
+                        Prelude.rnf httpStatus `Prelude.seq`
+                          Prelude.rnf credentials

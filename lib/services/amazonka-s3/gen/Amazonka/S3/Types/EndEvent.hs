@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,12 +18,13 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.EndEvent where
 
+import Amazonka.S3.Internal
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
 
 -- | A message that indicates the request is complete and no more messages
 -- will be sent. You should not assume that the request is complete until
@@ -30,24 +32,24 @@ import Amazonka.S3.Internal
 --
 -- /See:/ 'newEndEvent' smart constructor.
 data EndEvent = EndEvent'
-  {
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    {
+
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'EndEvent' with all optional fields omitted.
 --
 -- Use <https://hackage.haskell.org/package/generic-lens generic-lens> or <https://hackage.haskell.org/package/optics optics> to modify other optional fields.
-newEndEvent ::
-  EndEvent
+newEndEvent
+    :: EndEvent
 newEndEvent = EndEvent'
 
 instance Core.FromXML EndEvent where
-  parseXML = Prelude.const (Prelude.pure EndEvent')
+        parseXML = Prelude.const (Prelude.pure EndEvent')
 
 instance Prelude.Hashable EndEvent where
-  hashWithSalt _salt _ =
-    _salt `Prelude.hashWithSalt` ()
+        hashWithSalt _salt _
+          = _salt `Prelude.hashWithSalt` ()
 
 instance Prelude.NFData EndEvent where
-  rnf _ = ()
+        rnf _ = ()

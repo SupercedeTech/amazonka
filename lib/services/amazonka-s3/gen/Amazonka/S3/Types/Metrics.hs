@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,27 +18,28 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.Metrics where
 
-import qualified Amazonka.Core as Core
-import qualified Amazonka.Lens as Lens
-import qualified Amazonka.Prelude as Prelude
 import Amazonka.S3.Internal
 import Amazonka.S3.Types.MetricsStatus
 import Amazonka.S3.Types.ReplicationTimeValue
+import qualified Amazonka.Core as Core
+import qualified Amazonka.Lens as Lens
+import qualified Amazonka.Prelude as Prelude
 
 -- | A container specifying replication metrics-related settings enabling
 -- replication metrics and events.
 --
 -- /See:/ 'newMetrics' smart constructor.
 data Metrics = Metrics'
-  { -- | A container specifying the time threshold for emitting the
+    {
+    -- | A container specifying the time threshold for emitting the
     -- @s3:Replication:OperationMissedThreshold@ event.
-    eventThreshold :: Prelude.Maybe ReplicationTimeValue,
+    eventThreshold :: Prelude.Maybe ReplicationTimeValue
     -- | Specifies whether the replication metrics are enabled.
-    status :: MetricsStatus
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , status :: MetricsStatus
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'Metrics' with all optional fields omitted.
@@ -51,44 +53,40 @@ data Metrics = Metrics'
 -- @s3:Replication:OperationMissedThreshold@ event.
 --
 -- 'status', 'metrics_status' - Specifies whether the replication metrics are enabled.
-newMetrics ::
-  -- | 'status'
-  MetricsStatus ->
-  Metrics
-newMetrics pStatus_ =
-  Metrics'
-    { eventThreshold = Prelude.Nothing,
-      status = pStatus_
-    }
+newMetrics
+    :: MetricsStatus -- ^ 'status'
+    -> Metrics
+newMetrics pStatus_
+  = Metrics'{eventThreshold = Prelude.Nothing,
+             status = pStatus_}
 
 -- | A container specifying the time threshold for emitting the
 -- @s3:Replication:OperationMissedThreshold@ event.
 metrics_eventThreshold :: Lens.Lens' Metrics (Prelude.Maybe ReplicationTimeValue)
-metrics_eventThreshold = Lens.lens (\Metrics' {eventThreshold} -> eventThreshold) (\s@Metrics' {} a -> s {eventThreshold = a} :: Metrics)
+metrics_eventThreshold = Lens.lens (\ Metrics'{eventThreshold} -> eventThreshold) (\ s@Metrics'{} a -> s{eventThreshold = a} :: Metrics)
 
 -- | Specifies whether the replication metrics are enabled.
 metrics_status :: Lens.Lens' Metrics MetricsStatus
-metrics_status = Lens.lens (\Metrics' {status} -> status) (\s@Metrics' {} a -> s {status = a} :: Metrics)
+metrics_status = Lens.lens (\ Metrics'{status} -> status) (\ s@Metrics'{} a -> s{status = a} :: Metrics)
 
 instance Core.FromXML Metrics where
-  parseXML x =
-    Metrics'
-      Prelude.<$> (x Core..@? "EventThreshold")
-      Prelude.<*> (x Core..@ "Status")
+        parseXML x
+          = Metrics' Prelude.<$>
+              (x Core..@? "EventThreshold") Prelude.<*>
+                (x Core..@ "Status")
 
 instance Prelude.Hashable Metrics where
-  hashWithSalt _salt Metrics' {..} =
-    _salt `Prelude.hashWithSalt` eventThreshold
-      `Prelude.hashWithSalt` status
+        hashWithSalt _salt Metrics'{..}
+          = _salt `Prelude.hashWithSalt` eventThreshold
+              `Prelude.hashWithSalt` status
 
 instance Prelude.NFData Metrics where
-  rnf Metrics' {..} =
-    Prelude.rnf eventThreshold
-      `Prelude.seq` Prelude.rnf status
+        rnf Metrics'{..}
+          = Prelude.rnf eventThreshold `Prelude.seq`
+              Prelude.rnf status
 
 instance Core.ToXML Metrics where
-  toXML Metrics' {..} =
-    Prelude.mconcat
-      [ "EventThreshold" Core.@= eventThreshold,
-        "Status" Core.@= status
-      ]
+        toXML Metrics'{..}
+          = Prelude.mconcat
+              ["EventThreshold" Core.@= eventThreshold,
+               "Status" Core.@= status]

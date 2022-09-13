@@ -1,11 +1,12 @@
-{-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE DerivingStrategies #-}
+{-# LANGUAGE DeriveGeneric              #-}
+{-# LANGUAGE DerivingStrategies         #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE PatternSynonyms #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE LambdaCase                 #-}
+{-# LANGUAGE NoImplicitPrelude          #-}
+{-# LANGUAGE OverloadedStrings          #-}
+{-# LANGUAGE PatternSynonyms            #-}
+{-# LANGUAGE StrictData                 #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 
 -- Derived from AWS service descriptions, licensed under Apache 2.0.
@@ -17,68 +18,68 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
-module Amazonka.S3.Types.Event
-  ( Event
-      ( ..,
-        Event_S3_IntelligentTiering,
-        Event_S3_LifecycleExpiration_Delete,
-        Event_S3_LifecycleExpiration_DeleteMarkerCreated,
-        Event_S3_LifecycleExpiration__,
-        Event_S3_LifecycleTransition,
-        Event_S3_ObjectAcl_Put,
-        Event_S3_ObjectCreated_CompleteMultipartUpload,
-        Event_S3_ObjectCreated_Copy,
-        Event_S3_ObjectCreated_Post,
-        Event_S3_ObjectCreated_Put,
-        Event_S3_ObjectCreated__,
-        Event_S3_ObjectRemoved_Delete,
-        Event_S3_ObjectRemoved_DeleteMarkerCreated,
-        Event_S3_ObjectRemoved__,
-        Event_S3_ObjectRestore_Completed,
-        Event_S3_ObjectRestore_Delete,
-        Event_S3_ObjectRestore_Post,
-        Event_S3_ObjectRestore__,
-        Event_S3_ObjectTagging_Delete,
-        Event_S3_ObjectTagging_Put,
-        Event_S3_ObjectTagging__,
-        Event_S3_ReducedRedundancyLostObject,
-        Event_S3_Replication_OperationFailedReplication,
-        Event_S3_Replication_OperationMissedThreshold,
-        Event_S3_Replication_OperationNotTracked,
-        Event_S3_Replication_OperationReplicatedAfterThreshold,
-        Event_S3_Replication__
-      ),
-  )
-where
+--
+module Amazonka.S3.Types.Event (
+  Event (
+    ..
+    , Event_S3_IntelligentTiering
+    , Event_S3_LifecycleExpiration_Delete
+    , Event_S3_LifecycleExpiration_DeleteMarkerCreated
+    , Event_S3_LifecycleExpiration__
+    , Event_S3_LifecycleTransition
+    , Event_S3_ObjectAcl_Put
+    , Event_S3_ObjectCreated_CompleteMultipartUpload
+    , Event_S3_ObjectCreated_Copy
+    , Event_S3_ObjectCreated_Post
+    , Event_S3_ObjectCreated_Put
+    , Event_S3_ObjectCreated__
+    , Event_S3_ObjectRemoved_Delete
+    , Event_S3_ObjectRemoved_DeleteMarkerCreated
+    , Event_S3_ObjectRemoved__
+    , Event_S3_ObjectRestore_Completed
+    , Event_S3_ObjectRestore_Delete
+    , Event_S3_ObjectRestore_Post
+    , Event_S3_ObjectRestore__
+    , Event_S3_ObjectTagging_Delete
+    , Event_S3_ObjectTagging_Put
+    , Event_S3_ObjectTagging__
+    , Event_S3_ReducedRedundancyLostObject
+    , Event_S3_Replication_OperationFailedReplication
+    , Event_S3_Replication_OperationMissedThreshold
+    , Event_S3_Replication_OperationNotTracked
+    , Event_S3_Replication_OperationReplicatedAfterThreshold
+    , Event_S3_Replication__
+    )
+  ) where
 
+import Amazonka.S3.Internal
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
 
 -- | The bucket event for which to send notifications.
-newtype Event = Event' {fromEvent :: Core.Text}
+newtype Event = Event'{fromEvent :: Core.Text}
   deriving stock
-    ( Prelude.Show,
-      Prelude.Read,
-      Prelude.Eq,
-      Prelude.Ord,
-      Prelude.Generic
-    )
+      ( Prelude.Show
+      , Prelude.Read
+      , Prelude.Eq
+      , Prelude.Ord
+      , Prelude.Generic
+      )
   deriving newtype
-    ( Prelude.Hashable,
-      Prelude.NFData,
-      Core.FromText,
-      Core.ToText,
-      Core.ToByteString,
-      Core.ToLog,
-      Core.ToHeader,
-      Core.ToQuery,
-      Core.FromJSON,
-      Core.FromJSONKey,
-      Core.ToJSON,
-      Core.ToJSONKey,
-      Core.FromXML,
-      Core.ToXML
+      ( Prelude.Hashable
+      , Prelude.NFData
+      , Core.FromText
+      , Core.ToText
+      , Core.ToByteString
+      , Core.ToLog
+      , Core.ToHeader
+      , Core.ToQuery
+      , Core.FromJSON
+      , Core.FromJSONKey
+      , Core.ToJSON 
+      , Core.ToJSONKey
+      , Core.FromXML
+      , Core.ToXML
     )
 
 pattern Event_S3_IntelligentTiering :: Event
@@ -190,5 +191,4 @@ pattern Event_S3_Replication__ = Event' "s3:Replication:*"
   Event_S3_Replication_OperationNotTracked,
   Event_S3_Replication_OperationReplicatedAfterThreshold,
   Event_S3_Replication__,
-  Event'
-  #-}
+  Event' #-}

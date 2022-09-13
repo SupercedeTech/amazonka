@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,13 +18,14 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.CORSConfiguration where
 
+import Amazonka.S3.Internal
+import Amazonka.S3.Types.CORSRule
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
-import Amazonka.S3.Types.CORSRule
 
 -- | Describes the cross-origin access configuration for objects in an Amazon
 -- S3 bucket. For more information, see
@@ -32,11 +34,11 @@ import Amazonka.S3.Types.CORSRule
 --
 -- /See:/ 'newCORSConfiguration' smart constructor.
 data CORSConfiguration = CORSConfiguration'
-  { -- | A set of origins and methods (cross-origin access that you want to
+    {
+    -- | A set of origins and methods (cross-origin access that you want to
     -- allow). You can add up to 100 rules to the configuration.
     cORSRules :: [CORSRule]
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'CORSConfiguration' with all optional fields omitted.
@@ -48,24 +50,24 @@ data CORSConfiguration = CORSConfiguration'
 --
 -- 'cORSRules', 'cORSConfiguration_cORSRules' - A set of origins and methods (cross-origin access that you want to
 -- allow). You can add up to 100 rules to the configuration.
-newCORSConfiguration ::
-  CORSConfiguration
-newCORSConfiguration =
-  CORSConfiguration' {cORSRules = Prelude.mempty}
+newCORSConfiguration
+    :: CORSConfiguration
+newCORSConfiguration
+  = CORSConfiguration'{cORSRules = Prelude.mempty}
 
 -- | A set of origins and methods (cross-origin access that you want to
 -- allow). You can add up to 100 rules to the configuration.
 cORSConfiguration_cORSRules :: Lens.Lens' CORSConfiguration [CORSRule]
-cORSConfiguration_cORSRules = Lens.lens (\CORSConfiguration' {cORSRules} -> cORSRules) (\s@CORSConfiguration' {} a -> s {cORSRules = a} :: CORSConfiguration) Prelude.. Lens.coerced
+cORSConfiguration_cORSRules = Lens.lens (\ CORSConfiguration'{cORSRules} -> cORSRules) (\ s@CORSConfiguration'{} a -> s{cORSRules = a} :: CORSConfiguration) Prelude.. Lens.coerced
 
 instance Prelude.Hashable CORSConfiguration where
-  hashWithSalt _salt CORSConfiguration' {..} =
-    _salt `Prelude.hashWithSalt` cORSRules
+        hashWithSalt _salt CORSConfiguration'{..}
+          = _salt `Prelude.hashWithSalt` cORSRules
 
 instance Prelude.NFData CORSConfiguration where
-  rnf CORSConfiguration' {..} = Prelude.rnf cORSRules
+        rnf CORSConfiguration'{..} = Prelude.rnf cORSRules
 
 instance Core.ToXML CORSConfiguration where
-  toXML CORSConfiguration' {..} =
-    Prelude.mconcat
-      [Core.toXMLList "CORSRule" cORSRules]
+        toXML CORSConfiguration'{..}
+          = Prelude.mconcat
+              [Core.toXMLList "CORSRule" cORSRules]

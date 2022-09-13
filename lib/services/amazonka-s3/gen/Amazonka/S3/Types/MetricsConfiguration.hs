@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,13 +18,14 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.MetricsConfiguration where
 
+import Amazonka.S3.Internal
+import Amazonka.S3.Types.MetricsFilter
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
-import Amazonka.S3.Types.MetricsFilter
 
 -- | Specifies a metrics configuration for the CloudWatch request metrics
 -- (specified by the metrics configuration ID) from an Amazon S3 bucket. If
@@ -35,15 +37,15 @@ import Amazonka.S3.Types.MetricsFilter
 --
 -- /See:/ 'newMetricsConfiguration' smart constructor.
 data MetricsConfiguration = MetricsConfiguration'
-  { -- | Specifies a metrics configuration filter. The metrics configuration will
+    {
+    -- | Specifies a metrics configuration filter. The metrics configuration will
     -- only include objects that meet the filter\'s criteria. A filter must be
     -- a prefix, an object tag, an access point ARN, or a conjunction
     -- (MetricsAndOperator).
-    filter' :: Prelude.Maybe MetricsFilter,
+    filter' :: Prelude.Maybe MetricsFilter
     -- | The ID used to identify the metrics configuration.
-    id :: Prelude.Text
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , id :: Prelude.Text
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'MetricsConfiguration' with all optional fields omitted.
@@ -59,42 +61,39 @@ data MetricsConfiguration = MetricsConfiguration'
 -- (MetricsAndOperator).
 --
 -- 'id', 'metricsConfiguration_id' - The ID used to identify the metrics configuration.
-newMetricsConfiguration ::
-  -- | 'id'
-  Prelude.Text ->
-  MetricsConfiguration
-newMetricsConfiguration pId_ =
-  MetricsConfiguration'
-    { filter' = Prelude.Nothing,
-      id = pId_
-    }
+newMetricsConfiguration
+    :: Prelude.Text -- ^ 'id'
+    -> MetricsConfiguration
+newMetricsConfiguration pId_
+  = MetricsConfiguration'{filter' = Prelude.Nothing,
+                          id = pId_}
 
 -- | Specifies a metrics configuration filter. The metrics configuration will
 -- only include objects that meet the filter\'s criteria. A filter must be
 -- a prefix, an object tag, an access point ARN, or a conjunction
 -- (MetricsAndOperator).
 metricsConfiguration_filter :: Lens.Lens' MetricsConfiguration (Prelude.Maybe MetricsFilter)
-metricsConfiguration_filter = Lens.lens (\MetricsConfiguration' {filter'} -> filter') (\s@MetricsConfiguration' {} a -> s {filter' = a} :: MetricsConfiguration)
+metricsConfiguration_filter = Lens.lens (\ MetricsConfiguration'{filter'} -> filter') (\ s@MetricsConfiguration'{} a -> s{filter' = a} :: MetricsConfiguration)
 
 -- | The ID used to identify the metrics configuration.
 metricsConfiguration_id :: Lens.Lens' MetricsConfiguration Prelude.Text
-metricsConfiguration_id = Lens.lens (\MetricsConfiguration' {id} -> id) (\s@MetricsConfiguration' {} a -> s {id = a} :: MetricsConfiguration)
+metricsConfiguration_id = Lens.lens (\ MetricsConfiguration'{id} -> id) (\ s@MetricsConfiguration'{} a -> s{id = a} :: MetricsConfiguration)
 
 instance Core.FromXML MetricsConfiguration where
-  parseXML x =
-    MetricsConfiguration'
-      Prelude.<$> (x Core..@? "Filter") Prelude.<*> (x Core..@ "Id")
+        parseXML x
+          = MetricsConfiguration' Prelude.<$>
+              (x Core..@? "Filter") Prelude.<*> (x Core..@ "Id")
 
 instance Prelude.Hashable MetricsConfiguration where
-  hashWithSalt _salt MetricsConfiguration' {..} =
-    _salt `Prelude.hashWithSalt` filter'
-      `Prelude.hashWithSalt` id
+        hashWithSalt _salt MetricsConfiguration'{..}
+          = _salt `Prelude.hashWithSalt` filter'
+              `Prelude.hashWithSalt` id
 
 instance Prelude.NFData MetricsConfiguration where
-  rnf MetricsConfiguration' {..} =
-    Prelude.rnf filter' `Prelude.seq` Prelude.rnf id
+        rnf MetricsConfiguration'{..}
+          = Prelude.rnf filter' `Prelude.seq` Prelude.rnf id
 
 instance Core.ToXML MetricsConfiguration where
-  toXML MetricsConfiguration' {..} =
-    Prelude.mconcat
-      ["Filter" Core.@= filter', "Id" Core.@= id]
+        toXML MetricsConfiguration'{..}
+          = Prelude.mconcat
+              ["Filter" Core.@= filter', "Id" Core.@= id]

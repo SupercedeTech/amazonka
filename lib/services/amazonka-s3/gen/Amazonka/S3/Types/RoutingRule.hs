@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,14 +18,15 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.RoutingRule where
 
-import qualified Amazonka.Core as Core
-import qualified Amazonka.Lens as Lens
-import qualified Amazonka.Prelude as Prelude
 import Amazonka.S3.Internal
 import Amazonka.S3.Types.Condition
 import Amazonka.S3.Types.Redirect
+import qualified Amazonka.Core as Core
+import qualified Amazonka.Lens as Lens
+import qualified Amazonka.Prelude as Prelude
 
 -- | Specifies the redirect behavior and when a redirect is applied. For more
 -- information about routing rules, see
@@ -33,18 +35,18 @@ import Amazonka.S3.Types.Redirect
 --
 -- /See:/ 'newRoutingRule' smart constructor.
 data RoutingRule = RoutingRule'
-  { -- | A container for describing a condition that must be met for the
+    {
+    -- | A container for describing a condition that must be met for the
     -- specified redirect to apply. For example, 1. If request is for pages in
     -- the @\/docs@ folder, redirect to the @\/documents@ folder. 2. If request
     -- results in HTTP error 4xx, redirect request to another host where you
     -- might process the error.
-    condition :: Prelude.Maybe Condition,
+    condition :: Prelude.Maybe Condition
     -- | Container for redirect information. You can redirect requests to another
     -- host, to another page, or with another protocol. In the event of an
     -- error, you can specify a different error code to return.
-    redirect :: Redirect
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , redirect :: Redirect
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'RoutingRule' with all optional fields omitted.
@@ -63,15 +65,12 @@ data RoutingRule = RoutingRule'
 -- 'redirect', 'routingRule_redirect' - Container for redirect information. You can redirect requests to another
 -- host, to another page, or with another protocol. In the event of an
 -- error, you can specify a different error code to return.
-newRoutingRule ::
-  -- | 'redirect'
-  Redirect ->
-  RoutingRule
-newRoutingRule pRedirect_ =
-  RoutingRule'
-    { condition = Prelude.Nothing,
-      redirect = pRedirect_
-    }
+newRoutingRule
+    :: Redirect -- ^ 'redirect'
+    -> RoutingRule
+newRoutingRule pRedirect_
+  = RoutingRule'{condition = Prelude.Nothing,
+                 redirect = pRedirect_}
 
 -- | A container for describing a condition that must be met for the
 -- specified redirect to apply. For example, 1. If request is for pages in
@@ -79,33 +78,32 @@ newRoutingRule pRedirect_ =
 -- results in HTTP error 4xx, redirect request to another host where you
 -- might process the error.
 routingRule_condition :: Lens.Lens' RoutingRule (Prelude.Maybe Condition)
-routingRule_condition = Lens.lens (\RoutingRule' {condition} -> condition) (\s@RoutingRule' {} a -> s {condition = a} :: RoutingRule)
+routingRule_condition = Lens.lens (\ RoutingRule'{condition} -> condition) (\ s@RoutingRule'{} a -> s{condition = a} :: RoutingRule)
 
 -- | Container for redirect information. You can redirect requests to another
 -- host, to another page, or with another protocol. In the event of an
 -- error, you can specify a different error code to return.
 routingRule_redirect :: Lens.Lens' RoutingRule Redirect
-routingRule_redirect = Lens.lens (\RoutingRule' {redirect} -> redirect) (\s@RoutingRule' {} a -> s {redirect = a} :: RoutingRule)
+routingRule_redirect = Lens.lens (\ RoutingRule'{redirect} -> redirect) (\ s@RoutingRule'{} a -> s{redirect = a} :: RoutingRule)
 
 instance Core.FromXML RoutingRule where
-  parseXML x =
-    RoutingRule'
-      Prelude.<$> (x Core..@? "Condition")
-      Prelude.<*> (x Core..@ "Redirect")
+        parseXML x
+          = RoutingRule' Prelude.<$>
+              (x Core..@? "Condition") Prelude.<*>
+                (x Core..@ "Redirect")
 
 instance Prelude.Hashable RoutingRule where
-  hashWithSalt _salt RoutingRule' {..} =
-    _salt `Prelude.hashWithSalt` condition
-      `Prelude.hashWithSalt` redirect
+        hashWithSalt _salt RoutingRule'{..}
+          = _salt `Prelude.hashWithSalt` condition
+              `Prelude.hashWithSalt` redirect
 
 instance Prelude.NFData RoutingRule where
-  rnf RoutingRule' {..} =
-    Prelude.rnf condition
-      `Prelude.seq` Prelude.rnf redirect
+        rnf RoutingRule'{..}
+          = Prelude.rnf condition `Prelude.seq`
+              Prelude.rnf redirect
 
 instance Core.ToXML RoutingRule where
-  toXML RoutingRule' {..} =
-    Prelude.mconcat
-      [ "Condition" Core.@= condition,
-        "Redirect" Core.@= redirect
-      ]
+        toXML RoutingRule'{..}
+          = Prelude.mconcat
+              ["Condition" Core.@= condition,
+               "Redirect" Core.@= redirect]

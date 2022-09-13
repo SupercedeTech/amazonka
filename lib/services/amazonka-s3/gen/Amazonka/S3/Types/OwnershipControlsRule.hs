@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,21 +18,22 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.OwnershipControlsRule where
 
+import Amazonka.S3.Internal
+import Amazonka.S3.Types.ObjectOwnership
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
-import Amazonka.S3.Types.ObjectOwnership
 
 -- | The container element for an ownership control rule.
 --
 -- /See:/ 'newOwnershipControlsRule' smart constructor.
 data OwnershipControlsRule = OwnershipControlsRule'
-  { objectOwnership :: ObjectOwnership
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    {
+    objectOwnership :: ObjectOwnership
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'OwnershipControlsRule' with all optional fields omitted.
@@ -42,34 +44,31 @@ data OwnershipControlsRule = OwnershipControlsRule'
 -- for backwards compatibility:
 --
 -- 'objectOwnership', 'ownershipControlsRule_objectOwnership' - Undocumented member.
-newOwnershipControlsRule ::
-  -- | 'objectOwnership'
-  ObjectOwnership ->
-  OwnershipControlsRule
-newOwnershipControlsRule pObjectOwnership_ =
-  OwnershipControlsRule'
-    { objectOwnership =
-        pObjectOwnership_
-    }
+newOwnershipControlsRule
+    :: ObjectOwnership -- ^ 'objectOwnership'
+    -> OwnershipControlsRule
+newOwnershipControlsRule pObjectOwnership_
+  = OwnershipControlsRule'{objectOwnership =
+                             pObjectOwnership_}
 
 -- | Undocumented member.
 ownershipControlsRule_objectOwnership :: Lens.Lens' OwnershipControlsRule ObjectOwnership
-ownershipControlsRule_objectOwnership = Lens.lens (\OwnershipControlsRule' {objectOwnership} -> objectOwnership) (\s@OwnershipControlsRule' {} a -> s {objectOwnership = a} :: OwnershipControlsRule)
+ownershipControlsRule_objectOwnership = Lens.lens (\ OwnershipControlsRule'{objectOwnership} -> objectOwnership) (\ s@OwnershipControlsRule'{} a -> s{objectOwnership = a} :: OwnershipControlsRule)
 
 instance Core.FromXML OwnershipControlsRule where
-  parseXML x =
-    OwnershipControlsRule'
-      Prelude.<$> (x Core..@ "ObjectOwnership")
+        parseXML x
+          = OwnershipControlsRule' Prelude.<$>
+              (x Core..@ "ObjectOwnership")
 
 instance Prelude.Hashable OwnershipControlsRule where
-  hashWithSalt _salt OwnershipControlsRule' {..} =
-    _salt `Prelude.hashWithSalt` objectOwnership
+        hashWithSalt _salt OwnershipControlsRule'{..}
+          = _salt `Prelude.hashWithSalt` objectOwnership
 
 instance Prelude.NFData OwnershipControlsRule where
-  rnf OwnershipControlsRule' {..} =
-    Prelude.rnf objectOwnership
+        rnf OwnershipControlsRule'{..}
+          = Prelude.rnf objectOwnership
 
 instance Core.ToXML OwnershipControlsRule where
-  toXML OwnershipControlsRule' {..} =
-    Prelude.mconcat
-      ["ObjectOwnership" Core.@= objectOwnership]
+        toXML OwnershipControlsRule'{..}
+          = Prelude.mconcat
+              ["ObjectOwnership" Core.@= objectOwnership]

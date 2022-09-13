@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,13 +18,14 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.BucketLifecycleConfiguration where
 
+import Amazonka.S3.Internal
+import Amazonka.S3.Types.LifecycleRule
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
-import Amazonka.S3.Types.LifecycleRule
 
 -- | Specifies the lifecycle configuration for objects in an Amazon S3
 -- bucket. For more information, see
@@ -32,10 +34,10 @@ import Amazonka.S3.Types.LifecycleRule
 --
 -- /See:/ 'newBucketLifecycleConfiguration' smart constructor.
 data BucketLifecycleConfiguration = BucketLifecycleConfiguration'
-  { -- | A lifecycle rule for individual objects in an Amazon S3 bucket.
+    {
+    -- | A lifecycle rule for individual objects in an Amazon S3 bucket.
     rules :: [LifecycleRule]
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'BucketLifecycleConfiguration' with all optional fields omitted.
@@ -46,29 +48,28 @@ data BucketLifecycleConfiguration = BucketLifecycleConfiguration'
 -- for backwards compatibility:
 --
 -- 'rules', 'bucketLifecycleConfiguration_rules' - A lifecycle rule for individual objects in an Amazon S3 bucket.
-newBucketLifecycleConfiguration ::
-  BucketLifecycleConfiguration
-newBucketLifecycleConfiguration =
-  BucketLifecycleConfiguration'
-    { rules =
-        Prelude.mempty
-    }
+newBucketLifecycleConfiguration
+    :: BucketLifecycleConfiguration
+newBucketLifecycleConfiguration
+  = BucketLifecycleConfiguration'{rules =
+                                    Prelude.mempty}
 
 -- | A lifecycle rule for individual objects in an Amazon S3 bucket.
 bucketLifecycleConfiguration_rules :: Lens.Lens' BucketLifecycleConfiguration [LifecycleRule]
-bucketLifecycleConfiguration_rules = Lens.lens (\BucketLifecycleConfiguration' {rules} -> rules) (\s@BucketLifecycleConfiguration' {} a -> s {rules = a} :: BucketLifecycleConfiguration) Prelude.. Lens.coerced
+bucketLifecycleConfiguration_rules = Lens.lens (\ BucketLifecycleConfiguration'{rules} -> rules) (\ s@BucketLifecycleConfiguration'{} a -> s{rules = a} :: BucketLifecycleConfiguration) Prelude.. Lens.coerced
 
-instance
-  Prelude.Hashable
-    BucketLifecycleConfiguration
-  where
-  hashWithSalt _salt BucketLifecycleConfiguration' {..} =
-    _salt `Prelude.hashWithSalt` rules
+instance Prelude.Hashable
+           BucketLifecycleConfiguration
+         where
+        hashWithSalt _salt BucketLifecycleConfiguration'{..}
+          = _salt `Prelude.hashWithSalt` rules
 
-instance Prelude.NFData BucketLifecycleConfiguration where
-  rnf BucketLifecycleConfiguration' {..} =
-    Prelude.rnf rules
+instance Prelude.NFData BucketLifecycleConfiguration
+         where
+        rnf BucketLifecycleConfiguration'{..}
+          = Prelude.rnf rules
 
-instance Core.ToXML BucketLifecycleConfiguration where
-  toXML BucketLifecycleConfiguration' {..} =
-    Prelude.mconcat [Core.toXMLList "Rule" rules]
+instance Core.ToXML BucketLifecycleConfiguration
+         where
+        toXML BucketLifecycleConfiguration'{..}
+          = Prelude.mconcat [Core.toXMLList "Rule" rules]

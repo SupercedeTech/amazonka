@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,12 +18,13 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.CommonPrefix where
 
+import Amazonka.S3.Internal
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
 
 -- | Container for all (if there are any) keys between Prefix and the next
 -- occurrence of the string specified by a delimiter. CommonPrefixes lists
@@ -32,10 +34,10 @@ import Amazonka.S3.Internal
 --
 -- /See:/ 'newCommonPrefix' smart constructor.
 data CommonPrefix = CommonPrefix'
-  { -- | Container for the specified common prefix.
+    {
+    -- | Container for the specified common prefix.
     prefix :: Prelude.Maybe Prelude.Text
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'CommonPrefix' with all optional fields omitted.
@@ -46,22 +48,22 @@ data CommonPrefix = CommonPrefix'
 -- for backwards compatibility:
 --
 -- 'prefix', 'commonPrefix_prefix' - Container for the specified common prefix.
-newCommonPrefix ::
-  CommonPrefix
-newCommonPrefix =
-  CommonPrefix' {prefix = Prelude.Nothing}
+newCommonPrefix
+    :: CommonPrefix
+newCommonPrefix
+  = CommonPrefix'{prefix = Prelude.Nothing}
 
 -- | Container for the specified common prefix.
 commonPrefix_prefix :: Lens.Lens' CommonPrefix (Prelude.Maybe Prelude.Text)
-commonPrefix_prefix = Lens.lens (\CommonPrefix' {prefix} -> prefix) (\s@CommonPrefix' {} a -> s {prefix = a} :: CommonPrefix)
+commonPrefix_prefix = Lens.lens (\ CommonPrefix'{prefix} -> prefix) (\ s@CommonPrefix'{} a -> s{prefix = a} :: CommonPrefix)
 
 instance Core.FromXML CommonPrefix where
-  parseXML x =
-    CommonPrefix' Prelude.<$> (x Core..@? "Prefix")
+        parseXML x
+          = CommonPrefix' Prelude.<$> (x Core..@? "Prefix")
 
 instance Prelude.Hashable CommonPrefix where
-  hashWithSalt _salt CommonPrefix' {..} =
-    _salt `Prelude.hashWithSalt` prefix
+        hashWithSalt _salt CommonPrefix'{..}
+          = _salt `Prelude.hashWithSalt` prefix
 
 instance Prelude.NFData CommonPrefix where
-  rnf CommonPrefix' {..} = Prelude.rnf prefix
+        rnf CommonPrefix'{..} = Prelude.rnf prefix

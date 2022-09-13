@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,22 +18,23 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.StatsEvent where
 
+import Amazonka.S3.Internal
+import Amazonka.S3.Types.Stats
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
-import Amazonka.S3.Types.Stats
 
 -- | Container for the Stats Event.
 --
 -- /See:/ 'newStatsEvent' smart constructor.
 data StatsEvent = StatsEvent'
-  { -- | The Stats event details.
+    {
+    -- | The Stats event details.
     details :: Prelude.Maybe Stats
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'StatsEvent' with all optional fields omitted.
@@ -43,22 +45,22 @@ data StatsEvent = StatsEvent'
 -- for backwards compatibility:
 --
 -- 'details', 'statsEvent_details' - The Stats event details.
-newStatsEvent ::
-  StatsEvent
-newStatsEvent =
-  StatsEvent' {details = Prelude.Nothing}
+newStatsEvent
+    :: StatsEvent
+newStatsEvent
+  = StatsEvent'{details = Prelude.Nothing}
 
 -- | The Stats event details.
 statsEvent_details :: Lens.Lens' StatsEvent (Prelude.Maybe Stats)
-statsEvent_details = Lens.lens (\StatsEvent' {details} -> details) (\s@StatsEvent' {} a -> s {details = a} :: StatsEvent)
+statsEvent_details = Lens.lens (\ StatsEvent'{details} -> details) (\ s@StatsEvent'{} a -> s{details = a} :: StatsEvent)
 
 instance Core.FromXML StatsEvent where
-  parseXML x =
-    StatsEvent' Prelude.<$> (x Core..@? "Details")
+        parseXML x
+          = StatsEvent' Prelude.<$> (x Core..@? "Details")
 
 instance Prelude.Hashable StatsEvent where
-  hashWithSalt _salt StatsEvent' {..} =
-    _salt `Prelude.hashWithSalt` details
+        hashWithSalt _salt StatsEvent'{..}
+          = _salt `Prelude.hashWithSalt` details
 
 instance Prelude.NFData StatsEvent where
-  rnf StatsEvent' {..} = Prelude.rnf details
+        rnf StatsEvent'{..} = Prelude.rnf details

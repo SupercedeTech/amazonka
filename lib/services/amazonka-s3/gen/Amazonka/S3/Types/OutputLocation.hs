@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,23 +18,24 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.OutputLocation where
 
+import Amazonka.S3.Internal
+import Amazonka.S3.Types.S3Location
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
-import Amazonka.S3.Types.S3Location
 
 -- | Describes the location where the restore job\'s output is stored.
 --
 -- /See:/ 'newOutputLocation' smart constructor.
 data OutputLocation = OutputLocation'
-  { -- | Describes an S3 location that will receive the results of the restore
+    {
+    -- | Describes an S3 location that will receive the results of the restore
     -- request.
     s3 :: Prelude.Maybe S3Location
-  }
-  deriving (Prelude.Eq, Prelude.Show, Prelude.Generic)
+    } deriving (Prelude.Eq, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'OutputLocation' with all optional fields omitted.
@@ -45,23 +47,23 @@ data OutputLocation = OutputLocation'
 --
 -- 's3', 'outputLocation_s3' - Describes an S3 location that will receive the results of the restore
 -- request.
-newOutputLocation ::
-  OutputLocation
-newOutputLocation =
-  OutputLocation' {s3 = Prelude.Nothing}
+newOutputLocation
+    :: OutputLocation
+newOutputLocation
+  = OutputLocation'{s3 = Prelude.Nothing}
 
 -- | Describes an S3 location that will receive the results of the restore
 -- request.
 outputLocation_s3 :: Lens.Lens' OutputLocation (Prelude.Maybe S3Location)
-outputLocation_s3 = Lens.lens (\OutputLocation' {s3} -> s3) (\s@OutputLocation' {} a -> s {s3 = a} :: OutputLocation)
+outputLocation_s3 = Lens.lens (\ OutputLocation'{s3} -> s3) (\ s@OutputLocation'{} a -> s{s3 = a} :: OutputLocation)
 
 instance Prelude.Hashable OutputLocation where
-  hashWithSalt _salt OutputLocation' {..} =
-    _salt `Prelude.hashWithSalt` s3
+        hashWithSalt _salt OutputLocation'{..}
+          = _salt `Prelude.hashWithSalt` s3
 
 instance Prelude.NFData OutputLocation where
-  rnf OutputLocation' {..} = Prelude.rnf s3
+        rnf OutputLocation'{..} = Prelude.rnf s3
 
 instance Core.ToXML OutputLocation where
-  toXML OutputLocation' {..} =
-    Prelude.mconcat ["S3" Core.@= s3]
+        toXML OutputLocation'{..}
+          = Prelude.mconcat ["S3" Core.@= s3]

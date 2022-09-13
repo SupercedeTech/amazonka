@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,13 +18,14 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.StorageClassAnalysis where
 
+import Amazonka.S3.Internal
+import Amazonka.S3.Types.StorageClassAnalysisDataExport
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
-import Amazonka.S3.Types.StorageClassAnalysisDataExport
 
 -- | Specifies data related to access patterns to be collected and made
 -- available to analyze the tradeoffs between different storage classes for
@@ -31,11 +33,11 @@ import Amazonka.S3.Types.StorageClassAnalysisDataExport
 --
 -- /See:/ 'newStorageClassAnalysis' smart constructor.
 data StorageClassAnalysis = StorageClassAnalysis'
-  { -- | Specifies how data related to the storage class analysis for an Amazon
+    {
+    -- | Specifies how data related to the storage class analysis for an Amazon
     -- S3 bucket should be exported.
     dataExport :: Prelude.Maybe StorageClassAnalysisDataExport
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'StorageClassAnalysis' with all optional fields omitted.
@@ -47,29 +49,29 @@ data StorageClassAnalysis = StorageClassAnalysis'
 --
 -- 'dataExport', 'storageClassAnalysis_dataExport' - Specifies how data related to the storage class analysis for an Amazon
 -- S3 bucket should be exported.
-newStorageClassAnalysis ::
-  StorageClassAnalysis
-newStorageClassAnalysis =
-  StorageClassAnalysis' {dataExport = Prelude.Nothing}
+newStorageClassAnalysis
+    :: StorageClassAnalysis
+newStorageClassAnalysis
+  = StorageClassAnalysis'{dataExport = Prelude.Nothing}
 
 -- | Specifies how data related to the storage class analysis for an Amazon
 -- S3 bucket should be exported.
 storageClassAnalysis_dataExport :: Lens.Lens' StorageClassAnalysis (Prelude.Maybe StorageClassAnalysisDataExport)
-storageClassAnalysis_dataExport = Lens.lens (\StorageClassAnalysis' {dataExport} -> dataExport) (\s@StorageClassAnalysis' {} a -> s {dataExport = a} :: StorageClassAnalysis)
+storageClassAnalysis_dataExport = Lens.lens (\ StorageClassAnalysis'{dataExport} -> dataExport) (\ s@StorageClassAnalysis'{} a -> s{dataExport = a} :: StorageClassAnalysis)
 
 instance Core.FromXML StorageClassAnalysis where
-  parseXML x =
-    StorageClassAnalysis'
-      Prelude.<$> (x Core..@? "DataExport")
+        parseXML x
+          = StorageClassAnalysis' Prelude.<$>
+              (x Core..@? "DataExport")
 
 instance Prelude.Hashable StorageClassAnalysis where
-  hashWithSalt _salt StorageClassAnalysis' {..} =
-    _salt `Prelude.hashWithSalt` dataExport
+        hashWithSalt _salt StorageClassAnalysis'{..}
+          = _salt `Prelude.hashWithSalt` dataExport
 
 instance Prelude.NFData StorageClassAnalysis where
-  rnf StorageClassAnalysis' {..} =
-    Prelude.rnf dataExport
+        rnf StorageClassAnalysis'{..}
+          = Prelude.rnf dataExport
 
 instance Core.ToXML StorageClassAnalysis where
-  toXML StorageClassAnalysis' {..} =
-    Prelude.mconcat ["DataExport" Core.@= dataExport]
+        toXML StorageClassAnalysis'{..}
+          = Prelude.mconcat ["DataExport" Core.@= dataExport]

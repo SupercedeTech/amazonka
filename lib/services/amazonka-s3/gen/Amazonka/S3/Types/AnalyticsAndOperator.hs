@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,13 +18,14 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.AnalyticsAndOperator where
 
+import Amazonka.S3.Internal
+import Amazonka.S3.Types.Tag
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
-import Amazonka.S3.Types.Tag
 
 -- | A conjunction (logical AND) of predicates, which is used in evaluating a
 -- metrics filter. The operator must have at least two predicates in any
@@ -32,13 +34,13 @@ import Amazonka.S3.Types.Tag
 --
 -- /See:/ 'newAnalyticsAndOperator' smart constructor.
 data AnalyticsAndOperator = AnalyticsAndOperator'
-  { -- | The list of tags to use when evaluating an AND predicate.
-    tags :: Prelude.Maybe [Tag],
+    {
+    -- | The list of tags to use when evaluating an AND predicate.
+    tags :: Prelude.Maybe [Tag]
     -- | The prefix to use when evaluating an AND predicate: The prefix that an
     -- object must have to be included in the metrics results.
-    prefix :: Prelude.Maybe Prelude.Text
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , prefix :: Prelude.Maybe Prelude.Text
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'AnalyticsAndOperator' with all optional fields omitted.
@@ -52,44 +54,40 @@ data AnalyticsAndOperator = AnalyticsAndOperator'
 --
 -- 'prefix', 'analyticsAndOperator_prefix' - The prefix to use when evaluating an AND predicate: The prefix that an
 -- object must have to be included in the metrics results.
-newAnalyticsAndOperator ::
-  AnalyticsAndOperator
-newAnalyticsAndOperator =
-  AnalyticsAndOperator'
-    { tags = Prelude.Nothing,
-      prefix = Prelude.Nothing
-    }
+newAnalyticsAndOperator
+    :: AnalyticsAndOperator
+newAnalyticsAndOperator
+  = AnalyticsAndOperator'{tags = Prelude.Nothing,
+                          prefix = Prelude.Nothing}
 
 -- | The list of tags to use when evaluating an AND predicate.
 analyticsAndOperator_tags :: Lens.Lens' AnalyticsAndOperator (Prelude.Maybe [Tag])
-analyticsAndOperator_tags = Lens.lens (\AnalyticsAndOperator' {tags} -> tags) (\s@AnalyticsAndOperator' {} a -> s {tags = a} :: AnalyticsAndOperator) Prelude.. Lens.mapping Lens.coerced
+analyticsAndOperator_tags = Lens.lens (\ AnalyticsAndOperator'{tags} -> tags) (\ s@AnalyticsAndOperator'{} a -> s{tags = a} :: AnalyticsAndOperator) Prelude.. Lens.mapping Lens.coerced
 
 -- | The prefix to use when evaluating an AND predicate: The prefix that an
 -- object must have to be included in the metrics results.
 analyticsAndOperator_prefix :: Lens.Lens' AnalyticsAndOperator (Prelude.Maybe Prelude.Text)
-analyticsAndOperator_prefix = Lens.lens (\AnalyticsAndOperator' {prefix} -> prefix) (\s@AnalyticsAndOperator' {} a -> s {prefix = a} :: AnalyticsAndOperator)
+analyticsAndOperator_prefix = Lens.lens (\ AnalyticsAndOperator'{prefix} -> prefix) (\ s@AnalyticsAndOperator'{} a -> s{prefix = a} :: AnalyticsAndOperator)
 
 instance Core.FromXML AnalyticsAndOperator where
-  parseXML x =
-    AnalyticsAndOperator'
-      Prelude.<$> ( x Core..@? "Tag" Core..!@ Prelude.mempty
-                      Prelude.>>= Core.may (Core.parseXMLList "Tag")
-                  )
-      Prelude.<*> (x Core..@? "Prefix")
+        parseXML x
+          = AnalyticsAndOperator' Prelude.<$>
+              (x Core..@? "Tag" Core..!@ Prelude.mempty Prelude.>>=
+                 Core.may (Core.parseXMLList "Tag"))
+                Prelude.<*> (x Core..@? "Prefix")
 
 instance Prelude.Hashable AnalyticsAndOperator where
-  hashWithSalt _salt AnalyticsAndOperator' {..} =
-    _salt `Prelude.hashWithSalt` tags
-      `Prelude.hashWithSalt` prefix
+        hashWithSalt _salt AnalyticsAndOperator'{..}
+          = _salt `Prelude.hashWithSalt` tags
+              `Prelude.hashWithSalt` prefix
 
 instance Prelude.NFData AnalyticsAndOperator where
-  rnf AnalyticsAndOperator' {..} =
-    Prelude.rnf tags `Prelude.seq` Prelude.rnf prefix
+        rnf AnalyticsAndOperator'{..}
+          = Prelude.rnf tags `Prelude.seq` Prelude.rnf prefix
 
 instance Core.ToXML AnalyticsAndOperator where
-  toXML AnalyticsAndOperator' {..} =
-    Prelude.mconcat
-      [ "Tag"
-          Core.@= Core.toXML (Core.toXMLList "Tag" Prelude.<$> tags),
-        "Prefix" Core.@= prefix
-      ]
+        toXML AnalyticsAndOperator'{..}
+          = Prelude.mconcat
+              ["Tag" Core.@=
+                 Core.toXML (Core.toXMLList "Tag" Prelude.<$> tags),
+               "Prefix" Core.@= prefix]

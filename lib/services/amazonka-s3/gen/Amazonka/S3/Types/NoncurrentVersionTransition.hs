@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,13 +18,14 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.NoncurrentVersionTransition where
 
+import Amazonka.S3.Internal
+import Amazonka.S3.Types.TransitionStorageClass
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
-import Amazonka.S3.Types.TransitionStorageClass
 
 -- | Container for the transition rule that describes when noncurrent objects
 -- transition to the @STANDARD_IA@, @ONEZONE_IA@, @INTELLIGENT_TIERING@,
@@ -36,22 +38,22 @@ import Amazonka.S3.Types.TransitionStorageClass
 --
 -- /See:/ 'newNoncurrentVersionTransition' smart constructor.
 data NoncurrentVersionTransition = NoncurrentVersionTransition'
-  { -- | Specifies how many noncurrent versions Amazon S3 will retain. If there
+    {
+    -- | Specifies how many noncurrent versions Amazon S3 will retain. If there
     -- are this many more recent noncurrent versions, Amazon S3 will take the
     -- associated action. For more information about noncurrent versions, see
     -- <https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-rules.html Lifecycle configuration elements>
     -- in the /Amazon S3 User Guide/.
-    newerNoncurrentVersions' :: Prelude.Maybe Prelude.Int,
+    newerNoncurrentVersions' :: Prelude.Maybe Prelude.Int
     -- | Specifies the number of days an object is noncurrent before Amazon S3
     -- can perform the associated action. For information about the noncurrent
     -- days calculations, see
     -- <https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations How Amazon S3 Calculates How Long an Object Has Been Noncurrent>
     -- in the /Amazon S3 User Guide/.
-    noncurrentDays :: Prelude.Int,
+    , noncurrentDays :: Prelude.Int
     -- | The class of storage used to store the object.
-    storageClass :: TransitionStorageClass
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , storageClass :: TransitionStorageClass
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'NoncurrentVersionTransition' with all optional fields omitted.
@@ -74,21 +76,16 @@ data NoncurrentVersionTransition = NoncurrentVersionTransition'
 -- in the /Amazon S3 User Guide/.
 --
 -- 'storageClass', 'noncurrentVersionTransition_storageClass' - The class of storage used to store the object.
-newNoncurrentVersionTransition ::
-  -- | 'noncurrentDays'
-  Prelude.Int ->
-  -- | 'storageClass'
-  TransitionStorageClass ->
-  NoncurrentVersionTransition
 newNoncurrentVersionTransition
-  pNoncurrentDays_
-  pStorageClass_ =
-    NoncurrentVersionTransition'
-      { newerNoncurrentVersions' =
-          Prelude.Nothing,
-        noncurrentDays = pNoncurrentDays_,
-        storageClass = pStorageClass_
-      }
+    :: Prelude.Int -- ^ 'noncurrentDays'
+    -> TransitionStorageClass -- ^ 'storageClass'
+    -> NoncurrentVersionTransition
+newNoncurrentVersionTransition pNoncurrentDays_
+  pStorageClass_
+  = NoncurrentVersionTransition'{newerNoncurrentVersions'
+                                   = Prelude.Nothing,
+                                 noncurrentDays = pNoncurrentDays_,
+                                 storageClass = pStorageClass_}
 
 -- | Specifies how many noncurrent versions Amazon S3 will retain. If there
 -- are this many more recent noncurrent versions, Amazon S3 will take the
@@ -96,7 +93,7 @@ newNoncurrentVersionTransition
 -- <https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-rules.html Lifecycle configuration elements>
 -- in the /Amazon S3 User Guide/.
 noncurrentVersionTransition_newerNoncurrentVersions :: Lens.Lens' NoncurrentVersionTransition (Prelude.Maybe Prelude.Int)
-noncurrentVersionTransition_newerNoncurrentVersions = Lens.lens (\NoncurrentVersionTransition' {newerNoncurrentVersions'} -> newerNoncurrentVersions') (\s@NoncurrentVersionTransition' {} a -> s {newerNoncurrentVersions' = a} :: NoncurrentVersionTransition)
+noncurrentVersionTransition_newerNoncurrentVersions = Lens.lens (\ NoncurrentVersionTransition'{newerNoncurrentVersions'} -> newerNoncurrentVersions') (\ s@NoncurrentVersionTransition'{} a -> s{newerNoncurrentVersions' = a} :: NoncurrentVersionTransition)
 
 -- | Specifies the number of days an object is noncurrent before Amazon S3
 -- can perform the associated action. For information about the noncurrent
@@ -104,37 +101,39 @@ noncurrentVersionTransition_newerNoncurrentVersions = Lens.lens (\NoncurrentVers
 -- <https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations How Amazon S3 Calculates How Long an Object Has Been Noncurrent>
 -- in the /Amazon S3 User Guide/.
 noncurrentVersionTransition_noncurrentDays :: Lens.Lens' NoncurrentVersionTransition Prelude.Int
-noncurrentVersionTransition_noncurrentDays = Lens.lens (\NoncurrentVersionTransition' {noncurrentDays} -> noncurrentDays) (\s@NoncurrentVersionTransition' {} a -> s {noncurrentDays = a} :: NoncurrentVersionTransition)
+noncurrentVersionTransition_noncurrentDays = Lens.lens (\ NoncurrentVersionTransition'{noncurrentDays} -> noncurrentDays) (\ s@NoncurrentVersionTransition'{} a -> s{noncurrentDays = a} :: NoncurrentVersionTransition)
 
 -- | The class of storage used to store the object.
 noncurrentVersionTransition_storageClass :: Lens.Lens' NoncurrentVersionTransition TransitionStorageClass
-noncurrentVersionTransition_storageClass = Lens.lens (\NoncurrentVersionTransition' {storageClass} -> storageClass) (\s@NoncurrentVersionTransition' {} a -> s {storageClass = a} :: NoncurrentVersionTransition)
+noncurrentVersionTransition_storageClass = Lens.lens (\ NoncurrentVersionTransition'{storageClass} -> storageClass) (\ s@NoncurrentVersionTransition'{} a -> s{storageClass = a} :: NoncurrentVersionTransition)
 
-instance Core.FromXML NoncurrentVersionTransition where
-  parseXML x =
-    NoncurrentVersionTransition'
-      Prelude.<$> (x Core..@? "NewerNoncurrentVersions")
-      Prelude.<*> (x Core..@ "NoncurrentDays")
-      Prelude.<*> (x Core..@ "StorageClass")
+instance Core.FromXML NoncurrentVersionTransition
+         where
+        parseXML x
+          = NoncurrentVersionTransition' Prelude.<$>
+              (x Core..@? "NewerNoncurrentVersions") Prelude.<*>
+                (x Core..@ "NoncurrentDays")
+                Prelude.<*> (x Core..@ "StorageClass")
 
-instance Prelude.Hashable NoncurrentVersionTransition where
-  hashWithSalt _salt NoncurrentVersionTransition' {..} =
-    _salt
-      `Prelude.hashWithSalt` newerNoncurrentVersions'
-      `Prelude.hashWithSalt` noncurrentDays
-      `Prelude.hashWithSalt` storageClass
+instance Prelude.Hashable NoncurrentVersionTransition
+         where
+        hashWithSalt _salt NoncurrentVersionTransition'{..}
+          = _salt `Prelude.hashWithSalt`
+              newerNoncurrentVersions'
+              `Prelude.hashWithSalt` noncurrentDays
+              `Prelude.hashWithSalt` storageClass
 
-instance Prelude.NFData NoncurrentVersionTransition where
-  rnf NoncurrentVersionTransition' {..} =
-    Prelude.rnf newerNoncurrentVersions'
-      `Prelude.seq` Prelude.rnf noncurrentDays
-      `Prelude.seq` Prelude.rnf storageClass
+instance Prelude.NFData NoncurrentVersionTransition
+         where
+        rnf NoncurrentVersionTransition'{..}
+          = Prelude.rnf newerNoncurrentVersions' `Prelude.seq`
+              Prelude.rnf noncurrentDays `Prelude.seq`
+                Prelude.rnf storageClass
 
 instance Core.ToXML NoncurrentVersionTransition where
-  toXML NoncurrentVersionTransition' {..} =
-    Prelude.mconcat
-      [ "NewerNoncurrentVersions"
-          Core.@= newerNoncurrentVersions',
-        "NoncurrentDays" Core.@= noncurrentDays,
-        "StorageClass" Core.@= storageClass
-      ]
+        toXML NoncurrentVersionTransition'{..}
+          = Prelude.mconcat
+              ["NewerNoncurrentVersions" Core.@=
+                 newerNoncurrentVersions',
+               "NoncurrentDays" Core.@= noncurrentDays,
+               "StorageClass" Core.@= storageClass]

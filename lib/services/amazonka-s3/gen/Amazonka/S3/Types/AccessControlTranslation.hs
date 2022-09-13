@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,24 +18,25 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.AccessControlTranslation where
 
+import Amazonka.S3.Internal
+import Amazonka.S3.Types.OwnerOverride
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
-import Amazonka.S3.Types.OwnerOverride
 
 -- | A container for information about access control for replicas.
 --
 -- /See:/ 'newAccessControlTranslation' smart constructor.
 data AccessControlTranslation = AccessControlTranslation'
-  { -- | Specifies the replica ownership. For default and valid values, see
+    {
+    -- | Specifies the replica ownership. For default and valid values, see
     -- <https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html PUT bucket replication>
     -- in the /Amazon S3 API Reference/.
     owner :: OwnerOverride
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'AccessControlTranslation' with all optional fields omitted.
@@ -47,31 +49,32 @@ data AccessControlTranslation = AccessControlTranslation'
 -- 'owner', 'accessControlTranslation_owner' - Specifies the replica ownership. For default and valid values, see
 -- <https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html PUT bucket replication>
 -- in the /Amazon S3 API Reference/.
-newAccessControlTranslation ::
-  -- | 'owner'
-  OwnerOverride ->
-  AccessControlTranslation
-newAccessControlTranslation pOwner_ =
-  AccessControlTranslation' {owner = pOwner_}
+newAccessControlTranslation
+    :: OwnerOverride -- ^ 'owner'
+    -> AccessControlTranslation
+newAccessControlTranslation pOwner_
+  = AccessControlTranslation'{owner = pOwner_}
 
 -- | Specifies the replica ownership. For default and valid values, see
 -- <https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html PUT bucket replication>
 -- in the /Amazon S3 API Reference/.
 accessControlTranslation_owner :: Lens.Lens' AccessControlTranslation OwnerOverride
-accessControlTranslation_owner = Lens.lens (\AccessControlTranslation' {owner} -> owner) (\s@AccessControlTranslation' {} a -> s {owner = a} :: AccessControlTranslation)
+accessControlTranslation_owner = Lens.lens (\ AccessControlTranslation'{owner} -> owner) (\ s@AccessControlTranslation'{} a -> s{owner = a} :: AccessControlTranslation)
 
 instance Core.FromXML AccessControlTranslation where
-  parseXML x =
-    AccessControlTranslation'
-      Prelude.<$> (x Core..@ "Owner")
+        parseXML x
+          = AccessControlTranslation' Prelude.<$>
+              (x Core..@ "Owner")
 
-instance Prelude.Hashable AccessControlTranslation where
-  hashWithSalt _salt AccessControlTranslation' {..} =
-    _salt `Prelude.hashWithSalt` owner
+instance Prelude.Hashable AccessControlTranslation
+         where
+        hashWithSalt _salt AccessControlTranslation'{..}
+          = _salt `Prelude.hashWithSalt` owner
 
-instance Prelude.NFData AccessControlTranslation where
-  rnf AccessControlTranslation' {..} = Prelude.rnf owner
+instance Prelude.NFData AccessControlTranslation
+         where
+        rnf AccessControlTranslation'{..} = Prelude.rnf owner
 
 instance Core.ToXML AccessControlTranslation where
-  toXML AccessControlTranslation' {..} =
-    Prelude.mconcat ["Owner" Core.@= owner]
+        toXML AccessControlTranslation'{..}
+          = Prelude.mconcat ["Owner" Core.@= owner]

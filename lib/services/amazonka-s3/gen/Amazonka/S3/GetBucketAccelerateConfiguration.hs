@@ -1,13 +1,14 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE TypeFamilies          #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds   #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- Derived from AWS service descriptions, licensed under Apache 2.0.
@@ -25,7 +26,7 @@
 -- @Enabled@ or @Suspended@. Amazon S3 Transfer Acceleration is a
 -- bucket-level feature that enables you to perform faster data transfers
 -- to and from Amazon S3.
---
+-- 
 -- To use this operation, you must have permission to perform the
 -- @s3:GetAccelerateConfiguration@ action. The bucket owner has this
 -- permission by default. The bucket owner can grant this permission to
@@ -34,60 +35,58 @@
 -- and
 -- <https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html Managing Access Permissions to your Amazon S3 Resources>
 -- in the /Amazon S3 User Guide/.
---
+-- 
 -- You set the Transfer Acceleration state of an existing bucket to
 -- @Enabled@ or @Suspended@ by using the
 -- <https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAccelerateConfiguration.html PutBucketAccelerateConfiguration>
 -- operation.
---
+-- 
 -- A GET @accelerate@ request does not return a state value for a bucket
 -- that has no transfer acceleration state. A bucket has no Transfer
 -- Acceleration state if a state has never been set on the bucket.
---
+-- 
 -- For more information about transfer acceleration, see
 -- <https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html Transfer Acceleration>
 -- in the Amazon S3 User Guide.
---
+-- 
 -- __Related Resources__
---
+-- 
 -- -   <https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAccelerateConfiguration.html PutBucketAccelerateConfiguration>
 module Amazonka.S3.GetBucketAccelerateConfiguration
-  ( -- * Creating a Request
-    GetBucketAccelerateConfiguration (..),
-    newGetBucketAccelerateConfiguration,
-
+    (
+    -- * Creating a Request
+      GetBucketAccelerateConfiguration (..)
+    , newGetBucketAccelerateConfiguration 
     -- * Request Lenses
-    getBucketAccelerateConfiguration_expectedBucketOwner,
-    getBucketAccelerateConfiguration_bucket,
+    , getBucketAccelerateConfiguration_expectedBucketOwner
+    , getBucketAccelerateConfiguration_bucket
 
     -- * Destructuring the Response
-    GetBucketAccelerateConfigurationResponse (..),
-    newGetBucketAccelerateConfigurationResponse,
-
+    , GetBucketAccelerateConfigurationResponse (..)
+    , newGetBucketAccelerateConfigurationResponse 
     -- * Response Lenses
-    getBucketAccelerateConfigurationResponse_status,
-    getBucketAccelerateConfigurationResponse_httpStatus,
-  )
-where
+    , getBucketAccelerateConfigurationResponse_status
+    , getBucketAccelerateConfigurationResponse_httpStatus
+    ) where
 
+import Amazonka.S3.Types
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
 import qualified Amazonka.Request as Request
 import qualified Amazonka.Response as Response
-import Amazonka.S3.Types
 
 -- | /See:/ 'newGetBucketAccelerateConfiguration' smart constructor.
 data GetBucketAccelerateConfiguration = GetBucketAccelerateConfiguration'
-  { -- | The account ID of the expected bucket owner. If the bucket is owned by a
+    {
+    -- | The account ID of the expected bucket owner. If the bucket is owned by a
     -- different account, the request fails with the HTTP status code
     -- @403 Forbidden@ (access denied).
-    expectedBucketOwner :: Prelude.Maybe Prelude.Text,
+    expectedBucketOwner :: Prelude.Maybe Prelude.Text
     -- | The name of the bucket for which the accelerate configuration is
     -- retrieved.
-    bucket :: BucketName
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , bucket :: BucketName
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'GetBucketAccelerateConfiguration' with all optional fields omitted.
@@ -103,93 +102,86 @@ data GetBucketAccelerateConfiguration = GetBucketAccelerateConfiguration'
 --
 -- 'bucket', 'getBucketAccelerateConfiguration_bucket' - The name of the bucket for which the accelerate configuration is
 -- retrieved.
-newGetBucketAccelerateConfiguration ::
-  -- | 'bucket'
-  BucketName ->
-  GetBucketAccelerateConfiguration
-newGetBucketAccelerateConfiguration pBucket_ =
-  GetBucketAccelerateConfiguration'
-    { expectedBucketOwner =
-        Prelude.Nothing,
-      bucket = pBucket_
-    }
+newGetBucketAccelerateConfiguration
+    :: BucketName -- ^ 'bucket'
+    -> GetBucketAccelerateConfiguration
+newGetBucketAccelerateConfiguration pBucket_
+  = GetBucketAccelerateConfiguration'{expectedBucketOwner
+                                        = Prelude.Nothing,
+                                      bucket = pBucket_}
 
 -- | The account ID of the expected bucket owner. If the bucket is owned by a
 -- different account, the request fails with the HTTP status code
 -- @403 Forbidden@ (access denied).
 getBucketAccelerateConfiguration_expectedBucketOwner :: Lens.Lens' GetBucketAccelerateConfiguration (Prelude.Maybe Prelude.Text)
-getBucketAccelerateConfiguration_expectedBucketOwner = Lens.lens (\GetBucketAccelerateConfiguration' {expectedBucketOwner} -> expectedBucketOwner) (\s@GetBucketAccelerateConfiguration' {} a -> s {expectedBucketOwner = a} :: GetBucketAccelerateConfiguration)
+getBucketAccelerateConfiguration_expectedBucketOwner = Lens.lens (\ GetBucketAccelerateConfiguration'{expectedBucketOwner} -> expectedBucketOwner) (\ s@GetBucketAccelerateConfiguration'{} a -> s{expectedBucketOwner = a} :: GetBucketAccelerateConfiguration)
 
 -- | The name of the bucket for which the accelerate configuration is
 -- retrieved.
 getBucketAccelerateConfiguration_bucket :: Lens.Lens' GetBucketAccelerateConfiguration BucketName
-getBucketAccelerateConfiguration_bucket = Lens.lens (\GetBucketAccelerateConfiguration' {bucket} -> bucket) (\s@GetBucketAccelerateConfiguration' {} a -> s {bucket = a} :: GetBucketAccelerateConfiguration)
+getBucketAccelerateConfiguration_bucket = Lens.lens (\ GetBucketAccelerateConfiguration'{bucket} -> bucket) (\ s@GetBucketAccelerateConfiguration'{} a -> s{bucket = a} :: GetBucketAccelerateConfiguration)
 
-instance
-  Core.AWSRequest
-    GetBucketAccelerateConfiguration
-  where
-  type
-    AWSResponse GetBucketAccelerateConfiguration =
-      GetBucketAccelerateConfigurationResponse
-  request =
-    Request.s3vhost
-      Prelude.. Request.get defaultService
-  response =
-    Response.receiveXML
-      ( \s h x ->
-          GetBucketAccelerateConfigurationResponse'
-            Prelude.<$> (x Core..@? "Status")
-            Prelude.<*> (Prelude.pure (Prelude.fromEnum s))
-      )
+instance Core.AWSRequest
+           GetBucketAccelerateConfiguration
+         where
+        type AWSResponse GetBucketAccelerateConfiguration =
+             GetBucketAccelerateConfigurationResponse
+        request srv
+          = Request.s3vhost Prelude.. Request.get srv
+        response
+          = Response.receiveXML
+              (\ s h x ->
+                 GetBucketAccelerateConfigurationResponse' Prelude.<$>
+                   (x Core..@? "Status") Prelude.<*>
+                     (Prelude.pure (Prelude.fromEnum s)))
 
-instance
-  Prelude.Hashable
-    GetBucketAccelerateConfiguration
-  where
-  hashWithSalt
-    _salt
-    GetBucketAccelerateConfiguration' {..} =
-      _salt `Prelude.hashWithSalt` expectedBucketOwner
-        `Prelude.hashWithSalt` bucket
+instance Core.AWSService
+           GetBucketAccelerateConfiguration
+         where
+        service _proxy = defaultService
 
-instance
-  Prelude.NFData
-    GetBucketAccelerateConfiguration
-  where
-  rnf GetBucketAccelerateConfiguration' {..} =
-    Prelude.rnf expectedBucketOwner
-      `Prelude.seq` Prelude.rnf bucket
+instance Prelude.Hashable
+           GetBucketAccelerateConfiguration
+         where
+        hashWithSalt _salt
+          GetBucketAccelerateConfiguration'{..}
+          = _salt `Prelude.hashWithSalt` expectedBucketOwner
+              `Prelude.hashWithSalt` bucket
 
-instance
-  Core.ToHeaders
-    GetBucketAccelerateConfiguration
-  where
-  toHeaders GetBucketAccelerateConfiguration' {..} =
-    Prelude.mconcat
-      [ "x-amz-expected-bucket-owner"
-          Core.=# expectedBucketOwner
-      ]
+instance Prelude.NFData
+           GetBucketAccelerateConfiguration
+         where
+        rnf GetBucketAccelerateConfiguration'{..}
+          = Prelude.rnf expectedBucketOwner `Prelude.seq`
+              Prelude.rnf bucket
 
-instance Core.ToPath GetBucketAccelerateConfiguration where
-  toPath GetBucketAccelerateConfiguration' {..} =
-    Prelude.mconcat ["/", Core.toBS bucket]
+instance Core.ToHeaders
+           GetBucketAccelerateConfiguration
+         where
+        toHeaders GetBucketAccelerateConfiguration'{..}
+          = Prelude.mconcat
+              ["x-amz-expected-bucket-owner" Core.=#
+                 expectedBucketOwner]
 
-instance
-  Core.ToQuery
-    GetBucketAccelerateConfiguration
-  where
-  toQuery =
-    Prelude.const (Prelude.mconcat ["accelerate"])
+instance Core.ToPath GetBucketAccelerateConfiguration
+         where
+        toPath GetBucketAccelerateConfiguration'{..}
+          = Prelude.mconcat ["/", Core.toBS bucket]
+
+instance Core.ToQuery
+           GetBucketAccelerateConfiguration
+         where
+        toQuery
+          = Prelude.const (Prelude.mconcat ["accelerate"])
 
 -- | /See:/ 'newGetBucketAccelerateConfigurationResponse' smart constructor.
 data GetBucketAccelerateConfigurationResponse = GetBucketAccelerateConfigurationResponse'
-  { -- | The accelerate configuration of the bucket.
-    status :: Prelude.Maybe BucketAccelerateStatus,
+    {
+    -- | The accelerate configuration of the bucket.
+    status :: Prelude.Maybe BucketAccelerateStatus
     -- | The response's http status code.
-    httpStatus :: Prelude.Int
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , httpStatus :: Prelude.Int
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'GetBucketAccelerateConfigurationResponse' with all optional fields omitted.
@@ -202,30 +194,26 @@ data GetBucketAccelerateConfigurationResponse = GetBucketAccelerateConfiguration
 -- 'status', 'getBucketAccelerateConfigurationResponse_status' - The accelerate configuration of the bucket.
 --
 -- 'httpStatus', 'getBucketAccelerateConfigurationResponse_httpStatus' - The response's http status code.
-newGetBucketAccelerateConfigurationResponse ::
-  -- | 'httpStatus'
-  Prelude.Int ->
-  GetBucketAccelerateConfigurationResponse
 newGetBucketAccelerateConfigurationResponse
-  pHttpStatus_ =
-    GetBucketAccelerateConfigurationResponse'
-      { status =
-          Prelude.Nothing,
-        httpStatus = pHttpStatus_
-      }
+    :: Prelude.Int -- ^ 'httpStatus'
+    -> GetBucketAccelerateConfigurationResponse
+newGetBucketAccelerateConfigurationResponse
+  pHttpStatus_
+  = GetBucketAccelerateConfigurationResponse'{status =
+                                                Prelude.Nothing,
+                                              httpStatus = pHttpStatus_}
 
 -- | The accelerate configuration of the bucket.
 getBucketAccelerateConfigurationResponse_status :: Lens.Lens' GetBucketAccelerateConfigurationResponse (Prelude.Maybe BucketAccelerateStatus)
-getBucketAccelerateConfigurationResponse_status = Lens.lens (\GetBucketAccelerateConfigurationResponse' {status} -> status) (\s@GetBucketAccelerateConfigurationResponse' {} a -> s {status = a} :: GetBucketAccelerateConfigurationResponse)
+getBucketAccelerateConfigurationResponse_status = Lens.lens (\ GetBucketAccelerateConfigurationResponse'{status} -> status) (\ s@GetBucketAccelerateConfigurationResponse'{} a -> s{status = a} :: GetBucketAccelerateConfigurationResponse)
 
 -- | The response's http status code.
 getBucketAccelerateConfigurationResponse_httpStatus :: Lens.Lens' GetBucketAccelerateConfigurationResponse Prelude.Int
-getBucketAccelerateConfigurationResponse_httpStatus = Lens.lens (\GetBucketAccelerateConfigurationResponse' {httpStatus} -> httpStatus) (\s@GetBucketAccelerateConfigurationResponse' {} a -> s {httpStatus = a} :: GetBucketAccelerateConfigurationResponse)
+getBucketAccelerateConfigurationResponse_httpStatus = Lens.lens (\ GetBucketAccelerateConfigurationResponse'{httpStatus} -> httpStatus) (\ s@GetBucketAccelerateConfigurationResponse'{} a -> s{httpStatus = a} :: GetBucketAccelerateConfigurationResponse)
 
-instance
-  Prelude.NFData
-    GetBucketAccelerateConfigurationResponse
-  where
-  rnf GetBucketAccelerateConfigurationResponse' {..} =
-    Prelude.rnf status
-      `Prelude.seq` Prelude.rnf httpStatus
+instance Prelude.NFData
+           GetBucketAccelerateConfigurationResponse
+         where
+        rnf GetBucketAccelerateConfigurationResponse'{..}
+          = Prelude.rnf status `Prelude.seq`
+              Prelude.rnf httpStatus

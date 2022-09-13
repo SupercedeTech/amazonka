@@ -1,13 +1,14 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE TypeFamilies          #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds   #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- Derived from AWS service descriptions, licensed under Apache 2.0.
@@ -26,49 +27,48 @@
 -- <https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources Permissions Related to Bucket Subresource Operations>
 -- and
 -- <https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html Managing Access Permissions to Your Amazon S3 Resources>.
---
+-- 
 -- The following operations are related to @DeletePublicAccessBlock@:
---
+-- 
 -- -   <https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html Using Amazon S3 Block Public Access>
---
+-- 
 -- -   <https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetPublicAccessBlock.html GetPublicAccessBlock>
---
+-- 
 -- -   <https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutPublicAccessBlock.html PutPublicAccessBlock>
---
+-- 
 -- -   <https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicyStatus.html GetBucketPolicyStatus>
 module Amazonka.S3.DeletePublicAccessBlock
-  ( -- * Creating a Request
-    DeletePublicAccessBlock (..),
-    newDeletePublicAccessBlock,
-
+    (
+    -- * Creating a Request
+      DeletePublicAccessBlock (..)
+    , newDeletePublicAccessBlock 
     -- * Request Lenses
-    deletePublicAccessBlock_expectedBucketOwner,
-    deletePublicAccessBlock_bucket,
+    , deletePublicAccessBlock_expectedBucketOwner
+    , deletePublicAccessBlock_bucket
 
     -- * Destructuring the Response
-    DeletePublicAccessBlockResponse (..),
-    newDeletePublicAccessBlockResponse,
-  )
-where
+    , DeletePublicAccessBlockResponse (..)
+    , newDeletePublicAccessBlockResponse 
+    ) where
 
+import Amazonka.S3.Types
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
 import qualified Amazonka.Request as Request
 import qualified Amazonka.Response as Response
-import Amazonka.S3.Types
 
 -- | /See:/ 'newDeletePublicAccessBlock' smart constructor.
 data DeletePublicAccessBlock = DeletePublicAccessBlock'
-  { -- | The account ID of the expected bucket owner. If the bucket is owned by a
+    {
+    -- | The account ID of the expected bucket owner. If the bucket is owned by a
     -- different account, the request fails with the HTTP status code
     -- @403 Forbidden@ (access denied).
-    expectedBucketOwner :: Prelude.Maybe Prelude.Text,
+    expectedBucketOwner :: Prelude.Maybe Prelude.Text
     -- | The Amazon S3 bucket whose @PublicAccessBlock@ configuration you want to
     -- delete.
-    bucket :: BucketName
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , bucket :: BucketName
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'DeletePublicAccessBlock' with all optional fields omitted.
@@ -84,82 +84,81 @@ data DeletePublicAccessBlock = DeletePublicAccessBlock'
 --
 -- 'bucket', 'deletePublicAccessBlock_bucket' - The Amazon S3 bucket whose @PublicAccessBlock@ configuration you want to
 -- delete.
-newDeletePublicAccessBlock ::
-  -- | 'bucket'
-  BucketName ->
-  DeletePublicAccessBlock
-newDeletePublicAccessBlock pBucket_ =
-  DeletePublicAccessBlock'
-    { expectedBucketOwner =
-        Prelude.Nothing,
-      bucket = pBucket_
-    }
+newDeletePublicAccessBlock
+    :: BucketName -- ^ 'bucket'
+    -> DeletePublicAccessBlock
+newDeletePublicAccessBlock pBucket_
+  = DeletePublicAccessBlock'{expectedBucketOwner =
+                               Prelude.Nothing,
+                             bucket = pBucket_}
 
 -- | The account ID of the expected bucket owner. If the bucket is owned by a
 -- different account, the request fails with the HTTP status code
 -- @403 Forbidden@ (access denied).
 deletePublicAccessBlock_expectedBucketOwner :: Lens.Lens' DeletePublicAccessBlock (Prelude.Maybe Prelude.Text)
-deletePublicAccessBlock_expectedBucketOwner = Lens.lens (\DeletePublicAccessBlock' {expectedBucketOwner} -> expectedBucketOwner) (\s@DeletePublicAccessBlock' {} a -> s {expectedBucketOwner = a} :: DeletePublicAccessBlock)
+deletePublicAccessBlock_expectedBucketOwner = Lens.lens (\ DeletePublicAccessBlock'{expectedBucketOwner} -> expectedBucketOwner) (\ s@DeletePublicAccessBlock'{} a -> s{expectedBucketOwner = a} :: DeletePublicAccessBlock)
 
 -- | The Amazon S3 bucket whose @PublicAccessBlock@ configuration you want to
 -- delete.
 deletePublicAccessBlock_bucket :: Lens.Lens' DeletePublicAccessBlock BucketName
-deletePublicAccessBlock_bucket = Lens.lens (\DeletePublicAccessBlock' {bucket} -> bucket) (\s@DeletePublicAccessBlock' {} a -> s {bucket = a} :: DeletePublicAccessBlock)
+deletePublicAccessBlock_bucket = Lens.lens (\ DeletePublicAccessBlock'{bucket} -> bucket) (\ s@DeletePublicAccessBlock'{} a -> s{bucket = a} :: DeletePublicAccessBlock)
 
-instance Core.AWSRequest DeletePublicAccessBlock where
-  type
-    AWSResponse DeletePublicAccessBlock =
-      DeletePublicAccessBlockResponse
-  request =
-    Request.s3vhost
-      Prelude.. Request.delete defaultService
-  response =
-    Response.receiveNull
-      DeletePublicAccessBlockResponse'
+instance Core.AWSRequest DeletePublicAccessBlock
+         where
+        type AWSResponse DeletePublicAccessBlock =
+             DeletePublicAccessBlockResponse
+        request srv
+          = Request.s3vhost Prelude.. Request.delete srv
+        response
+          = Response.receiveNull
+              DeletePublicAccessBlockResponse'
 
-instance Prelude.Hashable DeletePublicAccessBlock where
-  hashWithSalt _salt DeletePublicAccessBlock' {..} =
-    _salt `Prelude.hashWithSalt` expectedBucketOwner
-      `Prelude.hashWithSalt` bucket
+instance Core.AWSService DeletePublicAccessBlock
+         where
+        service _proxy = defaultService
+
+instance Prelude.Hashable DeletePublicAccessBlock
+         where
+        hashWithSalt _salt DeletePublicAccessBlock'{..}
+          = _salt `Prelude.hashWithSalt` expectedBucketOwner
+              `Prelude.hashWithSalt` bucket
 
 instance Prelude.NFData DeletePublicAccessBlock where
-  rnf DeletePublicAccessBlock' {..} =
-    Prelude.rnf expectedBucketOwner
-      `Prelude.seq` Prelude.rnf bucket
+        rnf DeletePublicAccessBlock'{..}
+          = Prelude.rnf expectedBucketOwner `Prelude.seq`
+              Prelude.rnf bucket
 
 instance Core.ToHeaders DeletePublicAccessBlock where
-  toHeaders DeletePublicAccessBlock' {..} =
-    Prelude.mconcat
-      [ "x-amz-expected-bucket-owner"
-          Core.=# expectedBucketOwner
-      ]
+        toHeaders DeletePublicAccessBlock'{..}
+          = Prelude.mconcat
+              ["x-amz-expected-bucket-owner" Core.=#
+                 expectedBucketOwner]
 
 instance Core.ToPath DeletePublicAccessBlock where
-  toPath DeletePublicAccessBlock' {..} =
-    Prelude.mconcat ["/", Core.toBS bucket]
+        toPath DeletePublicAccessBlock'{..}
+          = Prelude.mconcat ["/", Core.toBS bucket]
 
 instance Core.ToQuery DeletePublicAccessBlock where
-  toQuery =
-    Prelude.const
-      (Prelude.mconcat ["publicAccessBlock"])
+        toQuery
+          = Prelude.const
+              (Prelude.mconcat ["publicAccessBlock"])
 
 -- | /See:/ 'newDeletePublicAccessBlockResponse' smart constructor.
 data DeletePublicAccessBlockResponse = DeletePublicAccessBlockResponse'
-  {
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    {
+
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'DeletePublicAccessBlockResponse' with all optional fields omitted.
 --
 -- Use <https://hackage.haskell.org/package/generic-lens generic-lens> or <https://hackage.haskell.org/package/optics optics> to modify other optional fields.
-newDeletePublicAccessBlockResponse ::
-  DeletePublicAccessBlockResponse
-newDeletePublicAccessBlockResponse =
-  DeletePublicAccessBlockResponse'
+newDeletePublicAccessBlockResponse
+    :: DeletePublicAccessBlockResponse
+newDeletePublicAccessBlockResponse
+  = DeletePublicAccessBlockResponse'
 
-instance
-  Prelude.NFData
-    DeletePublicAccessBlockResponse
-  where
-  rnf _ = ()
+instance Prelude.NFData
+           DeletePublicAccessBlockResponse
+         where
+        rnf _ = ()

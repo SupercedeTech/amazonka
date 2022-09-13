@@ -1,13 +1,14 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE TypeFamilies          #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds   #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- Derived from AWS service descriptions, licensed under Apache 2.0.
@@ -25,55 +26,54 @@
 -- subresource associated with the bucket. Your objects never expire, and
 -- Amazon S3 no longer automatically deletes any objects on the basis of
 -- rules contained in the deleted lifecycle configuration.
---
+-- 
 -- To use this operation, you must have permission to perform the
 -- @s3:PutLifecycleConfiguration@ action. By default, the bucket owner has
 -- this permission and the bucket owner can grant this permission to
 -- others.
---
+-- 
 -- There is usually some time lag before lifecycle configuration deletion
 -- is fully propagated to all the Amazon S3 systems.
---
+-- 
 -- For more information about the object expiration, see
 -- <https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#intro-lifecycle-rules-actions Elements to Describe Lifecycle Actions>.
---
+-- 
 -- Related actions include:
---
+-- 
 -- -   <https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketLifecycleConfiguration.html PutBucketLifecycleConfiguration>
---
+-- 
 -- -   <https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycleConfiguration.html GetBucketLifecycleConfiguration>
 module Amazonka.S3.DeleteBucketLifecycle
-  ( -- * Creating a Request
-    DeleteBucketLifecycle (..),
-    newDeleteBucketLifecycle,
-
+    (
+    -- * Creating a Request
+      DeleteBucketLifecycle (..)
+    , newDeleteBucketLifecycle 
     -- * Request Lenses
-    deleteBucketLifecycle_expectedBucketOwner,
-    deleteBucketLifecycle_bucket,
+    , deleteBucketLifecycle_expectedBucketOwner
+    , deleteBucketLifecycle_bucket
 
     -- * Destructuring the Response
-    DeleteBucketLifecycleResponse (..),
-    newDeleteBucketLifecycleResponse,
-  )
-where
+    , DeleteBucketLifecycleResponse (..)
+    , newDeleteBucketLifecycleResponse 
+    ) where
 
+import Amazonka.S3.Types
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
 import qualified Amazonka.Request as Request
 import qualified Amazonka.Response as Response
-import Amazonka.S3.Types
 
 -- | /See:/ 'newDeleteBucketLifecycle' smart constructor.
 data DeleteBucketLifecycle = DeleteBucketLifecycle'
-  { -- | The account ID of the expected bucket owner. If the bucket is owned by a
+    {
+    -- | The account ID of the expected bucket owner. If the bucket is owned by a
     -- different account, the request fails with the HTTP status code
     -- @403 Forbidden@ (access denied).
-    expectedBucketOwner :: Prelude.Maybe Prelude.Text,
+    expectedBucketOwner :: Prelude.Maybe Prelude.Text
     -- | The bucket name of the lifecycle to delete.
-    bucket :: BucketName
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , bucket :: BucketName
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'DeleteBucketLifecycle' with all optional fields omitted.
@@ -88,76 +88,74 @@ data DeleteBucketLifecycle = DeleteBucketLifecycle'
 -- @403 Forbidden@ (access denied).
 --
 -- 'bucket', 'deleteBucketLifecycle_bucket' - The bucket name of the lifecycle to delete.
-newDeleteBucketLifecycle ::
-  -- | 'bucket'
-  BucketName ->
-  DeleteBucketLifecycle
-newDeleteBucketLifecycle pBucket_ =
-  DeleteBucketLifecycle'
-    { expectedBucketOwner =
-        Prelude.Nothing,
-      bucket = pBucket_
-    }
+newDeleteBucketLifecycle
+    :: BucketName -- ^ 'bucket'
+    -> DeleteBucketLifecycle
+newDeleteBucketLifecycle pBucket_
+  = DeleteBucketLifecycle'{expectedBucketOwner =
+                             Prelude.Nothing,
+                           bucket = pBucket_}
 
 -- | The account ID of the expected bucket owner. If the bucket is owned by a
 -- different account, the request fails with the HTTP status code
 -- @403 Forbidden@ (access denied).
 deleteBucketLifecycle_expectedBucketOwner :: Lens.Lens' DeleteBucketLifecycle (Prelude.Maybe Prelude.Text)
-deleteBucketLifecycle_expectedBucketOwner = Lens.lens (\DeleteBucketLifecycle' {expectedBucketOwner} -> expectedBucketOwner) (\s@DeleteBucketLifecycle' {} a -> s {expectedBucketOwner = a} :: DeleteBucketLifecycle)
+deleteBucketLifecycle_expectedBucketOwner = Lens.lens (\ DeleteBucketLifecycle'{expectedBucketOwner} -> expectedBucketOwner) (\ s@DeleteBucketLifecycle'{} a -> s{expectedBucketOwner = a} :: DeleteBucketLifecycle)
 
 -- | The bucket name of the lifecycle to delete.
 deleteBucketLifecycle_bucket :: Lens.Lens' DeleteBucketLifecycle BucketName
-deleteBucketLifecycle_bucket = Lens.lens (\DeleteBucketLifecycle' {bucket} -> bucket) (\s@DeleteBucketLifecycle' {} a -> s {bucket = a} :: DeleteBucketLifecycle)
+deleteBucketLifecycle_bucket = Lens.lens (\ DeleteBucketLifecycle'{bucket} -> bucket) (\ s@DeleteBucketLifecycle'{} a -> s{bucket = a} :: DeleteBucketLifecycle)
 
 instance Core.AWSRequest DeleteBucketLifecycle where
-  type
-    AWSResponse DeleteBucketLifecycle =
-      DeleteBucketLifecycleResponse
-  request =
-    Request.s3vhost
-      Prelude.. Request.delete defaultService
-  response =
-    Response.receiveNull DeleteBucketLifecycleResponse'
+        type AWSResponse DeleteBucketLifecycle =
+             DeleteBucketLifecycleResponse
+        request srv
+          = Request.s3vhost Prelude.. Request.delete srv
+        response
+          = Response.receiveNull DeleteBucketLifecycleResponse'
+
+instance Core.AWSService DeleteBucketLifecycle where
+        service _proxy = defaultService
 
 instance Prelude.Hashable DeleteBucketLifecycle where
-  hashWithSalt _salt DeleteBucketLifecycle' {..} =
-    _salt `Prelude.hashWithSalt` expectedBucketOwner
-      `Prelude.hashWithSalt` bucket
+        hashWithSalt _salt DeleteBucketLifecycle'{..}
+          = _salt `Prelude.hashWithSalt` expectedBucketOwner
+              `Prelude.hashWithSalt` bucket
 
 instance Prelude.NFData DeleteBucketLifecycle where
-  rnf DeleteBucketLifecycle' {..} =
-    Prelude.rnf expectedBucketOwner
-      `Prelude.seq` Prelude.rnf bucket
+        rnf DeleteBucketLifecycle'{..}
+          = Prelude.rnf expectedBucketOwner `Prelude.seq`
+              Prelude.rnf bucket
 
 instance Core.ToHeaders DeleteBucketLifecycle where
-  toHeaders DeleteBucketLifecycle' {..} =
-    Prelude.mconcat
-      [ "x-amz-expected-bucket-owner"
-          Core.=# expectedBucketOwner
-      ]
+        toHeaders DeleteBucketLifecycle'{..}
+          = Prelude.mconcat
+              ["x-amz-expected-bucket-owner" Core.=#
+                 expectedBucketOwner]
 
 instance Core.ToPath DeleteBucketLifecycle where
-  toPath DeleteBucketLifecycle' {..} =
-    Prelude.mconcat ["/", Core.toBS bucket]
+        toPath DeleteBucketLifecycle'{..}
+          = Prelude.mconcat ["/", Core.toBS bucket]
 
 instance Core.ToQuery DeleteBucketLifecycle where
-  toQuery =
-    Prelude.const (Prelude.mconcat ["lifecycle"])
+        toQuery
+          = Prelude.const (Prelude.mconcat ["lifecycle"])
 
 -- | /See:/ 'newDeleteBucketLifecycleResponse' smart constructor.
 data DeleteBucketLifecycleResponse = DeleteBucketLifecycleResponse'
-  {
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    {
+
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'DeleteBucketLifecycleResponse' with all optional fields omitted.
 --
 -- Use <https://hackage.haskell.org/package/generic-lens generic-lens> or <https://hackage.haskell.org/package/optics optics> to modify other optional fields.
-newDeleteBucketLifecycleResponse ::
-  DeleteBucketLifecycleResponse
-newDeleteBucketLifecycleResponse =
-  DeleteBucketLifecycleResponse'
+newDeleteBucketLifecycleResponse
+    :: DeleteBucketLifecycleResponse
+newDeleteBucketLifecycleResponse
+  = DeleteBucketLifecycleResponse'
 
-instance Prelude.NFData DeleteBucketLifecycleResponse where
-  rnf _ = ()
+instance Prelude.NFData DeleteBucketLifecycleResponse
+         where
+        rnf _ = ()

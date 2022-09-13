@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,23 +18,24 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.RequestProgress where
 
+import Amazonka.S3.Internal
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
 
 -- | Container for specifying if periodic @QueryProgress@ messages should be
 -- sent.
 --
 -- /See:/ 'newRequestProgress' smart constructor.
 data RequestProgress = RequestProgress'
-  { -- | Specifies whether periodic QueryProgress frames should be sent. Valid
+    {
+    -- | Specifies whether periodic QueryProgress frames should be sent. Valid
     -- values: TRUE, FALSE. Default value: FALSE.
     enabled :: Prelude.Maybe Prelude.Bool
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'RequestProgress' with all optional fields omitted.
@@ -45,23 +47,23 @@ data RequestProgress = RequestProgress'
 --
 -- 'enabled', 'requestProgress_enabled' - Specifies whether periodic QueryProgress frames should be sent. Valid
 -- values: TRUE, FALSE. Default value: FALSE.
-newRequestProgress ::
-  RequestProgress
-newRequestProgress =
-  RequestProgress' {enabled = Prelude.Nothing}
+newRequestProgress
+    :: RequestProgress
+newRequestProgress
+  = RequestProgress'{enabled = Prelude.Nothing}
 
 -- | Specifies whether periodic QueryProgress frames should be sent. Valid
 -- values: TRUE, FALSE. Default value: FALSE.
 requestProgress_enabled :: Lens.Lens' RequestProgress (Prelude.Maybe Prelude.Bool)
-requestProgress_enabled = Lens.lens (\RequestProgress' {enabled} -> enabled) (\s@RequestProgress' {} a -> s {enabled = a} :: RequestProgress)
+requestProgress_enabled = Lens.lens (\ RequestProgress'{enabled} -> enabled) (\ s@RequestProgress'{} a -> s{enabled = a} :: RequestProgress)
 
 instance Prelude.Hashable RequestProgress where
-  hashWithSalt _salt RequestProgress' {..} =
-    _salt `Prelude.hashWithSalt` enabled
+        hashWithSalt _salt RequestProgress'{..}
+          = _salt `Prelude.hashWithSalt` enabled
 
 instance Prelude.NFData RequestProgress where
-  rnf RequestProgress' {..} = Prelude.rnf enabled
+        rnf RequestProgress'{..} = Prelude.rnf enabled
 
 instance Core.ToXML RequestProgress where
-  toXML RequestProgress' {..} =
-    Prelude.mconcat ["Enabled" Core.@= enabled]
+        toXML RequestProgress'{..}
+          = Prelude.mconcat ["Enabled" Core.@= enabled]

@@ -1,5 +1,5 @@
-{-# OPTIONS_GHC -fno-warn-orphans #-}
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-orphans        #-}
 
 -- Derived from AWS service descriptions, licensed under Apache 2.0.
 
@@ -10,14 +10,15 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Test.Amazonka.Gen.SSO where
 
-import Amazonka.SSO
 import qualified Data.Proxy as Proxy
 import Test.Amazonka.Fixture
 import Test.Amazonka.Prelude
-import Test.Amazonka.SSO.Internal
 import Test.Tasty
+import Amazonka.SSO
+import Test.Amazonka.SSO.Internal
 
 -- Auto-generated: the actual test selection needs to be manually placed into
 -- the top-level so that real test data can be incrementally added.
@@ -60,58 +61,50 @@ import Test.Tasty
 -- Requests
 
 requestGetRoleCredentials :: GetRoleCredentials -> TestTree
-requestGetRoleCredentials =
-  req
+requestGetRoleCredentials = req
     "GetRoleCredentials"
     "fixture/GetRoleCredentials.yaml"
 
 requestListAccountRoles :: ListAccountRoles -> TestTree
-requestListAccountRoles =
-  req
+requestListAccountRoles = req
     "ListAccountRoles"
     "fixture/ListAccountRoles.yaml"
 
 requestListAccounts :: ListAccounts -> TestTree
-requestListAccounts =
-  req
+requestListAccounts = req
     "ListAccounts"
     "fixture/ListAccounts.yaml"
 
 requestLogout :: Logout -> TestTree
-requestLogout =
-  req
+requestLogout = req
     "Logout"
     "fixture/Logout.yaml"
 
 -- Responses
 
 responseGetRoleCredentials :: GetRoleCredentialsResponse -> TestTree
-responseGetRoleCredentials =
-  res
+responseGetRoleCredentials = res
     "GetRoleCredentialsResponse"
     "fixture/GetRoleCredentialsResponse.proto"
     defaultService
     (Proxy.Proxy :: Proxy.Proxy GetRoleCredentials)
 
 responseListAccountRoles :: ListAccountRolesResponse -> TestTree
-responseListAccountRoles =
-  res
+responseListAccountRoles = res
     "ListAccountRolesResponse"
     "fixture/ListAccountRolesResponse.proto"
     defaultService
     (Proxy.Proxy :: Proxy.Proxy ListAccountRoles)
 
 responseListAccounts :: ListAccountsResponse -> TestTree
-responseListAccounts =
-  res
+responseListAccounts = res
     "ListAccountsResponse"
     "fixture/ListAccountsResponse.proto"
     defaultService
     (Proxy.Proxy :: Proxy.Proxy ListAccounts)
 
 responseLogout :: LogoutResponse -> TestTree
-responseLogout =
-  res
+responseLogout = res
     "LogoutResponse"
     "fixture/LogoutResponse.proto"
     defaultService

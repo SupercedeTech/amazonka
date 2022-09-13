@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,22 +18,23 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.JSONOutput where
 
+import Amazonka.S3.Internal
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
 
 -- | Specifies JSON as request\'s output serialization format.
 --
 -- /See:/ 'newJSONOutput' smart constructor.
 data JSONOutput = JSONOutput'
-  { -- | The value used to separate individual records in the output. If no value
+    {
+    -- | The value used to separate individual records in the output. If no value
     -- is specified, Amazon S3 uses a newline character (\'\\n\').
     recordDelimiter :: Prelude.Maybe Prelude.Text
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'JSONOutput' with all optional fields omitted.
@@ -44,24 +46,24 @@ data JSONOutput = JSONOutput'
 --
 -- 'recordDelimiter', 'jSONOutput_recordDelimiter' - The value used to separate individual records in the output. If no value
 -- is specified, Amazon S3 uses a newline character (\'\\n\').
-newJSONOutput ::
-  JSONOutput
-newJSONOutput =
-  JSONOutput' {recordDelimiter = Prelude.Nothing}
+newJSONOutput
+    :: JSONOutput
+newJSONOutput
+  = JSONOutput'{recordDelimiter = Prelude.Nothing}
 
 -- | The value used to separate individual records in the output. If no value
 -- is specified, Amazon S3 uses a newline character (\'\\n\').
 jSONOutput_recordDelimiter :: Lens.Lens' JSONOutput (Prelude.Maybe Prelude.Text)
-jSONOutput_recordDelimiter = Lens.lens (\JSONOutput' {recordDelimiter} -> recordDelimiter) (\s@JSONOutput' {} a -> s {recordDelimiter = a} :: JSONOutput)
+jSONOutput_recordDelimiter = Lens.lens (\ JSONOutput'{recordDelimiter} -> recordDelimiter) (\ s@JSONOutput'{} a -> s{recordDelimiter = a} :: JSONOutput)
 
 instance Prelude.Hashable JSONOutput where
-  hashWithSalt _salt JSONOutput' {..} =
-    _salt `Prelude.hashWithSalt` recordDelimiter
+        hashWithSalt _salt JSONOutput'{..}
+          = _salt `Prelude.hashWithSalt` recordDelimiter
 
 instance Prelude.NFData JSONOutput where
-  rnf JSONOutput' {..} = Prelude.rnf recordDelimiter
+        rnf JSONOutput'{..} = Prelude.rnf recordDelimiter
 
 instance Core.ToXML JSONOutput where
-  toXML JSONOutput' {..} =
-    Prelude.mconcat
-      ["RecordDelimiter" Core.@= recordDelimiter]
+        toXML JSONOutput'{..}
+          = Prelude.mconcat
+              ["RecordDelimiter" Core.@= recordDelimiter]

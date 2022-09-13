@@ -1,13 +1,14 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE TypeFamilies          #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds   #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- Derived from AWS service descriptions, licensed under Apache 2.0.
@@ -22,54 +23,53 @@
 --
 -- Retrieves an object\'s retention settings. For more information, see
 -- <https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html Locking Objects>.
---
+-- 
 -- This action is not supported by Amazon S3 on Outposts.
---
+-- 
 -- The following action is related to @GetObjectRetention@:
---
+-- 
 -- -   <https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObjectAttributes.html GetObjectAttributes>
 module Amazonka.S3.GetObjectRetention
-  ( -- * Creating a Request
-    GetObjectRetention (..),
-    newGetObjectRetention,
-
+    (
+    -- * Creating a Request
+      GetObjectRetention (..)
+    , newGetObjectRetention 
     -- * Request Lenses
-    getObjectRetention_expectedBucketOwner,
-    getObjectRetention_requestPayer,
-    getObjectRetention_versionId,
-    getObjectRetention_bucket,
-    getObjectRetention_key,
+    , getObjectRetention_expectedBucketOwner
+    , getObjectRetention_requestPayer
+    , getObjectRetention_versionId
+    , getObjectRetention_bucket
+    , getObjectRetention_key
 
     -- * Destructuring the Response
-    GetObjectRetentionResponse (..),
-    newGetObjectRetentionResponse,
-
+    , GetObjectRetentionResponse (..)
+    , newGetObjectRetentionResponse 
     -- * Response Lenses
-    getObjectRetentionResponse_retention,
-    getObjectRetentionResponse_httpStatus,
-  )
-where
+    , getObjectRetentionResponse_retention
+    , getObjectRetentionResponse_httpStatus
+    ) where
 
+import Amazonka.S3.Types
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
 import qualified Amazonka.Request as Request
 import qualified Amazonka.Response as Response
-import Amazonka.S3.Types
 
 -- | /See:/ 'newGetObjectRetention' smart constructor.
 data GetObjectRetention = GetObjectRetention'
-  { -- | The account ID of the expected bucket owner. If the bucket is owned by a
+    {
+    -- | The account ID of the expected bucket owner. If the bucket is owned by a
     -- different account, the request fails with the HTTP status code
     -- @403 Forbidden@ (access denied).
-    expectedBucketOwner :: Prelude.Maybe Prelude.Text,
-    requestPayer :: Prelude.Maybe RequestPayer,
+    expectedBucketOwner :: Prelude.Maybe Prelude.Text
+    , requestPayer :: Prelude.Maybe RequestPayer
     -- | The version ID for the object whose retention settings you want to
     -- retrieve.
-    versionId :: Prelude.Maybe ObjectVersionId,
+    , versionId :: Prelude.Maybe ObjectVersionId
     -- | The bucket name containing the object whose retention settings you want
     -- to retrieve.
-    --
+    -- 
     -- When using this action with an access point, you must direct requests to
     -- the access point hostname. The access point hostname takes the form
     -- /AccessPointName/-/AccountId/.s3-accesspoint./Region/.amazonaws.com.
@@ -78,12 +78,11 @@ data GetObjectRetention = GetObjectRetention'
     -- name. For more information about access point ARNs, see
     -- <https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html Using access points>
     -- in the /Amazon S3 User Guide/.
-    bucket :: BucketName,
+    , bucket :: BucketName
     -- | The key name for the object whose retention settings you want to
     -- retrieve.
-    key :: ObjectKey
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , key :: ObjectKey
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'GetObjectRetention' with all optional fields omitted.
@@ -104,7 +103,7 @@ data GetObjectRetention = GetObjectRetention'
 --
 -- 'bucket', 'getObjectRetention_bucket' - The bucket name containing the object whose retention settings you want
 -- to retrieve.
---
+-- 
 -- When using this action with an access point, you must direct requests to
 -- the access point hostname. The access point hostname takes the form
 -- /AccessPointName/-/AccountId/.s3-accesspoint./Region/.amazonaws.com.
@@ -116,40 +115,35 @@ data GetObjectRetention = GetObjectRetention'
 --
 -- 'key', 'getObjectRetention_key' - The key name for the object whose retention settings you want to
 -- retrieve.
-newGetObjectRetention ::
-  -- | 'bucket'
-  BucketName ->
-  -- | 'key'
-  ObjectKey ->
-  GetObjectRetention
-newGetObjectRetention pBucket_ pKey_ =
-  GetObjectRetention'
-    { expectedBucketOwner =
-        Prelude.Nothing,
-      requestPayer = Prelude.Nothing,
-      versionId = Prelude.Nothing,
-      bucket = pBucket_,
-      key = pKey_
-    }
+newGetObjectRetention
+    :: BucketName -- ^ 'bucket'
+    -> ObjectKey -- ^ 'key'
+    -> GetObjectRetention
+newGetObjectRetention pBucket_ pKey_
+  = GetObjectRetention'{expectedBucketOwner =
+                          Prelude.Nothing,
+                        requestPayer = Prelude.Nothing,
+                        versionId = Prelude.Nothing, bucket = pBucket_,
+                        key = pKey_}
 
 -- | The account ID of the expected bucket owner. If the bucket is owned by a
 -- different account, the request fails with the HTTP status code
 -- @403 Forbidden@ (access denied).
 getObjectRetention_expectedBucketOwner :: Lens.Lens' GetObjectRetention (Prelude.Maybe Prelude.Text)
-getObjectRetention_expectedBucketOwner = Lens.lens (\GetObjectRetention' {expectedBucketOwner} -> expectedBucketOwner) (\s@GetObjectRetention' {} a -> s {expectedBucketOwner = a} :: GetObjectRetention)
+getObjectRetention_expectedBucketOwner = Lens.lens (\ GetObjectRetention'{expectedBucketOwner} -> expectedBucketOwner) (\ s@GetObjectRetention'{} a -> s{expectedBucketOwner = a} :: GetObjectRetention)
 
 -- | Undocumented member.
 getObjectRetention_requestPayer :: Lens.Lens' GetObjectRetention (Prelude.Maybe RequestPayer)
-getObjectRetention_requestPayer = Lens.lens (\GetObjectRetention' {requestPayer} -> requestPayer) (\s@GetObjectRetention' {} a -> s {requestPayer = a} :: GetObjectRetention)
+getObjectRetention_requestPayer = Lens.lens (\ GetObjectRetention'{requestPayer} -> requestPayer) (\ s@GetObjectRetention'{} a -> s{requestPayer = a} :: GetObjectRetention)
 
 -- | The version ID for the object whose retention settings you want to
 -- retrieve.
 getObjectRetention_versionId :: Lens.Lens' GetObjectRetention (Prelude.Maybe ObjectVersionId)
-getObjectRetention_versionId = Lens.lens (\GetObjectRetention' {versionId} -> versionId) (\s@GetObjectRetention' {} a -> s {versionId = a} :: GetObjectRetention)
+getObjectRetention_versionId = Lens.lens (\ GetObjectRetention'{versionId} -> versionId) (\ s@GetObjectRetention'{} a -> s{versionId = a} :: GetObjectRetention)
 
 -- | The bucket name containing the object whose retention settings you want
 -- to retrieve.
---
+-- 
 -- When using this action with an access point, you must direct requests to
 -- the access point hostname. The access point hostname takes the form
 -- /AccessPointName/-/AccountId/.s3-accesspoint./Region/.amazonaws.com.
@@ -159,70 +153,68 @@ getObjectRetention_versionId = Lens.lens (\GetObjectRetention' {versionId} -> ve
 -- <https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html Using access points>
 -- in the /Amazon S3 User Guide/.
 getObjectRetention_bucket :: Lens.Lens' GetObjectRetention BucketName
-getObjectRetention_bucket = Lens.lens (\GetObjectRetention' {bucket} -> bucket) (\s@GetObjectRetention' {} a -> s {bucket = a} :: GetObjectRetention)
+getObjectRetention_bucket = Lens.lens (\ GetObjectRetention'{bucket} -> bucket) (\ s@GetObjectRetention'{} a -> s{bucket = a} :: GetObjectRetention)
 
 -- | The key name for the object whose retention settings you want to
 -- retrieve.
 getObjectRetention_key :: Lens.Lens' GetObjectRetention ObjectKey
-getObjectRetention_key = Lens.lens (\GetObjectRetention' {key} -> key) (\s@GetObjectRetention' {} a -> s {key = a} :: GetObjectRetention)
+getObjectRetention_key = Lens.lens (\ GetObjectRetention'{key} -> key) (\ s@GetObjectRetention'{} a -> s{key = a} :: GetObjectRetention)
 
 instance Core.AWSRequest GetObjectRetention where
-  type
-    AWSResponse GetObjectRetention =
-      GetObjectRetentionResponse
-  request =
-    Request.s3vhost
-      Prelude.. Request.get defaultService
-  response =
-    Response.receiveXML
-      ( \s h x ->
-          GetObjectRetentionResponse'
-            Prelude.<$> (Core.parseXML x)
-            Prelude.<*> (Prelude.pure (Prelude.fromEnum s))
-      )
+        type AWSResponse GetObjectRetention =
+             GetObjectRetentionResponse
+        request srv
+          = Request.s3vhost Prelude.. Request.get srv
+        response
+          = Response.receiveXML
+              (\ s h x ->
+                 GetObjectRetentionResponse' Prelude.<$>
+                   (Core.parseXML x) Prelude.<*>
+                     (Prelude.pure (Prelude.fromEnum s)))
+
+instance Core.AWSService GetObjectRetention where
+        service _proxy = defaultService
 
 instance Prelude.Hashable GetObjectRetention where
-  hashWithSalt _salt GetObjectRetention' {..} =
-    _salt `Prelude.hashWithSalt` expectedBucketOwner
-      `Prelude.hashWithSalt` requestPayer
-      `Prelude.hashWithSalt` versionId
-      `Prelude.hashWithSalt` bucket
-      `Prelude.hashWithSalt` key
+        hashWithSalt _salt GetObjectRetention'{..}
+          = _salt `Prelude.hashWithSalt` expectedBucketOwner
+              `Prelude.hashWithSalt` requestPayer
+              `Prelude.hashWithSalt` versionId
+              `Prelude.hashWithSalt` bucket
+              `Prelude.hashWithSalt` key
 
 instance Prelude.NFData GetObjectRetention where
-  rnf GetObjectRetention' {..} =
-    Prelude.rnf expectedBucketOwner
-      `Prelude.seq` Prelude.rnf requestPayer
-      `Prelude.seq` Prelude.rnf versionId
-      `Prelude.seq` Prelude.rnf bucket
-      `Prelude.seq` Prelude.rnf key
+        rnf GetObjectRetention'{..}
+          = Prelude.rnf expectedBucketOwner `Prelude.seq`
+              Prelude.rnf requestPayer `Prelude.seq`
+                Prelude.rnf versionId `Prelude.seq`
+                  Prelude.rnf bucket `Prelude.seq` Prelude.rnf key
 
 instance Core.ToHeaders GetObjectRetention where
-  toHeaders GetObjectRetention' {..} =
-    Prelude.mconcat
-      [ "x-amz-expected-bucket-owner"
-          Core.=# expectedBucketOwner,
-        "x-amz-request-payer" Core.=# requestPayer
-      ]
+        toHeaders GetObjectRetention'{..}
+          = Prelude.mconcat
+              ["x-amz-expected-bucket-owner" Core.=#
+                 expectedBucketOwner,
+               "x-amz-request-payer" Core.=# requestPayer]
 
 instance Core.ToPath GetObjectRetention where
-  toPath GetObjectRetention' {..} =
-    Prelude.mconcat
-      ["/", Core.toBS bucket, "/", Core.toBS key]
+        toPath GetObjectRetention'{..}
+          = Prelude.mconcat
+              ["/", Core.toBS bucket, "/", Core.toBS key]
 
 instance Core.ToQuery GetObjectRetention where
-  toQuery GetObjectRetention' {..} =
-    Prelude.mconcat
-      ["versionId" Core.=: versionId, "retention"]
+        toQuery GetObjectRetention'{..}
+          = Prelude.mconcat
+              ["versionId" Core.=: versionId, "retention"]
 
 -- | /See:/ 'newGetObjectRetentionResponse' smart constructor.
 data GetObjectRetentionResponse = GetObjectRetentionResponse'
-  { -- | The container element for an object\'s retention settings.
-    retention :: Prelude.Maybe ObjectLockRetention,
+    {
+    -- | The container element for an object\'s retention settings.
+    retention :: Prelude.Maybe ObjectLockRetention
     -- | The response's http status code.
-    httpStatus :: Prelude.Int
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , httpStatus :: Prelude.Int
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'GetObjectRetentionResponse' with all optional fields omitted.
@@ -235,26 +227,24 @@ data GetObjectRetentionResponse = GetObjectRetentionResponse'
 -- 'retention', 'getObjectRetentionResponse_retention' - The container element for an object\'s retention settings.
 --
 -- 'httpStatus', 'getObjectRetentionResponse_httpStatus' - The response's http status code.
-newGetObjectRetentionResponse ::
-  -- | 'httpStatus'
-  Prelude.Int ->
-  GetObjectRetentionResponse
-newGetObjectRetentionResponse pHttpStatus_ =
-  GetObjectRetentionResponse'
-    { retention =
-        Prelude.Nothing,
-      httpStatus = pHttpStatus_
-    }
+newGetObjectRetentionResponse
+    :: Prelude.Int -- ^ 'httpStatus'
+    -> GetObjectRetentionResponse
+newGetObjectRetentionResponse pHttpStatus_
+  = GetObjectRetentionResponse'{retention =
+                                  Prelude.Nothing,
+                                httpStatus = pHttpStatus_}
 
 -- | The container element for an object\'s retention settings.
 getObjectRetentionResponse_retention :: Lens.Lens' GetObjectRetentionResponse (Prelude.Maybe ObjectLockRetention)
-getObjectRetentionResponse_retention = Lens.lens (\GetObjectRetentionResponse' {retention} -> retention) (\s@GetObjectRetentionResponse' {} a -> s {retention = a} :: GetObjectRetentionResponse)
+getObjectRetentionResponse_retention = Lens.lens (\ GetObjectRetentionResponse'{retention} -> retention) (\ s@GetObjectRetentionResponse'{} a -> s{retention = a} :: GetObjectRetentionResponse)
 
 -- | The response's http status code.
 getObjectRetentionResponse_httpStatus :: Lens.Lens' GetObjectRetentionResponse Prelude.Int
-getObjectRetentionResponse_httpStatus = Lens.lens (\GetObjectRetentionResponse' {httpStatus} -> httpStatus) (\s@GetObjectRetentionResponse' {} a -> s {httpStatus = a} :: GetObjectRetentionResponse)
+getObjectRetentionResponse_httpStatus = Lens.lens (\ GetObjectRetentionResponse'{httpStatus} -> httpStatus) (\ s@GetObjectRetentionResponse'{} a -> s{httpStatus = a} :: GetObjectRetentionResponse)
 
-instance Prelude.NFData GetObjectRetentionResponse where
-  rnf GetObjectRetentionResponse' {..} =
-    Prelude.rnf retention
-      `Prelude.seq` Prelude.rnf httpStatus
+instance Prelude.NFData GetObjectRetentionResponse
+         where
+        rnf GetObjectRetentionResponse'{..}
+          = Prelude.rnf retention `Prelude.seq`
+              Prelude.rnf httpStatus

@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,6 +18,7 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.SSO.Types.RoleInfo where
 
 import qualified Amazonka.Core as Core
@@ -27,12 +29,12 @@ import qualified Amazonka.Prelude as Prelude
 --
 -- /See:/ 'newRoleInfo' smart constructor.
 data RoleInfo = RoleInfo'
-  { -- | The friendly name of the role that is assigned to the user.
-    roleName :: Prelude.Maybe Prelude.Text,
+    {
+    -- | The friendly name of the role that is assigned to the user.
+    roleName :: Prelude.Maybe Prelude.Text
     -- | The identifier of the Amazon Web Services account assigned to the user.
-    accountId :: Prelude.Maybe Prelude.Text
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , accountId :: Prelude.Maybe Prelude.Text
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'RoleInfo' with all optional fields omitted.
@@ -45,38 +47,34 @@ data RoleInfo = RoleInfo'
 -- 'roleName', 'roleInfo_roleName' - The friendly name of the role that is assigned to the user.
 --
 -- 'accountId', 'roleInfo_accountId' - The identifier of the Amazon Web Services account assigned to the user.
-newRoleInfo ::
-  RoleInfo
-newRoleInfo =
-  RoleInfo'
-    { roleName = Prelude.Nothing,
-      accountId = Prelude.Nothing
-    }
+newRoleInfo
+    :: RoleInfo
+newRoleInfo
+  = RoleInfo'{roleName = Prelude.Nothing,
+              accountId = Prelude.Nothing}
 
 -- | The friendly name of the role that is assigned to the user.
 roleInfo_roleName :: Lens.Lens' RoleInfo (Prelude.Maybe Prelude.Text)
-roleInfo_roleName = Lens.lens (\RoleInfo' {roleName} -> roleName) (\s@RoleInfo' {} a -> s {roleName = a} :: RoleInfo)
+roleInfo_roleName = Lens.lens (\ RoleInfo'{roleName} -> roleName) (\ s@RoleInfo'{} a -> s{roleName = a} :: RoleInfo)
 
 -- | The identifier of the Amazon Web Services account assigned to the user.
 roleInfo_accountId :: Lens.Lens' RoleInfo (Prelude.Maybe Prelude.Text)
-roleInfo_accountId = Lens.lens (\RoleInfo' {accountId} -> accountId) (\s@RoleInfo' {} a -> s {accountId = a} :: RoleInfo)
+roleInfo_accountId = Lens.lens (\ RoleInfo'{accountId} -> accountId) (\ s@RoleInfo'{} a -> s{accountId = a} :: RoleInfo)
 
 instance Core.FromJSON RoleInfo where
-  parseJSON =
-    Core.withObject
-      "RoleInfo"
-      ( \x ->
-          RoleInfo'
-            Prelude.<$> (x Core..:? "roleName")
-            Prelude.<*> (x Core..:? "accountId")
-      )
+        parseJSON
+          = Core.withObject "RoleInfo"
+              (\ x ->
+                 RoleInfo' Prelude.<$>
+                   (x Core..:? "roleName") Prelude.<*>
+                     (x Core..:? "accountId"))
 
 instance Prelude.Hashable RoleInfo where
-  hashWithSalt _salt RoleInfo' {..} =
-    _salt `Prelude.hashWithSalt` roleName
-      `Prelude.hashWithSalt` accountId
+        hashWithSalt _salt RoleInfo'{..}
+          = _salt `Prelude.hashWithSalt` roleName
+              `Prelude.hashWithSalt` accountId
 
 instance Prelude.NFData RoleInfo where
-  rnf RoleInfo' {..} =
-    Prelude.rnf roleName
-      `Prelude.seq` Prelude.rnf accountId
+        rnf RoleInfo'{..}
+          = Prelude.rnf roleName `Prelude.seq`
+              Prelude.rnf accountId

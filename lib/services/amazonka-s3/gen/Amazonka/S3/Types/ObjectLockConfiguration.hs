@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,31 +18,32 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.ObjectLockConfiguration where
 
-import qualified Amazonka.Core as Core
-import qualified Amazonka.Lens as Lens
-import qualified Amazonka.Prelude as Prelude
 import Amazonka.S3.Internal
 import Amazonka.S3.Types.ObjectLockEnabled
 import Amazonka.S3.Types.ObjectLockRule
+import qualified Amazonka.Core as Core
+import qualified Amazonka.Lens as Lens
+import qualified Amazonka.Prelude as Prelude
 
 -- | The container element for Object Lock configuration parameters.
 --
 -- /See:/ 'newObjectLockConfiguration' smart constructor.
 data ObjectLockConfiguration = ObjectLockConfiguration'
-  { -- | Indicates whether this bucket has an Object Lock configuration enabled.
+    {
+    -- | Indicates whether this bucket has an Object Lock configuration enabled.
     -- Enable @ObjectLockEnabled@ when you apply @ObjectLockConfiguration@ to a
     -- bucket.
-    objectLockEnabled :: Prelude.Maybe ObjectLockEnabled,
+    objectLockEnabled :: Prelude.Maybe ObjectLockEnabled
     -- | Specifies the Object Lock rule for the specified object. Enable the this
     -- rule when you apply @ObjectLockConfiguration@ to a bucket. Bucket
     -- settings require both a mode and a period. The period can be either
     -- @Days@ or @Years@ but you must select one. You cannot specify @Days@ and
     -- @Years@ at the same time.
-    rule :: Prelude.Maybe ObjectLockRule
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , rule :: Prelude.Maybe ObjectLockRule
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'ObjectLockConfiguration' with all optional fields omitted.
@@ -60,20 +62,18 @@ data ObjectLockConfiguration = ObjectLockConfiguration'
 -- settings require both a mode and a period. The period can be either
 -- @Days@ or @Years@ but you must select one. You cannot specify @Days@ and
 -- @Years@ at the same time.
-newObjectLockConfiguration ::
-  ObjectLockConfiguration
-newObjectLockConfiguration =
-  ObjectLockConfiguration'
-    { objectLockEnabled =
-        Prelude.Nothing,
-      rule = Prelude.Nothing
-    }
+newObjectLockConfiguration
+    :: ObjectLockConfiguration
+newObjectLockConfiguration
+  = ObjectLockConfiguration'{objectLockEnabled =
+                               Prelude.Nothing,
+                             rule = Prelude.Nothing}
 
 -- | Indicates whether this bucket has an Object Lock configuration enabled.
 -- Enable @ObjectLockEnabled@ when you apply @ObjectLockConfiguration@ to a
 -- bucket.
 objectLockConfiguration_objectLockEnabled :: Lens.Lens' ObjectLockConfiguration (Prelude.Maybe ObjectLockEnabled)
-objectLockConfiguration_objectLockEnabled = Lens.lens (\ObjectLockConfiguration' {objectLockEnabled} -> objectLockEnabled) (\s@ObjectLockConfiguration' {} a -> s {objectLockEnabled = a} :: ObjectLockConfiguration)
+objectLockConfiguration_objectLockEnabled = Lens.lens (\ ObjectLockConfiguration'{objectLockEnabled} -> objectLockEnabled) (\ s@ObjectLockConfiguration'{} a -> s{objectLockEnabled = a} :: ObjectLockConfiguration)
 
 -- | Specifies the Object Lock rule for the specified object. Enable the this
 -- rule when you apply @ObjectLockConfiguration@ to a bucket. Bucket
@@ -81,27 +81,27 @@ objectLockConfiguration_objectLockEnabled = Lens.lens (\ObjectLockConfiguration'
 -- @Days@ or @Years@ but you must select one. You cannot specify @Days@ and
 -- @Years@ at the same time.
 objectLockConfiguration_rule :: Lens.Lens' ObjectLockConfiguration (Prelude.Maybe ObjectLockRule)
-objectLockConfiguration_rule = Lens.lens (\ObjectLockConfiguration' {rule} -> rule) (\s@ObjectLockConfiguration' {} a -> s {rule = a} :: ObjectLockConfiguration)
+objectLockConfiguration_rule = Lens.lens (\ ObjectLockConfiguration'{rule} -> rule) (\ s@ObjectLockConfiguration'{} a -> s{rule = a} :: ObjectLockConfiguration)
 
 instance Core.FromXML ObjectLockConfiguration where
-  parseXML x =
-    ObjectLockConfiguration'
-      Prelude.<$> (x Core..@? "ObjectLockEnabled")
-      Prelude.<*> (x Core..@? "Rule")
+        parseXML x
+          = ObjectLockConfiguration' Prelude.<$>
+              (x Core..@? "ObjectLockEnabled") Prelude.<*>
+                (x Core..@? "Rule")
 
-instance Prelude.Hashable ObjectLockConfiguration where
-  hashWithSalt _salt ObjectLockConfiguration' {..} =
-    _salt `Prelude.hashWithSalt` objectLockEnabled
-      `Prelude.hashWithSalt` rule
+instance Prelude.Hashable ObjectLockConfiguration
+         where
+        hashWithSalt _salt ObjectLockConfiguration'{..}
+          = _salt `Prelude.hashWithSalt` objectLockEnabled
+              `Prelude.hashWithSalt` rule
 
 instance Prelude.NFData ObjectLockConfiguration where
-  rnf ObjectLockConfiguration' {..} =
-    Prelude.rnf objectLockEnabled
-      `Prelude.seq` Prelude.rnf rule
+        rnf ObjectLockConfiguration'{..}
+          = Prelude.rnf objectLockEnabled `Prelude.seq`
+              Prelude.rnf rule
 
 instance Core.ToXML ObjectLockConfiguration where
-  toXML ObjectLockConfiguration' {..} =
-    Prelude.mconcat
-      [ "ObjectLockEnabled" Core.@= objectLockEnabled,
-        "Rule" Core.@= rule
-      ]
+        toXML ObjectLockConfiguration'{..}
+          = Prelude.mconcat
+              ["ObjectLockEnabled" Core.@= objectLockEnabled,
+               "Rule" Core.@= rule]

@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,13 +18,14 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.NotificationConfigurationFilter where
 
+import Amazonka.S3.Internal
+import Amazonka.S3.Types.S3KeyFilter
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
-import Amazonka.S3.Types.S3KeyFilter
 
 -- | Specifies object key name filtering rules. For information about key
 -- name filtering, see
@@ -32,9 +34,9 @@ import Amazonka.S3.Types.S3KeyFilter
 --
 -- /See:/ 'newNotificationConfigurationFilter' smart constructor.
 data NotificationConfigurationFilter = NotificationConfigurationFilter'
-  { key :: Prelude.Maybe S3KeyFilter
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    {
+    key :: Prelude.Maybe S3KeyFilter
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'NotificationConfigurationFilter' with all optional fields omitted.
@@ -45,39 +47,36 @@ data NotificationConfigurationFilter = NotificationConfigurationFilter'
 -- for backwards compatibility:
 --
 -- 'key', 'notificationConfigurationFilter_key' - Undocumented member.
-newNotificationConfigurationFilter ::
-  NotificationConfigurationFilter
-newNotificationConfigurationFilter =
-  NotificationConfigurationFilter'
-    { key =
-        Prelude.Nothing
-    }
+newNotificationConfigurationFilter
+    :: NotificationConfigurationFilter
+newNotificationConfigurationFilter
+  = NotificationConfigurationFilter'{key =
+                                       Prelude.Nothing}
 
 -- | Undocumented member.
 notificationConfigurationFilter_key :: Lens.Lens' NotificationConfigurationFilter (Prelude.Maybe S3KeyFilter)
-notificationConfigurationFilter_key = Lens.lens (\NotificationConfigurationFilter' {key} -> key) (\s@NotificationConfigurationFilter' {} a -> s {key = a} :: NotificationConfigurationFilter)
+notificationConfigurationFilter_key = Lens.lens (\ NotificationConfigurationFilter'{key} -> key) (\ s@NotificationConfigurationFilter'{} a -> s{key = a} :: NotificationConfigurationFilter)
 
-instance Core.FromXML NotificationConfigurationFilter where
-  parseXML x =
-    NotificationConfigurationFilter'
-      Prelude.<$> (x Core..@? "S3Key")
+instance Core.FromXML NotificationConfigurationFilter
+         where
+        parseXML x
+          = NotificationConfigurationFilter' Prelude.<$>
+              (x Core..@? "S3Key")
 
-instance
-  Prelude.Hashable
-    NotificationConfigurationFilter
-  where
-  hashWithSalt
-    _salt
-    NotificationConfigurationFilter' {..} =
-      _salt `Prelude.hashWithSalt` key
+instance Prelude.Hashable
+           NotificationConfigurationFilter
+         where
+        hashWithSalt _salt
+          NotificationConfigurationFilter'{..}
+          = _salt `Prelude.hashWithSalt` key
 
-instance
-  Prelude.NFData
-    NotificationConfigurationFilter
-  where
-  rnf NotificationConfigurationFilter' {..} =
-    Prelude.rnf key
+instance Prelude.NFData
+           NotificationConfigurationFilter
+         where
+        rnf NotificationConfigurationFilter'{..}
+          = Prelude.rnf key
 
-instance Core.ToXML NotificationConfigurationFilter where
-  toXML NotificationConfigurationFilter' {..} =
-    Prelude.mconcat ["S3Key" Core.@= key]
+instance Core.ToXML NotificationConfigurationFilter
+         where
+        toXML NotificationConfigurationFilter'{..}
+          = Prelude.mconcat ["S3Key" Core.@= key]

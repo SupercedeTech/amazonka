@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,13 +18,14 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.DeleteMarkerReplication where
 
+import Amazonka.S3.Internal
+import Amazonka.S3.Types.DeleteMarkerReplicationStatus
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
-import Amazonka.S3.Types.DeleteMarkerReplicationStatus
 
 -- | Specifies whether Amazon S3 replicates delete markers. If you specify a
 -- @Filter@ in your replication configuration, you must also include a
@@ -32,10 +34,10 @@ import Amazonka.S3.Types.DeleteMarkerReplicationStatus
 -- because Amazon S3 does not support replicating delete markers for
 -- tag-based rules. For an example configuration, see
 -- <https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config Basic Rule Configuration>.
---
+-- 
 -- For more information about delete marker replication, see
 -- <https://docs.aws.amazon.com/AmazonS3/latest/dev/delete-marker-replication.html Basic Rule Configuration>.
---
+-- 
 -- If you are using an earlier version of the replication configuration,
 -- Amazon S3 handles replication of delete markers differently. For more
 -- information, see
@@ -43,12 +45,12 @@ import Amazonka.S3.Types.DeleteMarkerReplicationStatus
 --
 -- /See:/ 'newDeleteMarkerReplication' smart constructor.
 data DeleteMarkerReplication = DeleteMarkerReplication'
-  { -- | Indicates whether to replicate delete markers.
-    --
+    {
+    -- | Indicates whether to replicate delete markers.
+    -- 
     -- Indicates whether to replicate delete markers.
     status :: Prelude.Maybe DeleteMarkerReplicationStatus
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'DeleteMarkerReplication' with all optional fields omitted.
@@ -59,31 +61,32 @@ data DeleteMarkerReplication = DeleteMarkerReplication'
 -- for backwards compatibility:
 --
 -- 'status', 'deleteMarkerReplication_status' - Indicates whether to replicate delete markers.
---
+-- 
 -- Indicates whether to replicate delete markers.
-newDeleteMarkerReplication ::
-  DeleteMarkerReplication
-newDeleteMarkerReplication =
-  DeleteMarkerReplication' {status = Prelude.Nothing}
+newDeleteMarkerReplication
+    :: DeleteMarkerReplication
+newDeleteMarkerReplication
+  = DeleteMarkerReplication'{status = Prelude.Nothing}
 
 -- | Indicates whether to replicate delete markers.
---
+-- 
 -- Indicates whether to replicate delete markers.
 deleteMarkerReplication_status :: Lens.Lens' DeleteMarkerReplication (Prelude.Maybe DeleteMarkerReplicationStatus)
-deleteMarkerReplication_status = Lens.lens (\DeleteMarkerReplication' {status} -> status) (\s@DeleteMarkerReplication' {} a -> s {status = a} :: DeleteMarkerReplication)
+deleteMarkerReplication_status = Lens.lens (\ DeleteMarkerReplication'{status} -> status) (\ s@DeleteMarkerReplication'{} a -> s{status = a} :: DeleteMarkerReplication)
 
 instance Core.FromXML DeleteMarkerReplication where
-  parseXML x =
-    DeleteMarkerReplication'
-      Prelude.<$> (x Core..@? "Status")
+        parseXML x
+          = DeleteMarkerReplication' Prelude.<$>
+              (x Core..@? "Status")
 
-instance Prelude.Hashable DeleteMarkerReplication where
-  hashWithSalt _salt DeleteMarkerReplication' {..} =
-    _salt `Prelude.hashWithSalt` status
+instance Prelude.Hashable DeleteMarkerReplication
+         where
+        hashWithSalt _salt DeleteMarkerReplication'{..}
+          = _salt `Prelude.hashWithSalt` status
 
 instance Prelude.NFData DeleteMarkerReplication where
-  rnf DeleteMarkerReplication' {..} = Prelude.rnf status
+        rnf DeleteMarkerReplication'{..} = Prelude.rnf status
 
 instance Core.ToXML DeleteMarkerReplication where
-  toXML DeleteMarkerReplication' {..} =
-    Prelude.mconcat ["Status" Core.@= status]
+        toXML DeleteMarkerReplication'{..}
+          = Prelude.mconcat ["Status" Core.@= status]

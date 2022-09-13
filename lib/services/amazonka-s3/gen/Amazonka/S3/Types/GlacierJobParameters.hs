@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,22 +18,23 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.GlacierJobParameters where
 
+import Amazonka.S3.Internal
+import Amazonka.S3.Types.Tier
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
-import Amazonka.S3.Types.Tier
 
 -- | Container for S3 Glacier job parameters.
 --
 -- /See:/ 'newGlacierJobParameters' smart constructor.
 data GlacierJobParameters = GlacierJobParameters'
-  { -- | Retrieval tier at which the restore will be processed.
+    {
+    -- | Retrieval tier at which the restore will be processed.
     tier :: Tier
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'GlacierJobParameters' with all optional fields omitted.
@@ -43,24 +45,23 @@ data GlacierJobParameters = GlacierJobParameters'
 -- for backwards compatibility:
 --
 -- 'tier', 'glacierJobParameters_tier' - Retrieval tier at which the restore will be processed.
-newGlacierJobParameters ::
-  -- | 'tier'
-  Tier ->
-  GlacierJobParameters
-newGlacierJobParameters pTier_ =
-  GlacierJobParameters' {tier = pTier_}
+newGlacierJobParameters
+    :: Tier -- ^ 'tier'
+    -> GlacierJobParameters
+newGlacierJobParameters pTier_
+  = GlacierJobParameters'{tier = pTier_}
 
 -- | Retrieval tier at which the restore will be processed.
 glacierJobParameters_tier :: Lens.Lens' GlacierJobParameters Tier
-glacierJobParameters_tier = Lens.lens (\GlacierJobParameters' {tier} -> tier) (\s@GlacierJobParameters' {} a -> s {tier = a} :: GlacierJobParameters)
+glacierJobParameters_tier = Lens.lens (\ GlacierJobParameters'{tier} -> tier) (\ s@GlacierJobParameters'{} a -> s{tier = a} :: GlacierJobParameters)
 
 instance Prelude.Hashable GlacierJobParameters where
-  hashWithSalt _salt GlacierJobParameters' {..} =
-    _salt `Prelude.hashWithSalt` tier
+        hashWithSalt _salt GlacierJobParameters'{..}
+          = _salt `Prelude.hashWithSalt` tier
 
 instance Prelude.NFData GlacierJobParameters where
-  rnf GlacierJobParameters' {..} = Prelude.rnf tier
+        rnf GlacierJobParameters'{..} = Prelude.rnf tier
 
 instance Core.ToXML GlacierJobParameters where
-  toXML GlacierJobParameters' {..} =
-    Prelude.mconcat ["Tier" Core.@= tier]
+        toXML GlacierJobParameters'{..}
+          = Prelude.mconcat ["Tier" Core.@= tier]

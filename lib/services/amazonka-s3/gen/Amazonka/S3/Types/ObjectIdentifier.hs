@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,28 +18,29 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.ObjectIdentifier where
 
+import Amazonka.S3.Internal
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
 
 -- | Object Identifier is unique value to identify objects.
 --
 -- /See:/ 'newObjectIdentifier' smart constructor.
 data ObjectIdentifier = ObjectIdentifier'
-  { -- | VersionId for the specific version of the object to delete.
-    versionId :: Prelude.Maybe ObjectVersionId,
+    {
+    -- | VersionId for the specific version of the object to delete.
+    versionId :: Prelude.Maybe ObjectVersionId
     -- | Key name of the object.
-    --
+    -- 
     -- Replacement must be made for object keys containing special characters
     -- (such as carriage returns) when using XML requests. For more
     -- information, see
     -- <https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints XML related object key constraints>.
-    key :: ObjectKey
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , key :: ObjectKey
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'ObjectIdentifier' with all optional fields omitted.
@@ -51,44 +53,41 @@ data ObjectIdentifier = ObjectIdentifier'
 -- 'versionId', 'objectIdentifier_versionId' - VersionId for the specific version of the object to delete.
 --
 -- 'key', 'objectIdentifier_key' - Key name of the object.
---
+-- 
 -- Replacement must be made for object keys containing special characters
 -- (such as carriage returns) when using XML requests. For more
 -- information, see
 -- <https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints XML related object key constraints>.
-newObjectIdentifier ::
-  -- | 'key'
-  ObjectKey ->
-  ObjectIdentifier
-newObjectIdentifier pKey_ =
-  ObjectIdentifier'
-    { versionId = Prelude.Nothing,
-      key = pKey_
-    }
+newObjectIdentifier
+    :: ObjectKey -- ^ 'key'
+    -> ObjectIdentifier
+newObjectIdentifier pKey_
+  = ObjectIdentifier'{versionId = Prelude.Nothing,
+                      key = pKey_}
 
 -- | VersionId for the specific version of the object to delete.
 objectIdentifier_versionId :: Lens.Lens' ObjectIdentifier (Prelude.Maybe ObjectVersionId)
-objectIdentifier_versionId = Lens.lens (\ObjectIdentifier' {versionId} -> versionId) (\s@ObjectIdentifier' {} a -> s {versionId = a} :: ObjectIdentifier)
+objectIdentifier_versionId = Lens.lens (\ ObjectIdentifier'{versionId} -> versionId) (\ s@ObjectIdentifier'{} a -> s{versionId = a} :: ObjectIdentifier)
 
 -- | Key name of the object.
---
+-- 
 -- Replacement must be made for object keys containing special characters
 -- (such as carriage returns) when using XML requests. For more
 -- information, see
 -- <https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints XML related object key constraints>.
 objectIdentifier_key :: Lens.Lens' ObjectIdentifier ObjectKey
-objectIdentifier_key = Lens.lens (\ObjectIdentifier' {key} -> key) (\s@ObjectIdentifier' {} a -> s {key = a} :: ObjectIdentifier)
+objectIdentifier_key = Lens.lens (\ ObjectIdentifier'{key} -> key) (\ s@ObjectIdentifier'{} a -> s{key = a} :: ObjectIdentifier)
 
 instance Prelude.Hashable ObjectIdentifier where
-  hashWithSalt _salt ObjectIdentifier' {..} =
-    _salt `Prelude.hashWithSalt` versionId
-      `Prelude.hashWithSalt` key
+        hashWithSalt _salt ObjectIdentifier'{..}
+          = _salt `Prelude.hashWithSalt` versionId
+              `Prelude.hashWithSalt` key
 
 instance Prelude.NFData ObjectIdentifier where
-  rnf ObjectIdentifier' {..} =
-    Prelude.rnf versionId `Prelude.seq` Prelude.rnf key
+        rnf ObjectIdentifier'{..}
+          = Prelude.rnf versionId `Prelude.seq` Prelude.rnf key
 
 instance Core.ToXML ObjectIdentifier where
-  toXML ObjectIdentifier' {..} =
-    Prelude.mconcat
-      ["VersionId" Core.@= versionId, "Key" Core.@= key]
+        toXML ObjectIdentifier'{..}
+          = Prelude.mconcat
+              ["VersionId" Core.@= versionId, "Key" Core.@= key]

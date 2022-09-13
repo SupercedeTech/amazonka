@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,23 +18,24 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.ServerSideEncryptionConfiguration where
 
+import Amazonka.S3.Internal
+import Amazonka.S3.Types.ServerSideEncryptionRule
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
-import Amazonka.S3.Types.ServerSideEncryptionRule
 
 -- | Specifies the default server-side-encryption configuration.
 --
 -- /See:/ 'newServerSideEncryptionConfiguration' smart constructor.
 data ServerSideEncryptionConfiguration = ServerSideEncryptionConfiguration'
-  { -- | Container for information about a particular server-side encryption
+    {
+    -- | Container for information about a particular server-side encryption
     -- configuration rule.
     rules :: [ServerSideEncryptionRule]
-  }
-  deriving (Prelude.Eq, Prelude.Show, Prelude.Generic)
+    } deriving (Prelude.Eq, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'ServerSideEncryptionConfiguration' with all optional fields omitted.
@@ -45,43 +47,38 @@ data ServerSideEncryptionConfiguration = ServerSideEncryptionConfiguration'
 --
 -- 'rules', 'serverSideEncryptionConfiguration_rules' - Container for information about a particular server-side encryption
 -- configuration rule.
-newServerSideEncryptionConfiguration ::
-  ServerSideEncryptionConfiguration
-newServerSideEncryptionConfiguration =
-  ServerSideEncryptionConfiguration'
-    { rules =
-        Prelude.mempty
-    }
+newServerSideEncryptionConfiguration
+    :: ServerSideEncryptionConfiguration
+newServerSideEncryptionConfiguration
+  = ServerSideEncryptionConfiguration'{rules =
+                                         Prelude.mempty}
 
 -- | Container for information about a particular server-side encryption
 -- configuration rule.
 serverSideEncryptionConfiguration_rules :: Lens.Lens' ServerSideEncryptionConfiguration [ServerSideEncryptionRule]
-serverSideEncryptionConfiguration_rules = Lens.lens (\ServerSideEncryptionConfiguration' {rules} -> rules) (\s@ServerSideEncryptionConfiguration' {} a -> s {rules = a} :: ServerSideEncryptionConfiguration) Prelude.. Lens.coerced
+serverSideEncryptionConfiguration_rules = Lens.lens (\ ServerSideEncryptionConfiguration'{rules} -> rules) (\ s@ServerSideEncryptionConfiguration'{} a -> s{rules = a} :: ServerSideEncryptionConfiguration) Prelude.. Lens.coerced
 
-instance
-  Core.FromXML
-    ServerSideEncryptionConfiguration
-  where
-  parseXML x =
-    ServerSideEncryptionConfiguration'
-      Prelude.<$> (Core.parseXMLList "Rule" x)
+instance Core.FromXML
+           ServerSideEncryptionConfiguration
+         where
+        parseXML x
+          = ServerSideEncryptionConfiguration' Prelude.<$>
+              (Core.parseXMLList "Rule" x)
 
-instance
-  Prelude.Hashable
-    ServerSideEncryptionConfiguration
-  where
-  hashWithSalt
-    _salt
-    ServerSideEncryptionConfiguration' {..} =
-      _salt `Prelude.hashWithSalt` rules
+instance Prelude.Hashable
+           ServerSideEncryptionConfiguration
+         where
+        hashWithSalt _salt
+          ServerSideEncryptionConfiguration'{..}
+          = _salt `Prelude.hashWithSalt` rules
 
-instance
-  Prelude.NFData
-    ServerSideEncryptionConfiguration
-  where
-  rnf ServerSideEncryptionConfiguration' {..} =
-    Prelude.rnf rules
+instance Prelude.NFData
+           ServerSideEncryptionConfiguration
+         where
+        rnf ServerSideEncryptionConfiguration'{..}
+          = Prelude.rnf rules
 
-instance Core.ToXML ServerSideEncryptionConfiguration where
-  toXML ServerSideEncryptionConfiguration' {..} =
-    Prelude.mconcat [Core.toXMLList "Rule" rules]
+instance Core.ToXML ServerSideEncryptionConfiguration
+         where
+        toXML ServerSideEncryptionConfiguration'{..}
+          = Prelude.mconcat [Core.toXMLList "Rule" rules]

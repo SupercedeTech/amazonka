@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,13 +18,14 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.ExistingObjectReplication where
 
+import Amazonka.S3.Internal
+import Amazonka.S3.Types.ExistingObjectReplicationStatus
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
-import Amazonka.S3.Types.ExistingObjectReplicationStatus
 
 -- | Optional configuration to replicate existing source bucket objects. For
 -- more information, see
@@ -32,9 +34,9 @@ import Amazonka.S3.Types.ExistingObjectReplicationStatus
 --
 -- /See:/ 'newExistingObjectReplication' smart constructor.
 data ExistingObjectReplication = ExistingObjectReplication'
-  { status :: ExistingObjectReplicationStatus
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    {
+    status :: ExistingObjectReplicationStatus
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'ExistingObjectReplication' with all optional fields omitted.
@@ -44,31 +46,32 @@ data ExistingObjectReplication = ExistingObjectReplication'
 -- The following record fields are available, with the corresponding lenses provided
 -- for backwards compatibility:
 --
--- 'status', 'existingObjectReplication_status' -
-newExistingObjectReplication ::
-  -- | 'status'
-  ExistingObjectReplicationStatus ->
-  ExistingObjectReplication
-newExistingObjectReplication pStatus_ =
-  ExistingObjectReplication' {status = pStatus_}
+-- 'status', 'existingObjectReplication_status' - 
+newExistingObjectReplication
+    :: ExistingObjectReplicationStatus -- ^ 'status'
+    -> ExistingObjectReplication
+newExistingObjectReplication pStatus_
+  = ExistingObjectReplication'{status = pStatus_}
 
--- |
+-- | 
 existingObjectReplication_status :: Lens.Lens' ExistingObjectReplication ExistingObjectReplicationStatus
-existingObjectReplication_status = Lens.lens (\ExistingObjectReplication' {status} -> status) (\s@ExistingObjectReplication' {} a -> s {status = a} :: ExistingObjectReplication)
+existingObjectReplication_status = Lens.lens (\ ExistingObjectReplication'{status} -> status) (\ s@ExistingObjectReplication'{} a -> s{status = a} :: ExistingObjectReplication)
 
 instance Core.FromXML ExistingObjectReplication where
-  parseXML x =
-    ExistingObjectReplication'
-      Prelude.<$> (x Core..@ "Status")
+        parseXML x
+          = ExistingObjectReplication' Prelude.<$>
+              (x Core..@ "Status")
 
-instance Prelude.Hashable ExistingObjectReplication where
-  hashWithSalt _salt ExistingObjectReplication' {..} =
-    _salt `Prelude.hashWithSalt` status
+instance Prelude.Hashable ExistingObjectReplication
+         where
+        hashWithSalt _salt ExistingObjectReplication'{..}
+          = _salt `Prelude.hashWithSalt` status
 
-instance Prelude.NFData ExistingObjectReplication where
-  rnf ExistingObjectReplication' {..} =
-    Prelude.rnf status
+instance Prelude.NFData ExistingObjectReplication
+         where
+        rnf ExistingObjectReplication'{..}
+          = Prelude.rnf status
 
 instance Core.ToXML ExistingObjectReplication where
-  toXML ExistingObjectReplication' {..} =
-    Prelude.mconcat ["Status" Core.@= status]
+        toXML ExistingObjectReplication'{..}
+          = Prelude.mconcat ["Status" Core.@= status]

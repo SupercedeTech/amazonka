@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,24 +18,25 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.ObjectLockRetention where
 
+import Amazonka.S3.Internal
+import Amazonka.S3.Types.ObjectLockRetentionMode
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
-import Amazonka.S3.Types.ObjectLockRetentionMode
 
 -- | A Retention configuration for an object.
 --
 -- /See:/ 'newObjectLockRetention' smart constructor.
 data ObjectLockRetention = ObjectLockRetention'
-  { -- | Indicates the Retention mode for the specified object.
-    mode :: Prelude.Maybe ObjectLockRetentionMode,
+    {
+    -- | Indicates the Retention mode for the specified object.
+    mode :: Prelude.Maybe ObjectLockRetentionMode
     -- | The date on which this Object Lock Retention will expire.
-    retainUntilDate :: Prelude.Maybe Core.ISO8601
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , retainUntilDate :: Prelude.Maybe Core.ISO8601
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'ObjectLockRetention' with all optional fields omitted.
@@ -47,41 +49,38 @@ data ObjectLockRetention = ObjectLockRetention'
 -- 'mode', 'objectLockRetention_mode' - Indicates the Retention mode for the specified object.
 --
 -- 'retainUntilDate', 'objectLockRetention_retainUntilDate' - The date on which this Object Lock Retention will expire.
-newObjectLockRetention ::
-  ObjectLockRetention
-newObjectLockRetention =
-  ObjectLockRetention'
-    { mode = Prelude.Nothing,
-      retainUntilDate = Prelude.Nothing
-    }
+newObjectLockRetention
+    :: ObjectLockRetention
+newObjectLockRetention
+  = ObjectLockRetention'{mode = Prelude.Nothing,
+                         retainUntilDate = Prelude.Nothing}
 
 -- | Indicates the Retention mode for the specified object.
 objectLockRetention_mode :: Lens.Lens' ObjectLockRetention (Prelude.Maybe ObjectLockRetentionMode)
-objectLockRetention_mode = Lens.lens (\ObjectLockRetention' {mode} -> mode) (\s@ObjectLockRetention' {} a -> s {mode = a} :: ObjectLockRetention)
+objectLockRetention_mode = Lens.lens (\ ObjectLockRetention'{mode} -> mode) (\ s@ObjectLockRetention'{} a -> s{mode = a} :: ObjectLockRetention)
 
 -- | The date on which this Object Lock Retention will expire.
 objectLockRetention_retainUntilDate :: Lens.Lens' ObjectLockRetention (Prelude.Maybe Prelude.UTCTime)
-objectLockRetention_retainUntilDate = Lens.lens (\ObjectLockRetention' {retainUntilDate} -> retainUntilDate) (\s@ObjectLockRetention' {} a -> s {retainUntilDate = a} :: ObjectLockRetention) Prelude.. Lens.mapping Core._Time
+objectLockRetention_retainUntilDate = Lens.lens (\ ObjectLockRetention'{retainUntilDate} -> retainUntilDate) (\ s@ObjectLockRetention'{} a -> s{retainUntilDate = a} :: ObjectLockRetention) Prelude.. Lens.mapping Core._Time
 
 instance Core.FromXML ObjectLockRetention where
-  parseXML x =
-    ObjectLockRetention'
-      Prelude.<$> (x Core..@? "Mode")
-      Prelude.<*> (x Core..@? "RetainUntilDate")
+        parseXML x
+          = ObjectLockRetention' Prelude.<$>
+              (x Core..@? "Mode") Prelude.<*>
+                (x Core..@? "RetainUntilDate")
 
 instance Prelude.Hashable ObjectLockRetention where
-  hashWithSalt _salt ObjectLockRetention' {..} =
-    _salt `Prelude.hashWithSalt` mode
-      `Prelude.hashWithSalt` retainUntilDate
+        hashWithSalt _salt ObjectLockRetention'{..}
+          = _salt `Prelude.hashWithSalt` mode
+              `Prelude.hashWithSalt` retainUntilDate
 
 instance Prelude.NFData ObjectLockRetention where
-  rnf ObjectLockRetention' {..} =
-    Prelude.rnf mode
-      `Prelude.seq` Prelude.rnf retainUntilDate
+        rnf ObjectLockRetention'{..}
+          = Prelude.rnf mode `Prelude.seq`
+              Prelude.rnf retainUntilDate
 
 instance Core.ToXML ObjectLockRetention where
-  toXML ObjectLockRetention' {..} =
-    Prelude.mconcat
-      [ "Mode" Core.@= mode,
-        "RetainUntilDate" Core.@= retainUntilDate
-      ]
+        toXML ObjectLockRetention'{..}
+          = Prelude.mconcat
+              ["Mode" Core.@= mode,
+               "RetainUntilDate" Core.@= retainUntilDate]

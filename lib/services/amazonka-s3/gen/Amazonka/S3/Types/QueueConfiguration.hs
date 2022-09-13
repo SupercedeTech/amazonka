@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,14 +18,15 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.QueueConfiguration where
 
-import qualified Amazonka.Core as Core
-import qualified Amazonka.Lens as Lens
-import qualified Amazonka.Prelude as Prelude
 import Amazonka.S3.Internal
 import Amazonka.S3.Types.Event
 import Amazonka.S3.Types.NotificationConfigurationFilter
+import qualified Amazonka.Core as Core
+import qualified Amazonka.Lens as Lens
+import qualified Amazonka.Prelude as Prelude
 
 -- | Specifies the configuration for publishing messages to an Amazon Simple
 -- Queue Service (Amazon SQS) queue when Amazon S3 detects specified
@@ -32,15 +34,15 @@ import Amazonka.S3.Types.NotificationConfigurationFilter
 --
 -- /See:/ 'newQueueConfiguration' smart constructor.
 data QueueConfiguration = QueueConfiguration'
-  { id :: Prelude.Maybe Prelude.Text,
-    filter' :: Prelude.Maybe NotificationConfigurationFilter,
+    {
+    id :: Prelude.Maybe Prelude.Text
+    , filter' :: Prelude.Maybe NotificationConfigurationFilter
     -- | The Amazon Resource Name (ARN) of the Amazon SQS queue to which Amazon
     -- S3 publishes a message when it detects events of the specified type.
-    queueArn :: Prelude.Text,
+    , queueArn :: Prelude.Text
     -- | A collection of bucket events for which to send notifications
-    events :: [Event]
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , events :: [Event]
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'QueueConfiguration' with all optional fields omitted.
@@ -58,62 +60,54 @@ data QueueConfiguration = QueueConfiguration'
 -- S3 publishes a message when it detects events of the specified type.
 --
 -- 'events', 'queueConfiguration_events' - A collection of bucket events for which to send notifications
-newQueueConfiguration ::
-  -- | 'queueArn'
-  Prelude.Text ->
-  QueueConfiguration
-newQueueConfiguration pQueueArn_ =
-  QueueConfiguration'
-    { id = Prelude.Nothing,
-      filter' = Prelude.Nothing,
-      queueArn = pQueueArn_,
-      events = Prelude.mempty
-    }
+newQueueConfiguration
+    :: Prelude.Text -- ^ 'queueArn'
+    -> QueueConfiguration
+newQueueConfiguration pQueueArn_
+  = QueueConfiguration'{id = Prelude.Nothing,
+                        filter' = Prelude.Nothing, queueArn = pQueueArn_,
+                        events = Prelude.mempty}
 
 -- | Undocumented member.
 queueConfiguration_id :: Lens.Lens' QueueConfiguration (Prelude.Maybe Prelude.Text)
-queueConfiguration_id = Lens.lens (\QueueConfiguration' {id} -> id) (\s@QueueConfiguration' {} a -> s {id = a} :: QueueConfiguration)
+queueConfiguration_id = Lens.lens (\ QueueConfiguration'{id} -> id) (\ s@QueueConfiguration'{} a -> s{id = a} :: QueueConfiguration)
 
 -- | Undocumented member.
 queueConfiguration_filter :: Lens.Lens' QueueConfiguration (Prelude.Maybe NotificationConfigurationFilter)
-queueConfiguration_filter = Lens.lens (\QueueConfiguration' {filter'} -> filter') (\s@QueueConfiguration' {} a -> s {filter' = a} :: QueueConfiguration)
+queueConfiguration_filter = Lens.lens (\ QueueConfiguration'{filter'} -> filter') (\ s@QueueConfiguration'{} a -> s{filter' = a} :: QueueConfiguration)
 
 -- | The Amazon Resource Name (ARN) of the Amazon SQS queue to which Amazon
 -- S3 publishes a message when it detects events of the specified type.
 queueConfiguration_queueArn :: Lens.Lens' QueueConfiguration Prelude.Text
-queueConfiguration_queueArn = Lens.lens (\QueueConfiguration' {queueArn} -> queueArn) (\s@QueueConfiguration' {} a -> s {queueArn = a} :: QueueConfiguration)
+queueConfiguration_queueArn = Lens.lens (\ QueueConfiguration'{queueArn} -> queueArn) (\ s@QueueConfiguration'{} a -> s{queueArn = a} :: QueueConfiguration)
 
 -- | A collection of bucket events for which to send notifications
 queueConfiguration_events :: Lens.Lens' QueueConfiguration [Event]
-queueConfiguration_events = Lens.lens (\QueueConfiguration' {events} -> events) (\s@QueueConfiguration' {} a -> s {events = a} :: QueueConfiguration) Prelude.. Lens.coerced
+queueConfiguration_events = Lens.lens (\ QueueConfiguration'{events} -> events) (\ s@QueueConfiguration'{} a -> s{events = a} :: QueueConfiguration) Prelude.. Lens.coerced
 
 instance Core.FromXML QueueConfiguration where
-  parseXML x =
-    QueueConfiguration'
-      Prelude.<$> (x Core..@? "Id")
-      Prelude.<*> (x Core..@? "Filter")
-      Prelude.<*> (x Core..@ "Queue")
-      Prelude.<*> (Core.parseXMLList "Event" x)
+        parseXML x
+          = QueueConfiguration' Prelude.<$>
+              (x Core..@? "Id") Prelude.<*> (x Core..@? "Filter")
+                Prelude.<*> (x Core..@ "Queue")
+                Prelude.<*> (Core.parseXMLList "Event" x)
 
 instance Prelude.Hashable QueueConfiguration where
-  hashWithSalt _salt QueueConfiguration' {..} =
-    _salt `Prelude.hashWithSalt` id
-      `Prelude.hashWithSalt` filter'
-      `Prelude.hashWithSalt` queueArn
-      `Prelude.hashWithSalt` events
+        hashWithSalt _salt QueueConfiguration'{..}
+          = _salt `Prelude.hashWithSalt` id
+              `Prelude.hashWithSalt` filter'
+              `Prelude.hashWithSalt` queueArn
+              `Prelude.hashWithSalt` events
 
 instance Prelude.NFData QueueConfiguration where
-  rnf QueueConfiguration' {..} =
-    Prelude.rnf id
-      `Prelude.seq` Prelude.rnf filter'
-      `Prelude.seq` Prelude.rnf queueArn
-      `Prelude.seq` Prelude.rnf events
+        rnf QueueConfiguration'{..}
+          = Prelude.rnf id `Prelude.seq`
+              Prelude.rnf filter' `Prelude.seq`
+                Prelude.rnf queueArn `Prelude.seq` Prelude.rnf events
 
 instance Core.ToXML QueueConfiguration where
-  toXML QueueConfiguration' {..} =
-    Prelude.mconcat
-      [ "Id" Core.@= id,
-        "Filter" Core.@= filter',
-        "Queue" Core.@= queueArn,
-        Core.toXMLList "Event" events
-      ]
+        toXML QueueConfiguration'{..}
+          = Prelude.mconcat
+              ["Id" Core.@= id, "Filter" Core.@= filter',
+               "Queue" Core.@= queueArn,
+               Core.toXMLList "Event" events]

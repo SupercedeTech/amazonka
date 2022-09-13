@@ -1,13 +1,14 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE TypeFamilies          #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds   #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- Derived from AWS service descriptions, licensed under Apache 2.0.
@@ -26,97 +27,97 @@
 -- the file name of the index document and any redirect rules. For more
 -- information, see
 -- <https://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html Hosting Websites on Amazon S3>.
---
+-- 
 -- This PUT action requires the @S3:PutBucketWebsite@ permission. By
 -- default, only the bucket owner can configure the website attached to a
 -- bucket; however, bucket owners can allow other users to set the website
 -- configuration by writing a bucket policy that grants them the
 -- @S3:PutBucketWebsite@ permission.
---
+-- 
 -- To redirect all website requests sent to the bucket\'s website endpoint,
 -- you add a website configuration with the following elements. Because all
 -- requests are sent to another website, you don\'t need to provide index
 -- document name for the bucket.
---
+-- 
 -- -   @WebsiteConfiguration@
---
+-- 
 -- -   @RedirectAllRequestsTo@
---
+-- 
 -- -   @HostName@
---
+-- 
 -- -   @Protocol@
---
+-- 
 -- If you want granular control over redirects, you can use the following
 -- elements to add routing rules that describe conditions for redirecting
 -- requests and information about the redirect destination. In this case,
 -- the website configuration must provide an index document for the bucket,
 -- because some requests might not be redirected.
---
+-- 
 -- -   @WebsiteConfiguration@
---
+-- 
 -- -   @IndexDocument@
---
+-- 
 -- -   @Suffix@
---
+-- 
 -- -   @ErrorDocument@
---
+-- 
 -- -   @Key@
---
+-- 
 -- -   @RoutingRules@
---
+-- 
 -- -   @RoutingRule@
---
+-- 
 -- -   @Condition@
---
+-- 
 -- -   @HttpErrorCodeReturnedEquals@
---
+-- 
 -- -   @KeyPrefixEquals@
---
+-- 
 -- -   @Redirect@
---
+-- 
 -- -   @Protocol@
---
+-- 
 -- -   @HostName@
---
+-- 
 -- -   @ReplaceKeyPrefixWith@
---
+-- 
 -- -   @ReplaceKeyWith@
---
+-- 
 -- -   @HttpRedirectCode@
---
+-- 
 -- Amazon S3 has a limitation of 50 routing rules per website
 -- configuration. If you require more than 50 routing rules, you can use
 -- object redirect. For more information, see
 -- <https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html Configuring an Object Redirect>
 -- in the /Amazon S3 User Guide/.
 module Amazonka.S3.PutBucketWebsite
-  ( -- * Creating a Request
-    PutBucketWebsite (..),
-    newPutBucketWebsite,
-
+    (
+    -- * Creating a Request
+      PutBucketWebsite (..)
+    , newPutBucketWebsite 
     -- * Request Lenses
-    putBucketWebsite_checksumAlgorithm,
-    putBucketWebsite_contentMD5,
-    putBucketWebsite_expectedBucketOwner,
-    putBucketWebsite_bucket,
-    putBucketWebsite_websiteConfiguration,
+    , putBucketWebsite_checksumAlgorithm
+    , putBucketWebsite_contentMD5
+    , putBucketWebsite_expectedBucketOwner
+    , putBucketWebsite_bucket
+    , putBucketWebsite_websiteConfiguration
 
     -- * Destructuring the Response
-    PutBucketWebsiteResponse (..),
-    newPutBucketWebsiteResponse,
-  )
-where
+    , PutBucketWebsiteResponse (..)
+    , newPutBucketWebsiteResponse 
+    ) where
 
+import Amazonka.S3.Types
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
 import qualified Amazonka.Request as Request
 import qualified Amazonka.Response as Response
-import Amazonka.S3.Types
 
 -- | /See:/ 'newPutBucketWebsite' smart constructor.
 data PutBucketWebsite = PutBucketWebsite'
-  { -- | Indicates the algorithm used to create the checksum for the object when
+    {
+    -- | Indicates the algorithm used to create the checksum for the object when
     -- using the SDK. This header will not provide any additional functionality
     -- if not using the SDK. When sending this header, there must be a
     -- corresponding @x-amz-checksum@ or @x-amz-trailer@ header sent.
@@ -124,29 +125,28 @@ data PutBucketWebsite = PutBucketWebsite'
     -- @400 Bad Request@. For more information, see
     -- <https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html Checking object integrity>
     -- in the /Amazon S3 User Guide/.
-    --
+    -- 
     -- If you provide an individual checksum, Amazon S3 ignores any provided
     -- @ChecksumAlgorithm@ parameter.
-    checksumAlgorithm :: Prelude.Maybe ChecksumAlgorithm,
+    checksumAlgorithm :: Prelude.Maybe ChecksumAlgorithm
     -- | The base64-encoded 128-bit MD5 digest of the data. You must use this
     -- header as a message integrity check to verify that the request body was
     -- not corrupted in transit. For more information, see
     -- <http://www.ietf.org/rfc/rfc1864.txt RFC 1864>.
-    --
+    -- 
     -- For requests made using the Amazon Web Services Command Line Interface
     -- (CLI) or Amazon Web Services SDKs, this field is calculated
     -- automatically.
-    contentMD5 :: Prelude.Maybe Prelude.Text,
+    , contentMD5 :: Prelude.Maybe Prelude.Text
     -- | The account ID of the expected bucket owner. If the bucket is owned by a
     -- different account, the request fails with the HTTP status code
     -- @403 Forbidden@ (access denied).
-    expectedBucketOwner :: Prelude.Maybe Prelude.Text,
+    , expectedBucketOwner :: Prelude.Maybe Prelude.Text
     -- | The bucket name.
-    bucket :: BucketName,
+    , bucket :: BucketName
     -- | Container for the request.
-    websiteConfiguration :: WebsiteConfiguration
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , websiteConfiguration :: WebsiteConfiguration
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'PutBucketWebsite' with all optional fields omitted.
@@ -164,7 +164,7 @@ data PutBucketWebsite = PutBucketWebsite'
 -- @400 Bad Request@. For more information, see
 -- <https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html Checking object integrity>
 -- in the /Amazon S3 User Guide/.
---
+-- 
 -- If you provide an individual checksum, Amazon S3 ignores any provided
 -- @ChecksumAlgorithm@ parameter.
 --
@@ -172,7 +172,7 @@ data PutBucketWebsite = PutBucketWebsite'
 -- header as a message integrity check to verify that the request body was
 -- not corrupted in transit. For more information, see
 -- <http://www.ietf.org/rfc/rfc1864.txt RFC 1864>.
---
+-- 
 -- For requests made using the Amazon Web Services Command Line Interface
 -- (CLI) or Amazon Web Services SDKs, this field is calculated
 -- automatically.
@@ -184,21 +184,17 @@ data PutBucketWebsite = PutBucketWebsite'
 -- 'bucket', 'putBucketWebsite_bucket' - The bucket name.
 --
 -- 'websiteConfiguration', 'putBucketWebsite_websiteConfiguration' - Container for the request.
-newPutBucketWebsite ::
-  -- | 'bucket'
-  BucketName ->
-  -- | 'websiteConfiguration'
-  WebsiteConfiguration ->
-  PutBucketWebsite
-newPutBucketWebsite pBucket_ pWebsiteConfiguration_ =
-  PutBucketWebsite'
-    { checksumAlgorithm =
-        Prelude.Nothing,
-      contentMD5 = Prelude.Nothing,
-      expectedBucketOwner = Prelude.Nothing,
-      bucket = pBucket_,
-      websiteConfiguration = pWebsiteConfiguration_
-    }
+newPutBucketWebsite
+    :: BucketName -- ^ 'bucket'
+    -> WebsiteConfiguration -- ^ 'websiteConfiguration'
+    -> PutBucketWebsite
+newPutBucketWebsite pBucket_ pWebsiteConfiguration_
+  = PutBucketWebsite'{checksumAlgorithm =
+                        Prelude.Nothing,
+                      contentMD5 = Prelude.Nothing,
+                      expectedBucketOwner = Prelude.Nothing,
+                      bucket = pBucket_,
+                      websiteConfiguration = pWebsiteConfiguration_}
 
 -- | Indicates the algorithm used to create the checksum for the object when
 -- using the SDK. This header will not provide any additional functionality
@@ -208,100 +204,101 @@ newPutBucketWebsite pBucket_ pWebsiteConfiguration_ =
 -- @400 Bad Request@. For more information, see
 -- <https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html Checking object integrity>
 -- in the /Amazon S3 User Guide/.
---
+-- 
 -- If you provide an individual checksum, Amazon S3 ignores any provided
 -- @ChecksumAlgorithm@ parameter.
 putBucketWebsite_checksumAlgorithm :: Lens.Lens' PutBucketWebsite (Prelude.Maybe ChecksumAlgorithm)
-putBucketWebsite_checksumAlgorithm = Lens.lens (\PutBucketWebsite' {checksumAlgorithm} -> checksumAlgorithm) (\s@PutBucketWebsite' {} a -> s {checksumAlgorithm = a} :: PutBucketWebsite)
+putBucketWebsite_checksumAlgorithm = Lens.lens (\ PutBucketWebsite'{checksumAlgorithm} -> checksumAlgorithm) (\ s@PutBucketWebsite'{} a -> s{checksumAlgorithm = a} :: PutBucketWebsite)
 
 -- | The base64-encoded 128-bit MD5 digest of the data. You must use this
 -- header as a message integrity check to verify that the request body was
 -- not corrupted in transit. For more information, see
 -- <http://www.ietf.org/rfc/rfc1864.txt RFC 1864>.
---
+-- 
 -- For requests made using the Amazon Web Services Command Line Interface
 -- (CLI) or Amazon Web Services SDKs, this field is calculated
 -- automatically.
 putBucketWebsite_contentMD5 :: Lens.Lens' PutBucketWebsite (Prelude.Maybe Prelude.Text)
-putBucketWebsite_contentMD5 = Lens.lens (\PutBucketWebsite' {contentMD5} -> contentMD5) (\s@PutBucketWebsite' {} a -> s {contentMD5 = a} :: PutBucketWebsite)
+putBucketWebsite_contentMD5 = Lens.lens (\ PutBucketWebsite'{contentMD5} -> contentMD5) (\ s@PutBucketWebsite'{} a -> s{contentMD5 = a} :: PutBucketWebsite)
 
 -- | The account ID of the expected bucket owner. If the bucket is owned by a
 -- different account, the request fails with the HTTP status code
 -- @403 Forbidden@ (access denied).
 putBucketWebsite_expectedBucketOwner :: Lens.Lens' PutBucketWebsite (Prelude.Maybe Prelude.Text)
-putBucketWebsite_expectedBucketOwner = Lens.lens (\PutBucketWebsite' {expectedBucketOwner} -> expectedBucketOwner) (\s@PutBucketWebsite' {} a -> s {expectedBucketOwner = a} :: PutBucketWebsite)
+putBucketWebsite_expectedBucketOwner = Lens.lens (\ PutBucketWebsite'{expectedBucketOwner} -> expectedBucketOwner) (\ s@PutBucketWebsite'{} a -> s{expectedBucketOwner = a} :: PutBucketWebsite)
 
 -- | The bucket name.
 putBucketWebsite_bucket :: Lens.Lens' PutBucketWebsite BucketName
-putBucketWebsite_bucket = Lens.lens (\PutBucketWebsite' {bucket} -> bucket) (\s@PutBucketWebsite' {} a -> s {bucket = a} :: PutBucketWebsite)
+putBucketWebsite_bucket = Lens.lens (\ PutBucketWebsite'{bucket} -> bucket) (\ s@PutBucketWebsite'{} a -> s{bucket = a} :: PutBucketWebsite)
 
 -- | Container for the request.
 putBucketWebsite_websiteConfiguration :: Lens.Lens' PutBucketWebsite WebsiteConfiguration
-putBucketWebsite_websiteConfiguration = Lens.lens (\PutBucketWebsite' {websiteConfiguration} -> websiteConfiguration) (\s@PutBucketWebsite' {} a -> s {websiteConfiguration = a} :: PutBucketWebsite)
+putBucketWebsite_websiteConfiguration = Lens.lens (\ PutBucketWebsite'{websiteConfiguration} -> websiteConfiguration) (\ s@PutBucketWebsite'{} a -> s{websiteConfiguration = a} :: PutBucketWebsite)
 
 instance Core.AWSRequest PutBucketWebsite where
-  type
-    AWSResponse PutBucketWebsite =
-      PutBucketWebsiteResponse
-  request =
-    Request.s3vhost
-      Prelude.. Request.putXML defaultService
-  response =
-    Response.receiveNull PutBucketWebsiteResponse'
+        type AWSResponse PutBucketWebsite =
+             PutBucketWebsiteResponse
+        request srv
+          = Request.s3vhost Prelude.. Request.putXML srv
+        response
+          = Response.receiveNull PutBucketWebsiteResponse'
+
+instance Core.AWSService PutBucketWebsite where
+        service _proxy = defaultService
 
 instance Prelude.Hashable PutBucketWebsite where
-  hashWithSalt _salt PutBucketWebsite' {..} =
-    _salt `Prelude.hashWithSalt` checksumAlgorithm
-      `Prelude.hashWithSalt` contentMD5
-      `Prelude.hashWithSalt` expectedBucketOwner
-      `Prelude.hashWithSalt` bucket
-      `Prelude.hashWithSalt` websiteConfiguration
+        hashWithSalt _salt PutBucketWebsite'{..}
+          = _salt `Prelude.hashWithSalt` checksumAlgorithm
+              `Prelude.hashWithSalt` contentMD5
+              `Prelude.hashWithSalt` expectedBucketOwner
+              `Prelude.hashWithSalt` bucket
+              `Prelude.hashWithSalt` websiteConfiguration
 
 instance Prelude.NFData PutBucketWebsite where
-  rnf PutBucketWebsite' {..} =
-    Prelude.rnf checksumAlgorithm
-      `Prelude.seq` Prelude.rnf contentMD5
-      `Prelude.seq` Prelude.rnf expectedBucketOwner
-      `Prelude.seq` Prelude.rnf bucket
-      `Prelude.seq` Prelude.rnf websiteConfiguration
+        rnf PutBucketWebsite'{..}
+          = Prelude.rnf checksumAlgorithm `Prelude.seq`
+              Prelude.rnf contentMD5 `Prelude.seq`
+                Prelude.rnf expectedBucketOwner `Prelude.seq`
+                  Prelude.rnf bucket `Prelude.seq`
+                    Prelude.rnf websiteConfiguration
 
 instance Core.ToElement PutBucketWebsite where
-  toElement PutBucketWebsite' {..} =
-    Core.mkElement
-      "{http://s3.amazonaws.com/doc/2006-03-01/}WebsiteConfiguration"
-      websiteConfiguration
+        toElement PutBucketWebsite'{..}
+          = Core.mkElement
+              "{http://s3.amazonaws.com/doc/2006-03-01/}WebsiteConfiguration"
+              websiteConfiguration
 
 instance Core.ToHeaders PutBucketWebsite where
-  toHeaders PutBucketWebsite' {..} =
-    Prelude.mconcat
-      [ "x-amz-sdk-checksum-algorithm"
-          Core.=# checksumAlgorithm,
-        "Content-MD5" Core.=# contentMD5,
-        "x-amz-expected-bucket-owner"
-          Core.=# expectedBucketOwner
-      ]
+        toHeaders PutBucketWebsite'{..}
+          = Prelude.mconcat
+              ["x-amz-sdk-checksum-algorithm" Core.=#
+                 checksumAlgorithm,
+               "Content-MD5" Core.=# contentMD5,
+               "x-amz-expected-bucket-owner" Core.=#
+                 expectedBucketOwner]
 
 instance Core.ToPath PutBucketWebsite where
-  toPath PutBucketWebsite' {..} =
-    Prelude.mconcat ["/", Core.toBS bucket]
+        toPath PutBucketWebsite'{..}
+          = Prelude.mconcat ["/", Core.toBS bucket]
 
 instance Core.ToQuery PutBucketWebsite where
-  toQuery = Prelude.const (Prelude.mconcat ["website"])
+        toQuery = Prelude.const (Prelude.mconcat ["website"])
 
 -- | /See:/ 'newPutBucketWebsiteResponse' smart constructor.
 data PutBucketWebsiteResponse = PutBucketWebsiteResponse'
-  {
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    {
+
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'PutBucketWebsiteResponse' with all optional fields omitted.
 --
 -- Use <https://hackage.haskell.org/package/generic-lens generic-lens> or <https://hackage.haskell.org/package/optics optics> to modify other optional fields.
-newPutBucketWebsiteResponse ::
-  PutBucketWebsiteResponse
-newPutBucketWebsiteResponse =
-  PutBucketWebsiteResponse'
+newPutBucketWebsiteResponse
+    :: PutBucketWebsiteResponse
+newPutBucketWebsiteResponse
+  = PutBucketWebsiteResponse'
 
-instance Prelude.NFData PutBucketWebsiteResponse where
-  rnf _ = ()
+instance Prelude.NFData PutBucketWebsiteResponse
+         where
+        rnf _ = ()

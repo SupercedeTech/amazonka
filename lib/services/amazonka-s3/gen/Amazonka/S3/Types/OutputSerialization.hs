@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,25 +18,26 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.OutputSerialization where
 
-import qualified Amazonka.Core as Core
-import qualified Amazonka.Lens as Lens
-import qualified Amazonka.Prelude as Prelude
 import Amazonka.S3.Internal
 import Amazonka.S3.Types.CSVOutput
 import Amazonka.S3.Types.JSONOutput
+import qualified Amazonka.Core as Core
+import qualified Amazonka.Lens as Lens
+import qualified Amazonka.Prelude as Prelude
 
 -- | Describes how results of the Select job are serialized.
 --
 -- /See:/ 'newOutputSerialization' smart constructor.
 data OutputSerialization = OutputSerialization'
-  { -- | Specifies JSON as request\'s output serialization format.
-    json :: Prelude.Maybe JSONOutput,
+    {
+    -- | Specifies JSON as request\'s output serialization format.
+    json :: Prelude.Maybe JSONOutput
     -- | Describes the serialization of CSV-encoded Select results.
-    csv :: Prelude.Maybe CSVOutput
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , csv :: Prelude.Maybe CSVOutput
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'OutputSerialization' with all optional fields omitted.
@@ -48,32 +50,30 @@ data OutputSerialization = OutputSerialization'
 -- 'json', 'outputSerialization_json' - Specifies JSON as request\'s output serialization format.
 --
 -- 'csv', 'outputSerialization_csv' - Describes the serialization of CSV-encoded Select results.
-newOutputSerialization ::
-  OutputSerialization
-newOutputSerialization =
-  OutputSerialization'
-    { json = Prelude.Nothing,
-      csv = Prelude.Nothing
-    }
+newOutputSerialization
+    :: OutputSerialization
+newOutputSerialization
+  = OutputSerialization'{json = Prelude.Nothing,
+                         csv = Prelude.Nothing}
 
 -- | Specifies JSON as request\'s output serialization format.
 outputSerialization_json :: Lens.Lens' OutputSerialization (Prelude.Maybe JSONOutput)
-outputSerialization_json = Lens.lens (\OutputSerialization' {json} -> json) (\s@OutputSerialization' {} a -> s {json = a} :: OutputSerialization)
+outputSerialization_json = Lens.lens (\ OutputSerialization'{json} -> json) (\ s@OutputSerialization'{} a -> s{json = a} :: OutputSerialization)
 
 -- | Describes the serialization of CSV-encoded Select results.
 outputSerialization_csv :: Lens.Lens' OutputSerialization (Prelude.Maybe CSVOutput)
-outputSerialization_csv = Lens.lens (\OutputSerialization' {csv} -> csv) (\s@OutputSerialization' {} a -> s {csv = a} :: OutputSerialization)
+outputSerialization_csv = Lens.lens (\ OutputSerialization'{csv} -> csv) (\ s@OutputSerialization'{} a -> s{csv = a} :: OutputSerialization)
 
 instance Prelude.Hashable OutputSerialization where
-  hashWithSalt _salt OutputSerialization' {..} =
-    _salt `Prelude.hashWithSalt` json
-      `Prelude.hashWithSalt` csv
+        hashWithSalt _salt OutputSerialization'{..}
+          = _salt `Prelude.hashWithSalt` json
+              `Prelude.hashWithSalt` csv
 
 instance Prelude.NFData OutputSerialization where
-  rnf OutputSerialization' {..} =
-    Prelude.rnf json `Prelude.seq` Prelude.rnf csv
+        rnf OutputSerialization'{..}
+          = Prelude.rnf json `Prelude.seq` Prelude.rnf csv
 
 instance Core.ToXML OutputSerialization where
-  toXML OutputSerialization' {..} =
-    Prelude.mconcat
-      ["JSON" Core.@= json, "CSV" Core.@= csv]
+        toXML OutputSerialization'{..}
+          = Prelude.mconcat
+              ["JSON" Core.@= json, "CSV" Core.@= csv]

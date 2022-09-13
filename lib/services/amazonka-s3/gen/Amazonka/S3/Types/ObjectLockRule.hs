@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,26 +18,27 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.ObjectLockRule where
 
+import Amazonka.S3.Internal
+import Amazonka.S3.Types.DefaultRetention
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
-import Amazonka.S3.Types.DefaultRetention
 
 -- | The container element for an Object Lock rule.
 --
 -- /See:/ 'newObjectLockRule' smart constructor.
 data ObjectLockRule = ObjectLockRule'
-  { -- | The default Object Lock retention mode and period that you want to apply
+    {
+    -- | The default Object Lock retention mode and period that you want to apply
     -- to new objects placed in the specified bucket. Bucket settings require
     -- both a mode and a period. The period can be either @Days@ or @Years@ but
     -- you must select one. You cannot specify @Days@ and @Years@ at the same
     -- time.
     defaultRetention :: Prelude.Maybe DefaultRetention
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'ObjectLockRule' with all optional fields omitted.
@@ -51,10 +53,10 @@ data ObjectLockRule = ObjectLockRule'
 -- both a mode and a period. The period can be either @Days@ or @Years@ but
 -- you must select one. You cannot specify @Days@ and @Years@ at the same
 -- time.
-newObjectLockRule ::
-  ObjectLockRule
-newObjectLockRule =
-  ObjectLockRule' {defaultRetention = Prelude.Nothing}
+newObjectLockRule
+    :: ObjectLockRule
+newObjectLockRule
+  = ObjectLockRule'{defaultRetention = Prelude.Nothing}
 
 -- | The default Object Lock retention mode and period that you want to apply
 -- to new objects placed in the specified bucket. Bucket settings require
@@ -62,22 +64,22 @@ newObjectLockRule =
 -- you must select one. You cannot specify @Days@ and @Years@ at the same
 -- time.
 objectLockRule_defaultRetention :: Lens.Lens' ObjectLockRule (Prelude.Maybe DefaultRetention)
-objectLockRule_defaultRetention = Lens.lens (\ObjectLockRule' {defaultRetention} -> defaultRetention) (\s@ObjectLockRule' {} a -> s {defaultRetention = a} :: ObjectLockRule)
+objectLockRule_defaultRetention = Lens.lens (\ ObjectLockRule'{defaultRetention} -> defaultRetention) (\ s@ObjectLockRule'{} a -> s{defaultRetention = a} :: ObjectLockRule)
 
 instance Core.FromXML ObjectLockRule where
-  parseXML x =
-    ObjectLockRule'
-      Prelude.<$> (x Core..@? "DefaultRetention")
+        parseXML x
+          = ObjectLockRule' Prelude.<$>
+              (x Core..@? "DefaultRetention")
 
 instance Prelude.Hashable ObjectLockRule where
-  hashWithSalt _salt ObjectLockRule' {..} =
-    _salt `Prelude.hashWithSalt` defaultRetention
+        hashWithSalt _salt ObjectLockRule'{..}
+          = _salt `Prelude.hashWithSalt` defaultRetention
 
 instance Prelude.NFData ObjectLockRule where
-  rnf ObjectLockRule' {..} =
-    Prelude.rnf defaultRetention
+        rnf ObjectLockRule'{..}
+          = Prelude.rnf defaultRetention
 
 instance Core.ToXML ObjectLockRule where
-  toXML ObjectLockRule' {..} =
-    Prelude.mconcat
-      ["DefaultRetention" Core.@= defaultRetention]
+        toXML ObjectLockRule'{..}
+          = Prelude.mconcat
+              ["DefaultRetention" Core.@= defaultRetention]

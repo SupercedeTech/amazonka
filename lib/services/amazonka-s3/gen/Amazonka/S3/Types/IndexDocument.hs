@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,30 +18,31 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.IndexDocument where
 
+import Amazonka.S3.Internal
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
 
 -- | Container for the @Suffix@ element.
 --
 -- /See:/ 'newIndexDocument' smart constructor.
 data IndexDocument = IndexDocument'
-  { -- | A suffix that is appended to a request that is for a directory on the
+    {
+    -- | A suffix that is appended to a request that is for a directory on the
     -- website endpoint (for example,if the suffix is index.html and you make a
     -- request to samplebucket\/images\/ the data that is returned will be for
     -- the object with the key name images\/index.html) The suffix must not be
     -- empty and must not include a slash character.
-    --
+    -- 
     -- Replacement must be made for object keys containing special characters
     -- (such as carriage returns) when using XML requests. For more
     -- information, see
     -- <https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints XML related object key constraints>.
     suffix :: Prelude.Text
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'IndexDocument' with all optional fields omitted.
@@ -55,42 +57,41 @@ data IndexDocument = IndexDocument'
 -- request to samplebucket\/images\/ the data that is returned will be for
 -- the object with the key name images\/index.html) The suffix must not be
 -- empty and must not include a slash character.
---
+-- 
 -- Replacement must be made for object keys containing special characters
 -- (such as carriage returns) when using XML requests. For more
 -- information, see
 -- <https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints XML related object key constraints>.
-newIndexDocument ::
-  -- | 'suffix'
-  Prelude.Text ->
-  IndexDocument
-newIndexDocument pSuffix_ =
-  IndexDocument' {suffix = pSuffix_}
+newIndexDocument
+    :: Prelude.Text -- ^ 'suffix'
+    -> IndexDocument
+newIndexDocument pSuffix_
+  = IndexDocument'{suffix = pSuffix_}
 
 -- | A suffix that is appended to a request that is for a directory on the
 -- website endpoint (for example,if the suffix is index.html and you make a
 -- request to samplebucket\/images\/ the data that is returned will be for
 -- the object with the key name images\/index.html) The suffix must not be
 -- empty and must not include a slash character.
---
+-- 
 -- Replacement must be made for object keys containing special characters
 -- (such as carriage returns) when using XML requests. For more
 -- information, see
 -- <https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints XML related object key constraints>.
 indexDocument_suffix :: Lens.Lens' IndexDocument Prelude.Text
-indexDocument_suffix = Lens.lens (\IndexDocument' {suffix} -> suffix) (\s@IndexDocument' {} a -> s {suffix = a} :: IndexDocument)
+indexDocument_suffix = Lens.lens (\ IndexDocument'{suffix} -> suffix) (\ s@IndexDocument'{} a -> s{suffix = a} :: IndexDocument)
 
 instance Core.FromXML IndexDocument where
-  parseXML x =
-    IndexDocument' Prelude.<$> (x Core..@ "Suffix")
+        parseXML x
+          = IndexDocument' Prelude.<$> (x Core..@ "Suffix")
 
 instance Prelude.Hashable IndexDocument where
-  hashWithSalt _salt IndexDocument' {..} =
-    _salt `Prelude.hashWithSalt` suffix
+        hashWithSalt _salt IndexDocument'{..}
+          = _salt `Prelude.hashWithSalt` suffix
 
 instance Prelude.NFData IndexDocument where
-  rnf IndexDocument' {..} = Prelude.rnf suffix
+        rnf IndexDocument'{..} = Prelude.rnf suffix
 
 instance Core.ToXML IndexDocument where
-  toXML IndexDocument' {..} =
-    Prelude.mconcat ["Suffix" Core.@= suffix]
+        toXML IndexDocument'{..}
+          = Prelude.mconcat ["Suffix" Core.@= suffix]

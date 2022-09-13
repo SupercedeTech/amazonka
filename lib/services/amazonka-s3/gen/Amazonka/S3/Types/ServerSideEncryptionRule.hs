@@ -1,10 +1,11 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
@@ -17,34 +18,35 @@
 -- Maintainer  : Brendan Hay <brendan.g.hay+amazonka@gmail.com>
 -- Stability   : auto-generated
 -- Portability : non-portable (GHC extensions)
+--
 module Amazonka.S3.Types.ServerSideEncryptionRule where
 
+import Amazonka.S3.Internal
+import Amazonka.S3.Types.ServerSideEncryptionByDefault
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
-import Amazonka.S3.Internal
-import Amazonka.S3.Types.ServerSideEncryptionByDefault
 
 -- | Specifies the default server-side encryption configuration.
 --
 -- /See:/ 'newServerSideEncryptionRule' smart constructor.
 data ServerSideEncryptionRule = ServerSideEncryptionRule'
-  { -- | Specifies whether Amazon S3 should use an S3 Bucket Key with server-side
+    {
+    -- | Specifies whether Amazon S3 should use an S3 Bucket Key with server-side
     -- encryption using KMS (SSE-KMS) for new objects in the bucket. Existing
     -- objects are not affected. Setting the @BucketKeyEnabled@ element to
     -- @true@ causes Amazon S3 to use an S3 Bucket Key. By default, S3 Bucket
     -- Key is not enabled.
-    --
+    -- 
     -- For more information, see
     -- <https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html Amazon S3 Bucket Keys>
     -- in the /Amazon S3 User Guide/.
-    bucketKeyEnabled :: Prelude.Maybe Prelude.Bool,
+    bucketKeyEnabled :: Prelude.Maybe Prelude.Bool
     -- | Specifies the default server-side encryption to apply to new objects in
     -- the bucket. If a PUT Object request doesn\'t specify any server-side
     -- encryption, this default encryption will be applied.
-    applyServerSideEncryptionByDefault :: Prelude.Maybe ServerSideEncryptionByDefault
-  }
-  deriving (Prelude.Eq, Prelude.Show, Prelude.Generic)
+    , applyServerSideEncryptionByDefault :: Prelude.Maybe ServerSideEncryptionByDefault
+    } deriving (Prelude.Eq, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'ServerSideEncryptionRule' with all optional fields omitted.
@@ -59,7 +61,7 @@ data ServerSideEncryptionRule = ServerSideEncryptionRule'
 -- objects are not affected. Setting the @BucketKeyEnabled@ element to
 -- @true@ causes Amazon S3 to use an S3 Bucket Key. By default, S3 Bucket
 -- Key is not enabled.
---
+-- 
 -- For more information, see
 -- <https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html Amazon S3 Bucket Keys>
 -- in the /Amazon S3 User Guide/.
@@ -67,54 +69,54 @@ data ServerSideEncryptionRule = ServerSideEncryptionRule'
 -- 'applyServerSideEncryptionByDefault', 'serverSideEncryptionRule_applyServerSideEncryptionByDefault' - Specifies the default server-side encryption to apply to new objects in
 -- the bucket. If a PUT Object request doesn\'t specify any server-side
 -- encryption, this default encryption will be applied.
-newServerSideEncryptionRule ::
-  ServerSideEncryptionRule
-newServerSideEncryptionRule =
-  ServerSideEncryptionRule'
-    { bucketKeyEnabled =
-        Prelude.Nothing,
-      applyServerSideEncryptionByDefault =
-        Prelude.Nothing
-    }
+newServerSideEncryptionRule
+    :: ServerSideEncryptionRule
+newServerSideEncryptionRule
+  = ServerSideEncryptionRule'{bucketKeyEnabled =
+                                Prelude.Nothing,
+                              applyServerSideEncryptionByDefault =
+                                Prelude.Nothing}
 
 -- | Specifies whether Amazon S3 should use an S3 Bucket Key with server-side
 -- encryption using KMS (SSE-KMS) for new objects in the bucket. Existing
 -- objects are not affected. Setting the @BucketKeyEnabled@ element to
 -- @true@ causes Amazon S3 to use an S3 Bucket Key. By default, S3 Bucket
 -- Key is not enabled.
---
+-- 
 -- For more information, see
 -- <https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html Amazon S3 Bucket Keys>
 -- in the /Amazon S3 User Guide/.
 serverSideEncryptionRule_bucketKeyEnabled :: Lens.Lens' ServerSideEncryptionRule (Prelude.Maybe Prelude.Bool)
-serverSideEncryptionRule_bucketKeyEnabled = Lens.lens (\ServerSideEncryptionRule' {bucketKeyEnabled} -> bucketKeyEnabled) (\s@ServerSideEncryptionRule' {} a -> s {bucketKeyEnabled = a} :: ServerSideEncryptionRule)
+serverSideEncryptionRule_bucketKeyEnabled = Lens.lens (\ ServerSideEncryptionRule'{bucketKeyEnabled} -> bucketKeyEnabled) (\ s@ServerSideEncryptionRule'{} a -> s{bucketKeyEnabled = a} :: ServerSideEncryptionRule)
 
 -- | Specifies the default server-side encryption to apply to new objects in
 -- the bucket. If a PUT Object request doesn\'t specify any server-side
 -- encryption, this default encryption will be applied.
 serverSideEncryptionRule_applyServerSideEncryptionByDefault :: Lens.Lens' ServerSideEncryptionRule (Prelude.Maybe ServerSideEncryptionByDefault)
-serverSideEncryptionRule_applyServerSideEncryptionByDefault = Lens.lens (\ServerSideEncryptionRule' {applyServerSideEncryptionByDefault} -> applyServerSideEncryptionByDefault) (\s@ServerSideEncryptionRule' {} a -> s {applyServerSideEncryptionByDefault = a} :: ServerSideEncryptionRule)
+serverSideEncryptionRule_applyServerSideEncryptionByDefault = Lens.lens (\ ServerSideEncryptionRule'{applyServerSideEncryptionByDefault} -> applyServerSideEncryptionByDefault) (\ s@ServerSideEncryptionRule'{} a -> s{applyServerSideEncryptionByDefault = a} :: ServerSideEncryptionRule)
 
 instance Core.FromXML ServerSideEncryptionRule where
-  parseXML x =
-    ServerSideEncryptionRule'
-      Prelude.<$> (x Core..@? "BucketKeyEnabled")
-      Prelude.<*> (x Core..@? "ApplyServerSideEncryptionByDefault")
+        parseXML x
+          = ServerSideEncryptionRule' Prelude.<$>
+              (x Core..@? "BucketKeyEnabled") Prelude.<*>
+                (x Core..@? "ApplyServerSideEncryptionByDefault")
 
-instance Prelude.Hashable ServerSideEncryptionRule where
-  hashWithSalt _salt ServerSideEncryptionRule' {..} =
-    _salt `Prelude.hashWithSalt` bucketKeyEnabled
-      `Prelude.hashWithSalt` applyServerSideEncryptionByDefault
+instance Prelude.Hashable ServerSideEncryptionRule
+         where
+        hashWithSalt _salt ServerSideEncryptionRule'{..}
+          = _salt `Prelude.hashWithSalt` bucketKeyEnabled
+              `Prelude.hashWithSalt`
+              applyServerSideEncryptionByDefault
 
-instance Prelude.NFData ServerSideEncryptionRule where
-  rnf ServerSideEncryptionRule' {..} =
-    Prelude.rnf bucketKeyEnabled
-      `Prelude.seq` Prelude.rnf applyServerSideEncryptionByDefault
+instance Prelude.NFData ServerSideEncryptionRule
+         where
+        rnf ServerSideEncryptionRule'{..}
+          = Prelude.rnf bucketKeyEnabled `Prelude.seq`
+              Prelude.rnf applyServerSideEncryptionByDefault
 
 instance Core.ToXML ServerSideEncryptionRule where
-  toXML ServerSideEncryptionRule' {..} =
-    Prelude.mconcat
-      [ "BucketKeyEnabled" Core.@= bucketKeyEnabled,
-        "ApplyServerSideEncryptionByDefault"
-          Core.@= applyServerSideEncryptionByDefault
-      ]
+        toXML ServerSideEncryptionRule'{..}
+          = Prelude.mconcat
+              ["BucketKeyEnabled" Core.@= bucketKeyEnabled,
+               "ApplyServerSideEncryptionByDefault" Core.@=
+                 applyServerSideEncryptionByDefault]

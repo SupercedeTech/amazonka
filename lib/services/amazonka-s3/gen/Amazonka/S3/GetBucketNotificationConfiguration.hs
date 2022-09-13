@@ -1,13 +1,14 @@
-{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE NoImplicitPrelude     #-}
+{-# LANGUAGE DeriveGeneric         #-}
 {-# LANGUAGE DuplicateRecordFields #-}
-{-# LANGUAGE NamedFieldPuns #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE RecordWildCards #-}
-{-# LANGUAGE StrictData #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# OPTIONS_GHC -fno-warn-unused-binds #-}
+{-# LANGUAGE NamedFieldPuns        #-}
+{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE RecordWildCards       #-}
+{-# LANGUAGE TypeFamilies          #-}
+{-# LANGUAGE StrictData            #-}
+
 {-# OPTIONS_GHC -fno-warn-unused-imports #-}
+{-# OPTIONS_GHC -fno-warn-unused-binds   #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches #-}
 
 -- Derived from AWS service descriptions, licensed under Apache 2.0.
@@ -21,62 +22,60 @@
 -- Portability : non-portable (GHC extensions)
 --
 -- Returns the notification configuration of a bucket.
---
+-- 
 -- If notifications are not enabled on the bucket, the action returns an
 -- empty @NotificationConfiguration@ element.
---
+-- 
 -- By default, you must be the bucket owner to read the notification
 -- configuration of a bucket. However, the bucket owner can use a bucket
 -- policy to grant permission to other users to read this configuration
 -- with the @s3:GetBucketNotification@ permission.
---
+-- 
 -- For more information about setting and reading the notification
 -- configuration on a bucket, see
 -- <https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html Setting Up Notification of Bucket Events>.
 -- For more information about bucket policies, see
 -- <https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html Using Bucket Policies>.
---
+-- 
 -- The following action is related to @GetBucketNotification@:
---
+-- 
 -- -   <https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketNotification.html PutBucketNotification>
 module Amazonka.S3.GetBucketNotificationConfiguration
-  ( -- * Creating a Request
-    GetBucketNotificationConfiguration (..),
-    newGetBucketNotificationConfiguration,
-
+    (
+    -- * Creating a Request
+      GetBucketNotificationConfiguration (..)
+    , newGetBucketNotificationConfiguration 
     -- * Request Lenses
-    getBucketNotificationConfiguration_expectedBucketOwner,
-    getBucketNotificationConfiguration_bucket,
+    , getBucketNotificationConfiguration_expectedBucketOwner
+    , getBucketNotificationConfiguration_bucket
 
     -- * Destructuring the Response
-    NotificationConfiguration (..),
-    newNotificationConfiguration,
-
+    , NotificationConfiguration (..)
+    , newNotificationConfiguration 
     -- * Response Lenses
-    notificationConfiguration_eventBridgeConfiguration,
-    notificationConfiguration_queueConfigurations,
-    notificationConfiguration_topicConfigurations,
-    notificationConfiguration_lambdaFunctionConfigurations,
-  )
-where
+    , notificationConfiguration_eventBridgeConfiguration
+    , notificationConfiguration_queueConfigurations
+    , notificationConfiguration_topicConfigurations
+    , notificationConfiguration_lambdaFunctionConfigurations
+    ) where
 
+import Amazonka.S3.Types
 import qualified Amazonka.Core as Core
 import qualified Amazonka.Lens as Lens
 import qualified Amazonka.Prelude as Prelude
 import qualified Amazonka.Request as Request
 import qualified Amazonka.Response as Response
-import Amazonka.S3.Types
 
 -- | /See:/ 'newGetBucketNotificationConfiguration' smart constructor.
 data GetBucketNotificationConfiguration = GetBucketNotificationConfiguration'
-  { -- | The account ID of the expected bucket owner. If the bucket is owned by a
+    {
+    -- | The account ID of the expected bucket owner. If the bucket is owned by a
     -- different account, the request fails with the HTTP status code
     -- @403 Forbidden@ (access denied).
-    expectedBucketOwner :: Prelude.Maybe Prelude.Text,
+    expectedBucketOwner :: Prelude.Maybe Prelude.Text
     -- | The name of the bucket for which to get the notification configuration.
-    bucket :: BucketName
-  }
-  deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
+    , bucket :: BucketName
+    } deriving (Prelude.Eq, Prelude.Read, Prelude.Show, Prelude.Generic)
 
 -- |
 -- Create a value of 'GetBucketNotificationConfiguration' with all optional fields omitted.
@@ -91,78 +90,70 @@ data GetBucketNotificationConfiguration = GetBucketNotificationConfiguration'
 -- @403 Forbidden@ (access denied).
 --
 -- 'bucket', 'getBucketNotificationConfiguration_bucket' - The name of the bucket for which to get the notification configuration.
-newGetBucketNotificationConfiguration ::
-  -- | 'bucket'
-  BucketName ->
-  GetBucketNotificationConfiguration
-newGetBucketNotificationConfiguration pBucket_ =
-  GetBucketNotificationConfiguration'
-    { expectedBucketOwner =
-        Prelude.Nothing,
-      bucket = pBucket_
-    }
+newGetBucketNotificationConfiguration
+    :: BucketName -- ^ 'bucket'
+    -> GetBucketNotificationConfiguration
+newGetBucketNotificationConfiguration pBucket_
+  = GetBucketNotificationConfiguration'{expectedBucketOwner
+                                          = Prelude.Nothing,
+                                        bucket = pBucket_}
 
 -- | The account ID of the expected bucket owner. If the bucket is owned by a
 -- different account, the request fails with the HTTP status code
 -- @403 Forbidden@ (access denied).
 getBucketNotificationConfiguration_expectedBucketOwner :: Lens.Lens' GetBucketNotificationConfiguration (Prelude.Maybe Prelude.Text)
-getBucketNotificationConfiguration_expectedBucketOwner = Lens.lens (\GetBucketNotificationConfiguration' {expectedBucketOwner} -> expectedBucketOwner) (\s@GetBucketNotificationConfiguration' {} a -> s {expectedBucketOwner = a} :: GetBucketNotificationConfiguration)
+getBucketNotificationConfiguration_expectedBucketOwner = Lens.lens (\ GetBucketNotificationConfiguration'{expectedBucketOwner} -> expectedBucketOwner) (\ s@GetBucketNotificationConfiguration'{} a -> s{expectedBucketOwner = a} :: GetBucketNotificationConfiguration)
 
 -- | The name of the bucket for which to get the notification configuration.
 getBucketNotificationConfiguration_bucket :: Lens.Lens' GetBucketNotificationConfiguration BucketName
-getBucketNotificationConfiguration_bucket = Lens.lens (\GetBucketNotificationConfiguration' {bucket} -> bucket) (\s@GetBucketNotificationConfiguration' {} a -> s {bucket = a} :: GetBucketNotificationConfiguration)
+getBucketNotificationConfiguration_bucket = Lens.lens (\ GetBucketNotificationConfiguration'{bucket} -> bucket) (\ s@GetBucketNotificationConfiguration'{} a -> s{bucket = a} :: GetBucketNotificationConfiguration)
 
-instance
-  Core.AWSRequest
-    GetBucketNotificationConfiguration
-  where
-  type
-    AWSResponse GetBucketNotificationConfiguration =
-      NotificationConfiguration
-  request =
-    Request.s3vhost
-      Prelude.. Request.get defaultService
-  response =
-    Response.receiveXML (\s h x -> Core.parseXML x)
+instance Core.AWSRequest
+           GetBucketNotificationConfiguration
+         where
+        type AWSResponse GetBucketNotificationConfiguration =
+             NotificationConfiguration
+        request srv
+          = Request.s3vhost Prelude.. Request.get srv
+        response
+          = Response.receiveXML (\ s h x -> Core.parseXML x)
 
-instance
-  Prelude.Hashable
-    GetBucketNotificationConfiguration
-  where
-  hashWithSalt
-    _salt
-    GetBucketNotificationConfiguration' {..} =
-      _salt `Prelude.hashWithSalt` expectedBucketOwner
-        `Prelude.hashWithSalt` bucket
+instance Core.AWSService
+           GetBucketNotificationConfiguration
+         where
+        service _proxy = defaultService
 
-instance
-  Prelude.NFData
-    GetBucketNotificationConfiguration
-  where
-  rnf GetBucketNotificationConfiguration' {..} =
-    Prelude.rnf expectedBucketOwner
-      `Prelude.seq` Prelude.rnf bucket
+instance Prelude.Hashable
+           GetBucketNotificationConfiguration
+         where
+        hashWithSalt _salt
+          GetBucketNotificationConfiguration'{..}
+          = _salt `Prelude.hashWithSalt` expectedBucketOwner
+              `Prelude.hashWithSalt` bucket
 
-instance
-  Core.ToHeaders
-    GetBucketNotificationConfiguration
-  where
-  toHeaders GetBucketNotificationConfiguration' {..} =
-    Prelude.mconcat
-      [ "x-amz-expected-bucket-owner"
-          Core.=# expectedBucketOwner
-      ]
+instance Prelude.NFData
+           GetBucketNotificationConfiguration
+         where
+        rnf GetBucketNotificationConfiguration'{..}
+          = Prelude.rnf expectedBucketOwner `Prelude.seq`
+              Prelude.rnf bucket
 
-instance
-  Core.ToPath
-    GetBucketNotificationConfiguration
-  where
-  toPath GetBucketNotificationConfiguration' {..} =
-    Prelude.mconcat ["/", Core.toBS bucket]
+instance Core.ToHeaders
+           GetBucketNotificationConfiguration
+         where
+        toHeaders GetBucketNotificationConfiguration'{..}
+          = Prelude.mconcat
+              ["x-amz-expected-bucket-owner" Core.=#
+                 expectedBucketOwner]
 
-instance
-  Core.ToQuery
-    GetBucketNotificationConfiguration
-  where
-  toQuery =
-    Prelude.const (Prelude.mconcat ["notification"])
+instance Core.ToPath
+           GetBucketNotificationConfiguration
+         where
+        toPath GetBucketNotificationConfiguration'{..}
+          = Prelude.mconcat ["/", Core.toBS bucket]
+
+instance Core.ToQuery
+           GetBucketNotificationConfiguration
+         where
+        toQuery
+          = Prelude.const (Prelude.mconcat ["notification"])
