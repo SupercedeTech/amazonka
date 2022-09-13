@@ -123,6 +123,7 @@ haskell_test(
         "test/Test/Amazonka/Error.hs",
         "test/Test/Amazonka/Sign/V2Header.hs",
         "test/Test/Amazonka/Sign/V4.hs",
+        "test/Test/Amazonka/Sign/V4/Base.hs",
         "test/Test/Amazonka/Sign/V4/Chunked.hs",
         "test/Test/Amazonka/Util.hs",
     ],
